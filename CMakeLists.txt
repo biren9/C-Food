@@ -1,7 +1,21 @@
-cmake_minimum_required(VERSION 2.8.4)
+cmake_minimum_required(VERSION 3.6.3)
 project(C-Food)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-add_custom_target(C-Food COMMAND make -C ${mytest_SOURCE_DIR}
-        CLION_EXE_DIR=${PROJECT_BINARY_DIR})
+set(SOURCE_FILES
+        Automat/includes/Automat.h
+        Automat/src/Automat.cpp
+        Automat/src/TestAutomat.cpp
+        #Buffer/includes/Buffer.h
+        #Buffer/src/Buffer.cpp
+        #Buffer/src/TestBuffer.cpp
+        #Scanner/includes/Scanner.h
+        #Scanner/src/Scanner.cpp
+        #Scanner/src/TestScanner.cpp
+        #Symboltable/includes/Symboltable.h
+        #Symboltable/src/Symboltable.cpp
+        #Symboltable/src/TestSymboltable.cpp
+        )
+
+add_executable(C-Food ${SOURCE_FILES})
