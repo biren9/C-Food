@@ -87,3 +87,8 @@ http://mrbook.org/blog/tutorials/make/
 http://de.wikipedia.org/wiki/Make
 
 http://www.sethi.org/classes/cet375/lab_notes/lab_04_makefile_and_compilation.html
+
+
+## LINKS
+
+https://samthursfield.wordpress.com/2015/11/21/cmake-dependencies-between-targets-and-files-and-custom-commands/
