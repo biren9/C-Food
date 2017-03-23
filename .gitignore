@@ -3,3 +3,7 @@ cmake-build-*
 .DS_Store
 
 .idea*
+
+*debug/*
+
+*objs/*
