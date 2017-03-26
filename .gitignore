@@ -4,6 +4,6 @@ cmake-build-*
 
 .idea*
 
-*debug/*
+*/debug/*
 
 */objs/*
