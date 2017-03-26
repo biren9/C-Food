@@ -24,13 +24,16 @@ class Buffer {
         bool open(char*);
 	    bool read();
         void close();
+    void debug();
 
         static const unsigned int BUFFER_BLOCK = 5;
 
-        char buffCur [BUFFER_BLOCK + 1];
-        char buffPrev [BUFFER_BLOCK + 1];
+        char* buffCur;
+        char* buffPrev;
 
         int currentChar;
+
+        bool isArraySwitched;
 
         std::ifstream in;
 };
