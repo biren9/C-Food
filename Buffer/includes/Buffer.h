@@ -33,7 +33,7 @@ class Buffer {
 
         int currentChar;
 
-        bool isArraySwitched;
+        bool isArraySwap;
 
         std::ifstream in;
 };
