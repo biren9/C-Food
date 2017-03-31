@@ -28,10 +28,11 @@ class Buffer {
         void close();
         void debug(std::string);
 
-        static const unsigned int BUFFER_BLOCK = 1024;
+        static constexpr unsigned int BUFFER_BLOCK = 5;
 
-        char* buffCur;
-        char* buffPrev;
+        char buffCur[BUFFER_BLOCK]{};
+        char buffPrev[BUFFER_BLOCK]{};
+        char* prevChar;
 
         unsigned int currentChar;
         unsigned int rowCount;

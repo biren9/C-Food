@@ -7,31 +7,33 @@ using namespace std;
 using namespace std::chrono;
 
 int main(int argc, char **argv) {
-    constexpr int test = 12;
+
     high_resolution_clock::time_point begin = high_resolution_clock::now();
 
 	Buffer*  buffer;
-
 	buffer = new Buffer(argv[1]);
 
-    cout << endl << "------------------" << endl;
 
+    string a;
     for (int i = 0; i < 48; ++i) {
-        buffer->getChar();
-        return 0;
+         a = buffer->getChar();
+        cout << "GET: " << ((a == "\n")?"\\n": a) << "   Line: " << buffer->getLine() << "    Row: "  << buffer->getRow() << endl;
     }
 cout << "----------------------\n";
 
-/*
+
 
     for (int i = 0; i < 7; ++i) {
         buffer->ungetChar();
+        buffer->ungetChar();
+        a = buffer->getChar();
+        cout << "GET: " << ((a == "\n")?"\\n": a) << "   Line: " << buffer->getLine() << "    Row: "  << buffer->getRow() << endl;
     }
 
     for (int i = 0; i < 10; ++i) {
         buffer->getChar();
     }
-*/
+
 
     cout << endl << "--------" << endl;
     buffer->ungetChar();
@@ -46,7 +48,7 @@ cout << "----------------------\n";
     buffer->getChar();
     buffer->getChar();
 
-    cout << "Line: " << buffer->getLine() << "Row: " << buffer->getRow() << endl;
+    cout << "Line: " << buffer->getLine() << " Row: " << buffer->getRow() << endl;
 
     delete buffer;
 

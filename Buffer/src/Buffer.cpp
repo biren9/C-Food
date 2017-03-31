@@ -14,13 +14,11 @@ using namespace std;
 Buffer::Buffer(char* filename) {
 
     //Init variables
-    this->buffCur = new char[BUFFER_BLOCK];
-    this->buffPrev = new char[BUFFER_BLOCK];
 
     this->currentChar = 0;
     this->rowCount = 1;
     this->lineCount = 1;
-
+    this->prevChar = nullptr;
     this->isArraySwap = false;
 
     //Open the file & buffer the first X Bytes
@@ -30,10 +28,6 @@ Buffer::Buffer(char* filename) {
 
 //Destructor
 Buffer::~Buffer() {
-
-    //Cleanup & free up memory
-	delete [] this->buffCur;
-    delete [] this->buffPrev;
 
     //Close the file
     this->close();
@@ -63,16 +57,31 @@ void Buffer::close() {
 bool Buffer::read() {
 
     //overwrite buffer with NULL
-    fill_n(buffCur, BUFFER_BLOCK, '\0');
+    fill_n(this->buffCur, BUFFER_BLOCK, '\0');
 
     //Fill the buffer
-    this->in.read(buffCur, BUFFER_BLOCK);
+    this->in.read(this->buffCur, BUFFER_BLOCK);
 
     return true;
 }
 
 //Public method: get next char -> buffer
 char Buffer::getChar() {
+
+    //If end of file is reached -> do not change pointer & line count
+    if(this->prevChar != nullptr && *this->prevChar != '\0') {
+
+        this->rowCount += 1;
+
+        //Update row & line count
+        //cout << endl << *(this->prevChar) << endl;
+        if(*this->prevChar == '\n') {
+            this->lineCount += 1;
+            this->rowCount = 1;
+        }
+
+        this->currentChar += 1;
+    }
 
     //Current char pointer -> end of array
     if(this->currentChar >= BUFFER_BLOCK) {
@@ -84,37 +93,21 @@ char Buffer::getChar() {
         if(this->isArraySwap) {
 
             //Swap
-            swap(this->buffCur, this->buffPrev);
+            swap(this->buffCur, buffPrev);
             this->isArraySwap = false;
         }
         else {
 
             //Copy every element to the previous array
-            memcpy(this->buffPrev, this->buffCur, BUFFER_BLOCK);
+            memcpy(buffPrev, this->buffCur, BUFFER_BLOCK);
 
             //Buffer new chars
             this->read();
         }
     }
 
-    debug("Get");
-    char ret = this->buffCur[this->currentChar];
-
-    //If end of file is reached -> do not change pointer & line count
-    if(this->buffCur[this->currentChar] != '\0') {
-
-        this->rowCount += 1;
-
-        //Update row & line count
-        if(this->buffCur[this->currentChar] == '\n') {
-            this->lineCount += 1;
-            this->rowCount = 1;
-        }
-
-        this->currentChar += 1;
-    }
-
-    return ret;
+    this->prevChar = &(this->buffCur[this->currentChar]);
+    return this->buffCur[this->currentChar];
 }
 
 //Public method: put char back -> buffer
@@ -124,7 +117,7 @@ bool Buffer::ungetChar() {
     if(this->currentChar == 0) {
 
         //swap arrays
-        swap(this->buffCur, this->buffPrev);
+        swap(this->buffCur, buffPrev);
 
         //Set array swap flag to true
         this->isArraySwap = true;
@@ -144,9 +137,6 @@ bool Buffer::ungetChar() {
         //Row count ?:/
         this->lineCount -= 1;
     }
-
-    //debug
-    debug("Unget ");
 
     return 0;
 }
@@ -169,8 +159,8 @@ void Buffer::debug(string str) {
     cout << str << "\nLine:" << this->lineCount << " Row:" << this->rowCount << "\n  -> " << t << endl;
     cout << "           ";
     for (int i = 0; i <= BUFFER_BLOCK; ++i) {
-        if(this->buffPrev[i] != '\n'){
-            cout << "{" << this->buffPrev[i] << "} ";
+        if(buffPrev[i] != '\n'){
+            cout << "{" << buffPrev[i] << "} ";
         }
         else {
             cout << "{" << "\\n" << "} ";
