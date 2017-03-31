@@ -22,7 +22,7 @@ BINDIRTEST = debug
 # -o --> name des output-files
 
 makeTestBuffer: BufferTarget 	TestBufferTarget
-	g++ -g $(OBJDIR)/Buffer.o 	$(BINDIRTEST)/TestBuffer.o  -o $(BINDIRTEST)/BufferTest
+	g++ -std=c++11 -g $(OBJDIR)/Buffer.o 	$(BINDIRTEST)/TestBuffer.o  -o $(BINDIRTEST)/BufferTest
 	./$(BINDIRTEST)/BufferTest /Users/gilbiren/Desktop/test.txt
 
 # compilieren der Source-files
@@ -33,11 +33,11 @@ makeTestBuffer: BufferTarget 	TestBufferTarget
 # -Wall --> alle meldungen erzeugen (Warning all)
 
 BufferTarget :  $(SRCDIR)/Buffer.cpp $(HEADERDIR)/Buffer.h 
-	g++ -g  -c -Wall  $(SRCDIR)/Buffer.cpp -o $(OBJDIR)/Buffer.o
+	g++ -std=c++11 -g  -c -Wall  $(SRCDIR)/Buffer.cpp -o $(OBJDIR)/Buffer.o
 
 #TestBuffer.o ist abhaengig von TestBuffer.cpp und Buffer.h
 TestBufferTarget :  $(SRCDIR)/TestBuffer.cpp $(HEADERDIR)/Buffer.h
-	g++ -g  -c -Wall $(SRCDIR)/TestBuffer.cpp -o $(BINDIRTEST)/TestBuffer.o
+	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/TestBuffer.cpp -o $(BINDIRTEST)/TestBuffer.o
 
 
 

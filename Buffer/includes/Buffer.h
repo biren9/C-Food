@@ -11,7 +11,6 @@
 #include <fstream>
 #include <iostream>
 
-
 class Buffer {
     public:
 	    Buffer(char*);
@@ -20,18 +19,23 @@ class Buffer {
 	    char getChar();
 	    bool ungetChar();
 
+        unsigned int getRow();
+        unsigned int getLine();
+
     private:
         bool open(char*);
 	    bool read();
         void close();
-    void debug();
+        void debug(std::string);
 
-        static const unsigned int BUFFER_BLOCK = 5;
+        static const unsigned int BUFFER_BLOCK = 1024;
 
         char* buffCur;
         char* buffPrev;
 
-        int currentChar;
+        unsigned int currentChar;
+        unsigned int rowCount;
+        unsigned int lineCount;
 
         bool isArraySwap;
 
