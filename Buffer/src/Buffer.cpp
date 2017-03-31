@@ -131,12 +131,17 @@ bool Buffer::ungetChar() {
         this->currentChar -= 1;
     }
 
+
     this->rowCount -= 1;
 
     if(this->buffCur[this->currentChar] == '\n') {
-        //Row count ?:/
+        //Row count is now
+        //throw ?
+        throw "You cannot go back over a \\n";
         this->lineCount -= 1;
     }
+
+    this->prevChar = &(this->buffCur[this->currentChar]);
 
     return 0;
 }
