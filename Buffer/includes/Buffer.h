@@ -13,7 +13,7 @@
 
 class Buffer {
     public:
-	    Buffer(char*);
+	    Buffer(const char*);
 	    virtual ~Buffer();
 
 	    char getChar();
@@ -23,12 +23,12 @@ class Buffer {
         unsigned int getLine();
 
     private:
-        bool open(char*);
+        bool open(const char*);
 	    bool read();
         void close();
         void debug(std::string);
 
-        static constexpr unsigned int BUFFER_BLOCK = 7;
+        static constexpr unsigned int BUFFER_BLOCK = 1024;
 
         char buffCur[BUFFER_BLOCK]{};
         char buffPrev[BUFFER_BLOCK]{};

@@ -11,7 +11,7 @@ using namespace std;
 
 
 //Constructor
-Buffer::Buffer(char* filename) {
+Buffer::Buffer(const char* filename) {
 
     //Init variables
 
@@ -42,7 +42,7 @@ Buffer::~Buffer() {
 
 
 //Open the file & save the instance
-bool Buffer::open(char* filename) {
+bool Buffer::open(const char* filename) {
 
     //Try to open the file. Should throw exception on error
     this->in.open(filename, ios::in | ios::binary);
@@ -161,7 +161,7 @@ bool Buffer::ungetChar() {
 
     this->prevChar = &(this->buffCur[this->currentChar]);
 
-    return 0;
+    return true;
 }
 
 

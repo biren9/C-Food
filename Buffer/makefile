@@ -23,7 +23,7 @@ BINDIRTEST = debug
 
 makeTestBuffer: BufferTarget 	TestBufferTarget
 	g++ -std=c++11 -g $(OBJDIR)/Buffer.o 	$(BINDIRTEST)/TestBuffer.o  -o $(BINDIRTEST)/BufferTest
-	./$(BINDIRTEST)/BufferTest /Users/gilbiren/Desktop/test.txt
+	./$(BINDIRTEST)/BufferTest
 
 # compilieren der Source-files
 # Buffer.o ist abhaengig von Buffer.cpp und Buffer.h

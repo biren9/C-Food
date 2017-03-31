@@ -11,11 +11,11 @@ int main(int argc, char **argv) {
     high_resolution_clock::time_point begin = high_resolution_clock::now();
 
 	Buffer*  buffer;
-	buffer = new Buffer(argv[1]);
+	buffer = new Buffer("../TestFile/test1.txt");
 
 
     string a;
-    for (int i = 0; i < 50; ++i) {
+    for (int i = 0; i < 29160; ++i) {
          a = buffer->getChar();
         cout << "GET: " << ((a == "\n")?"\\n": a) << "   Line: " << buffer->getLine() << "    Row: "  << buffer->getRow() << endl;
     }
@@ -23,7 +23,7 @@ cout << "----------------------\n";
 
 
 
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < 2; ++i) {
         try {
             cout << "Unget... " << endl;
             buffer->ungetChar();
