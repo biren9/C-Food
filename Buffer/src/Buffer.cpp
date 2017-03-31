@@ -22,9 +22,16 @@ Buffer::Buffer(char* filename) {
     this->isArraySwap = false;
 
     //Open the file & buffer the first X Bytes
-    this->open(filename);
+    try {
+        this->open(filename);
+    }
+    catch(char* msg) {
+        cout << msg;
+    }
+
     this->read();
 }
+
 
 //Destructor
 Buffer::~Buffer() {
@@ -33,18 +40,19 @@ Buffer::~Buffer() {
     this->close();
 }
 
+
 //Open the file & save the instance
 bool Buffer::open(char* filename) {
 
     //Try to open the file. Should throw exception on error
     this->in.open(filename, ios::in | ios::binary);
     if (!this->in) {
-        cout << "Cannot open file.\n";
-        return false;
+        throw "Cannot open file.\n";
     }
 
     return true;
 }
+
 
 //Close the file
 void Buffer::close() {
@@ -52,6 +60,7 @@ void Buffer::close() {
     //Close the instance
     this->in.close();
 }
+
 
 //Read the file & put it in the buffer array
 bool Buffer::read() {
@@ -64,6 +73,7 @@ bool Buffer::read() {
 
     return true;
 }
+
 
 //Public method: get next char -> buffer
 char Buffer::getChar() {
@@ -109,6 +119,7 @@ char Buffer::getChar() {
     this->prevChar = &(this->buffCur[this->currentChar]);
     return this->buffCur[this->currentChar];
 }
+
 
 //Public method: put char back -> buffer
 bool Buffer::ungetChar() {
@@ -159,35 +170,8 @@ unsigned int Buffer::getRow() {
     return rowCount;
 }
 
+
 unsigned int Buffer::getLine() {
 
     return lineCount;
-}
-
-
-//Debug method
-void Buffer::debug(string str) {
-    string t = (this->buffCur[this->currentChar] == '\n') ? "\\n" : string(1, this->buffCur[this->currentChar]);
-    cout << str << "\nLine:" << this->lineCount << " Row:" << this->rowCount << "\n  -> " << t << endl;
-    cout << "           ";
-    for (int i = 0; i <= BUFFER_BLOCK; ++i) {
-        if(buffPrev[i] != '\n'){
-            cout << "{" << buffPrev[i] << "} ";
-        }
-        else {
-            cout << "{" << "\\n" << "} ";
-        }
-    }
-
-    cout << endl;
-    cout << "           ";
-    for (int i = 0; i <= BUFFER_BLOCK; ++i) {
-        if(this->buffCur[i] != '\n'){
-            cout << "{" << this->buffCur[i] << "} ";
-        }
-        else {
-            cout << "{" << "\\n" << "} ";
-        }
-    }
-    cout << endl;
 }

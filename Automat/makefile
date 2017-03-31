@@ -8,7 +8,7 @@
 # -o --> name des output-files
 
 makeTestAutomat: AutomatTarget TestAutomatTarget  
-	g++ -g objs/Automat.o debug/TestAutomat.o -o debug/AutomatTest
+	g++ -std=c++11 -g objs/Automat.o debug/TestAutomat.o -o debug/AutomatTest
 	
 
 # compilieren des Files Automat.cpp zu Automat.o, 
@@ -19,12 +19,12 @@ makeTestAutomat: AutomatTarget TestAutomatTarget
 # -Wall --> alle meldungen erzeugen (Warning all)
 
 AutomatTarget :  src/Automat.cpp includes/Automat.h 
-	g++ -g  -c -Wall src/Automat.cpp -o objs/Automat.o  
+	g++ -std=c++11 -g  -c -Wall src/Automat.cpp -o objs/Automat.o  
 
 
 # TestAutomat.o ist abhängig von src/TestAutomat.cpp und src/Automat.h
 TestAutomatTarget :  src/TestAutomat.cpp includes/Automat.h
-	g++ -g  -c -Wall src/TestAutomat.cpp  -o debug/TestAutomat.o  
+	g++ -std=c++11 -g  -c -Wall src/TestAutomat.cpp  -o debug/TestAutomat.o  
 
 
 
