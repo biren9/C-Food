@@ -113,17 +113,29 @@ char Buffer::getChar() {
 //Public method: put char back -> buffer
 bool Buffer::ungetChar() {
 
+    if(this->buffCur[this->currentChar] == '\n') {
+        //Row count is now
+        //throw ?
+        throw "You cannot go back over a \\n";
+
+    }
+
     //If Pointer is out of bounce
     if(this->currentChar == 0) {
 
-        //swap arrays
-        swap(this->buffCur, buffPrev);
+        if(!this->isArraySwap) {
+            //swap arrays
+            swap(this->buffCur, buffPrev);
 
-        //Set array swap flag to true
-        this->isArraySwap = true;
+            //Set array swap flag to true
+            this->isArraySwap = true;
 
-        //Move Pointer to the right of the previous Array
-        this->currentChar = BUFFER_BLOCK-1;
+            //Move Pointer to the right of the previous Array
+            this->currentChar = BUFFER_BLOCK - 1;
+        }
+        else {
+            throw "Buffer underflow! Increase the Buffer size!";
+        }
     }
     else {
 
@@ -131,15 +143,10 @@ bool Buffer::ungetChar() {
         this->currentChar -= 1;
     }
 
+    if(this->buffCur[this->currentChar] == '\n') this->lineCount -= 1;
+
 
     this->rowCount -= 1;
-
-    if(this->buffCur[this->currentChar] == '\n') {
-        //Row count is now
-        //throw ?
-        throw "You cannot go back over a \\n";
-        this->lineCount -= 1;
-    }
 
     this->prevChar = &(this->buffCur[this->currentChar]);
 

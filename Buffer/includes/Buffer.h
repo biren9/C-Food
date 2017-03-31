@@ -28,7 +28,7 @@ class Buffer {
         void close();
         void debug(std::string);
 
-        static constexpr unsigned int BUFFER_BLOCK = 5;
+        static constexpr unsigned int BUFFER_BLOCK = 7;
 
         char buffCur[BUFFER_BLOCK]{};
         char buffPrev[BUFFER_BLOCK]{};

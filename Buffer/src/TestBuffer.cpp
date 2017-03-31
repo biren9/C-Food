@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
 
 
     string a;
-    for (int i = 0; i < 48; ++i) {
+    for (int i = 0; i < 46; ++i) {
          a = buffer->getChar();
         cout << "GET: " << ((a == "\n")?"\\n": a) << "   Line: " << buffer->getLine() << "    Row: "  << buffer->getRow() << endl;
     }
