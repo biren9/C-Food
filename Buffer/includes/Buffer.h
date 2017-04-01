@@ -16,7 +16,8 @@ class Buffer {
 	    Buffer(const char*);
 	    virtual ~Buffer();
 
-	    char getChar();
+	    char getNextChar();
+        char getCurrentChar();
 	    bool ungetChar();
 
         unsigned int getRow();
@@ -28,7 +29,7 @@ class Buffer {
         void close();
         void debug(std::string);
 
-        static constexpr unsigned int BUFFER_BLOCK = 1024;
+        static constexpr unsigned int BUFFER_BLOCK = 5;
 
         char buffCur[BUFFER_BLOCK]{};
         char buffPrev[BUFFER_BLOCK]{};

@@ -76,22 +76,22 @@ bool Buffer::read() {
 
 
 //Public method: get next char -> buffer
-char Buffer::getChar() {
+char Buffer::getNextChar() {
 
-    //If end of file is reached -> do not change pointer & line count
-    if(this->prevChar != nullptr && *this->prevChar != '\0') {
-
-        this->rowCount += 1;
+    //If end of file OR First char of File -> do not change pointer & line count
+    if(this->prevChar != nullptr && this->buffCur[this->currentChar] != '\0') {
 
         //Update row & line count
-        //cout << endl << *(this->prevChar) << endl;
+        this->rowCount += 1;
+
         if(*this->prevChar == '\n') {
             this->lineCount += 1;
             this->rowCount = 1;
         }
-
+        this->prevChar = &(this->buffCur[this->currentChar]);
         this->currentChar += 1;
     }
+    else this->prevChar = &(this->buffCur[this->currentChar]);
 
     //Current char pointer -> end of array
     if(this->currentChar >= BUFFER_BLOCK) {
@@ -116,15 +116,17 @@ char Buffer::getChar() {
         }
     }
 
-    this->prevChar = &(this->buffCur[this->currentChar]);
     return this->buffCur[this->currentChar];
 }
 
+char Buffer::getCurrentChar() {
+    return this->buffCur[this->currentChar];
+}
 
 //Public method: put char back -> buffer
 bool Buffer::ungetChar() {
 
-    if(this->buffCur[this->currentChar] == '\n') {
+    if(*this->prevChar == '\n') {
         //Row count is now
         //throw ?
         throw "You cannot go back over a \\n";
@@ -135,10 +137,9 @@ bool Buffer::ungetChar() {
     if(this->currentChar == 0) {
 
         if(!this->isArraySwap) {
-            //swap arrays
-            swap(this->buffCur, buffPrev);
 
-            //Set array swap flag to true
+            //swap arrays & set to true
+            swap(this->buffCur, buffPrev);
             this->isArraySwap = true;
 
             //Move Pointer to the right of the previous Array
@@ -159,7 +160,7 @@ bool Buffer::ungetChar() {
 
     this->rowCount -= 1;
 
-    this->prevChar = &(this->buffCur[this->currentChar]);
+    this->prevChar = &((this->currentChar == 0) ? this->buffPrev[BUFFER_BLOCK-1]: this->buffCur[this->currentChar-1]);
 
     return true;
 }
