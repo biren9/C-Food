@@ -1,25 +1,25 @@
-#Buffer
+# Buffer
 
-###Public methode:
+### Public methode:
 
 
 
-Buffer(*char filename)
+#### Buffer(*char filename)
     
     Basic constructor & destructor
     
     Filelocation as parameter
     
-char getNextChar()
+#### char getNextChar()
 
     Return the next character
 
-char getCurrentChar()
+#### char getCurrentChar()
 
     Return the current character
     
 
-void ungetChar()
+#### void ungetChar()
 
     Go one character back
     
@@ -27,11 +27,11 @@ void ungetChar()
         -If unget reache a \n
         -Buffer underflow
         
-unsigned int getRow()
+#### unsigned int getRow()
 
     Return the line for the current character
 
 
-unsigned int getLine()
+#### unsigned int getLine()
 
     Return the row for the current character
