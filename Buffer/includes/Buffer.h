@@ -11,27 +11,33 @@
 #include <fstream>
 #include <iostream>
 
-
 class Buffer {
     public:
-	    Buffer(char*);
+	    Buffer(const char*);
 	    virtual ~Buffer();
 
-	    char getChar();
+	    char getNextChar();
+        char getCurrentChar();
 	    bool ungetChar();
 
+        unsigned int getRow();
+        unsigned int getLine();
+
     private:
-        bool open(char*);
+        bool open(const char*);
 	    bool read();
         void close();
-    void debug();
+        void debug(std::string);
 
-        static const unsigned int BUFFER_BLOCK = 5;
+        static constexpr unsigned int BUFFER_BLOCK = 5;
 
-        char* buffCur;
-        char* buffPrev;
+        char buffCur[BUFFER_BLOCK]{};
+        char buffPrev[BUFFER_BLOCK]{};
+        char* prevChar;
 
-        int currentChar;
+        unsigned int currentChar;
+        unsigned int rowCount;
+        unsigned int lineCount;
 
         bool isArraySwap;
 
