@@ -7,3 +7,5 @@ cmake-build-*
 */debug/*
 
 */objs/*
+
+CMakeLists.txt
