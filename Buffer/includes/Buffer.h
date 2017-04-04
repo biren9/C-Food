@@ -20,8 +20,8 @@ class Buffer {
         char getCurrentChar();
 	    bool ungetChar();
 
+        unsigned int getCol();
         unsigned int getRow();
-        unsigned int getLine();
 
     private:
         bool open(const char*);
@@ -37,7 +37,7 @@ class Buffer {
 
         unsigned int currentChar;
         unsigned int rowCount;
-        unsigned int lineCount;
+        unsigned int colCount;
 
         bool isArraySwap;
 

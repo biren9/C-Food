@@ -16,8 +16,8 @@ Buffer::Buffer(const char* filename) {
     //Init variables
 
     this->currentChar = 0;
+    this->colCount = 1;
     this->rowCount = 1;
-    this->lineCount = 1;
     this->prevChar = nullptr;
     this->isArraySwap = false;
 
@@ -82,11 +82,11 @@ char Buffer::getNextChar() {
     if(this->prevChar != nullptr && this->buffCur[this->currentChar] != '\0') {
 
         //Update row & line count
-        this->rowCount += 1;
+        this->colCount += 1;
 
         if(*this->prevChar == '\n') {
-            this->lineCount += 1;
-            this->rowCount = 1;
+            this->rowCount += 1;
+            this->colCount = 1;
         }
         this->prevChar = &(this->buffCur[this->currentChar]);
         this->currentChar += 1;
@@ -155,10 +155,10 @@ bool Buffer::ungetChar() {
         this->currentChar -= 1;
     }
 
-    if(this->buffCur[this->currentChar] == '\n') this->lineCount -= 1;
+    if(this->buffCur[this->currentChar] == '\n') this->rowCount -= 1;
 
 
-    this->rowCount -= 1;
+    this->colCount -= 1;
 
     this->prevChar = &((this->currentChar == 0) ? this->buffPrev[BUFFER_BLOCK-1]: this->buffCur[this->currentChar-1]);
 
@@ -166,13 +166,13 @@ bool Buffer::ungetChar() {
 }
 
 
-unsigned int Buffer::getRow() {
+unsigned int Buffer::getCol() {
 
-    return rowCount;
+    return colCount;
 }
 
 
-unsigned int Buffer::getLine() {
+unsigned int Buffer::getRow() {
 
-    return lineCount;
+    return rowCount;
 }

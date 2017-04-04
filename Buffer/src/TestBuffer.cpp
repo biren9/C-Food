@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
     string a;
     for (int i = 0; i < 48; ++i) {
          a = buffer->getNextChar();
-        cout << "GET: " << ((a == "\n")?"\\n": a) << "   Line: " << buffer->getLine() << "    Row: "  << buffer->getRow() << endl;
+        cout << "GET: " << ((a == "\n")?"\\n": a) << "   Row: " << buffer->getRow() << "    Col: "  << buffer->getCol() << endl;
     }
 cout << "----------------------\n";
 
@@ -34,10 +34,10 @@ cout << "----------------------\n";
             cout << endl << msg << endl;
         }
         a = buffer->getCurrentChar();
-        cout << "GET CUR: " << ((a == "\n")?"\\n": a) << "   Line: " << buffer->getLine() << "    Row: "  << buffer->getRow() << endl;
+        cout << "GET CUR: " << ((a == "\n")?"\\n": a) << "   Row: " << buffer->getRow() << "    Col: "  << buffer->getCol() << endl;
 
         a = buffer->getNextChar();
-        cout << "GET NXT: " << ((a == "\n")?"\\n": a) << "   Line: " << buffer->getLine() << "    Row: "  << buffer->getRow() << endl;
+        cout << "GET NXT: " << ((a == "\n")?"\\n": a) << "   Row: " << buffer->getRow() << "    Col: "  << buffer->getCol() << endl;
     }
 
 
