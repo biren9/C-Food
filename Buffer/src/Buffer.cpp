@@ -7,9 +7,6 @@
 
 #include "../includes/Buffer.h"
 
-using namespace std;
-
-
 //Constructor
 Buffer::Buffer(const char* filename) {
 
@@ -26,7 +23,7 @@ Buffer::Buffer(const char* filename) {
         this->open(filename);
     }
     catch(char* msg) {
-        cout << msg;
+        std::cout << msg;
     }
 
     this->read();
@@ -45,7 +42,7 @@ Buffer::~Buffer() {
 bool Buffer::open(const char* filename) {
 
     //Try to open the file. Should throw exception on error
-    this->in.open(filename, ios::in | ios::binary);
+    this->in.open(filename, std::ios::in | std::ios::binary);
     if (!this->in) {
         throw "Cannot open file.\n";
     }
@@ -66,7 +63,7 @@ void Buffer::close() {
 bool Buffer::read() {
 
     //overwrite buffer with NULL
-    fill_n(this->buffCur, BUFFER_BLOCK, '\0');
+    std::fill_n(this->buffCur, BUFFER_BLOCK, '\0');
 
     //Fill the buffer
     this->in.read(this->buffCur, BUFFER_BLOCK);
@@ -103,13 +100,13 @@ char Buffer::getNextChar() {
         if(this->isArraySwap) {
 
             //Swap
-            swap(this->buffCur, buffPrev);
+            std::swap(this->buffCur, buffPrev);
             this->isArraySwap = false;
         }
         else {
 
             //Copy every element to the previous array
-            memcpy(buffPrev, this->buffCur, BUFFER_BLOCK);
+            std::memcpy(buffPrev, this->buffCur, BUFFER_BLOCK);
 
             //Buffer new chars
             this->read();
@@ -139,7 +136,7 @@ bool Buffer::ungetChar() {
         if(!this->isArraySwap) {
 
             //swap arrays & set to true
-            swap(this->buffCur, buffPrev);
+            std::swap(this->buffCur, buffPrev);
             this->isArraySwap = true;
 
             //Move Pointer to the right of the previous Array
