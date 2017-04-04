@@ -1,6 +1,5 @@
+#include <chrono>
 #include "../includes/Buffer.h"
-#include <iostream>
-
 
 
 using namespace std;
