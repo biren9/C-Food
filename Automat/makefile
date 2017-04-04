@@ -1,43 +1,60 @@
+# Definition der Variablen
+
+# enthaelt die Header Files
+HEADERDIR = includes
+
+# enthaelt die Source Files
+SRCDIR = src
+
+# enthaelt die Obj Files fuer das Gesamtprojekt
+OBJDIR = objs
+
+# enthaelt die Objectfiles und das ausfuehrbare File zum Testen des Teilprojekts
+BINDIRTEST = debug
+
 #
 #		Targets zum Bauen des Tests
 #
 
-# Linken der Object-files, abhaengig von AutomatTarget und TestAutomatTarget
+# Linken der Object-files, abhaengig von BufferTarget und TestBufferTarget
 # flag:
 # -g --> debug Informationen erzeugen
 # -o --> name des output-files
 
-makeTestAutomat: AutomatTarget TestAutomatTarget  
-	g++ -std=c++11 -g objs/Automat.o debug/TestAutomat.o -o debug/AutomatTest
-	
+LIB = ../lib
 
-# compilieren des Files Automat.cpp zu Automat.o, 
-# das Objekt-File ist abhängig von src/Automat.cpp und src/Automat.h
+makeTestAutomat: AutomatTarget 	TestAutomatTarget
+	g++ -std=c++11 -g $(OBJDIR)/Automat.o $(OBJDIR)/String.o 	$(BINDIRTEST)/TestAutomat.o  -o $(BINDIRTEST)/TestAutomat
+	./$(BINDIRTEST)/TestAutomat
+
+String :  $(LIB)/String.cpp $(LIB)/String.h
+	g++ -std=c++11 -g  -c -Wall $(LIB)/String.cpp -o objs/String.o
+# compilieren der Source-files
+# Buffer.o ist abhaengig von Buffer.cpp und Buffer.h
 # flag:
 # -c --> nur compilieren
 # -g --> debug Informationen erzeugen
 # -Wall --> alle meldungen erzeugen (Warning all)
 
-AutomatTarget :  src/Automat.cpp includes/Automat.h 
-	g++ -std=c++11 -g  -c -Wall src/Automat.cpp -o objs/Automat.o  
+
+AutomatTarget :  $(SRCDIR)/Automat.cpp $(HEADERDIR)/Automat.h
+	g++ -std=c++11 -g  -c -Wall  $(SRCDIR)/Automat.cpp -o $(OBJDIR)/Automat.o
+
+#TestBuffer.o ist abhaengig von TestBuffer.cpp und Buffer.h
+TestAutomatTarget :  $(SRCDIR)/TestAutomat.cpp $(HEADERDIR)/Automat.h
+	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/TestAutomat.cpp -o $(BINDIRTEST)/TestAutomat.o
 
 
-# TestAutomat.o ist abhängig von src/TestAutomat.cpp und src/Automat.h
-TestAutomatTarget :  src/TestAutomat.cpp includes/Automat.h
-	g++ -std=c++11 -g  -c -Wall src/TestAutomat.cpp  -o debug/TestAutomat.o  
+
+# loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu compilieren
+
+cleanBuffer:
+	rm -f $(OBJDIR)/*.o
+	rm -f $(BINDIRTEST)/*
+	$(MAKE) makeTestBuffer
 
 
-
-# loeschen aller files im verzeichnis obj und debug, dann neu erzeugen
-
-cleanAutomat:
-	rm -f objs/*.o
-	rm -f debug/*
-	$(MAKE) makeTestAutomat
-	
-	
 # dieses Target wird vom makefile des Gesamtprojekts verwendet
-# objs fuer Gesamtprojekt loeschen und dann neu erzeugen
-AutomatOBJTarget:
-	$(MAKE) AutomatTarget
-
+# objs fuer GesamtProjekt loeschen und dann neu erzeugen
+BufferOBJTarget:
+	$(MAKE) BufferTarget

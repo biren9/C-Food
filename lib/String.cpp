@@ -1,8 +1,6 @@
 
 #include "String.h"
 
-using namespace std;
-
 /*
  * Default constructor.
  * Internal C-String initialization with size 1.
@@ -136,7 +134,7 @@ String& String::operator+=(String& s) {
  * Outputstream operator overload
  * chars are copied to ostream and returned
  */
-ostream& operator<< (ostream &out, String &s) {
+std::ostream& operator<< (std::ostream &out, String &s) {
   for(int i=0; i<s.size; i++) {
     out << s.str[i];
   }
