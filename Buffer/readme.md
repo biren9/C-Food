@@ -29,9 +29,9 @@
         
 #### unsigned int getRow()
 
-    Return the line for the current character
-
-
-#### unsigned int getLine()
-
     Return the row for the current character
+
+
+#### unsigned int getCol()
+
+    Return the column for the current character
