@@ -48,13 +48,13 @@ TestAutomatTarget :  $(SRCDIR)/TestAutomat.cpp $(HEADERDIR)/Automat.h
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu compilieren
 
-cleanBuffer:
+cleanAutomat:
 	rm -f $(OBJDIR)/*.o
 	rm -f $(BINDIRTEST)/*
-	$(MAKE) makeTestBuffer
+	$(MAKE) makeTestAutomat
 
 
 # dieses Target wird vom makefile des Gesamtprojekts verwendet
 # objs fuer GesamtProjekt loeschen und dann neu erzeugen
-BufferOBJTarget:
-	$(MAKE) BufferTarget
+AutomatOBJTarget:
+	$(MAKE) AutomatTarget

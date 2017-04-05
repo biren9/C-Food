@@ -20,7 +20,7 @@ OBJS = $(OBJDIR)/Symboltable.o \
 	#$(OBJDIR)/xx1.o \
 	#$(OBJDIR)/xxn.o
 
-
+LIB = ../lib
 #
 #		Targets zum Bauen des Tests
 #
@@ -49,7 +49,11 @@ OBJS = $(OBJDIR)/Symboltable.o \
 # Variante mit guten Makefile-Kenntnissen
 
 makeTestSymboltable: SymboltableTarget TestSymboltableTarget
-	g++ -std=c++11 -g $(OBJDIR)/*.o $(BINDIRTEST)/TestSymboltable.o  -o $(BINDIRTEST)/SymboltableTest
+	g++ -std=c++11 -g $(OBJDIR)/Symboltable.o $(BINDIRTEST)/TestSymboltable.o $(OBJDIR)/String.o -o $(BINDIRTEST)/SymboltableTest
+	./$(BINDIRTEST)/SymboltableTest
+
+String :  $(LIB)/String.cpp $(LIB)/String.h
+	g++ -std=c++11 -g  -c -Wall $(LIB)/String.cpp -o objs/String.o
 
 SymboltableTarget: $(OBJS)
 

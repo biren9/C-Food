@@ -6,9 +6,12 @@
  */
 
 #include "../includes/Symboltable.h"
+#include "../../lib/String.h"
+
 
 Symboltable::Symboltable() {
 	// TODO Auto-generated constructor stub
+    String t = "Test";
 
 }
 
