@@ -63,6 +63,8 @@ public:
    */
   char* getString();
 
+  int getSize();
+
   /*
    * @brief Array operator overload
    */
@@ -82,5 +84,7 @@ public:
    * make friend, so we can access private members
    */
   friend std::ostream& operator<< (std::ostream &out, String &s);
+
+  bool equals(String& s);
 };
 #endif

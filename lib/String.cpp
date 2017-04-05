@@ -64,6 +64,10 @@ char* String::getString() {
   return str;
 }
 
+int String::getSize() {
+  return size;
+}
+
 /*
  * Array operator overload.
  * If index is in range return pointer.
@@ -91,6 +95,20 @@ String& String::operator=(String& s) {
     str[size] = '\0';
   }
   return *this;
+}
+
+bool String::equals(String& s) {
+  if(this->size == s.getSize()) {
+    int length = s.getSize();
+    for(int i = 0; i < length; i++) {
+      if(str[i] != s.str[i]) {
+        return false;
+      }
+    }
+  } else {
+    return false;
+  }
+  return true;
 }
 
 /*

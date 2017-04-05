@@ -11,6 +11,8 @@ int main (int argc, char* argv[]){
 	std::cout << "Test" << std::endl;
     String test = "Test";
 
+
+
     std::cout << test.getString() << std::endl;
 
 
