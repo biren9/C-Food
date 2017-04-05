@@ -16,7 +16,7 @@ BINDIRTEST = debug
 #		Targets zum Bauen des Tests
 #
 
-# Linken der Object-files, abhaengig von BufferTarget und TestBufferTarget
+# Linken der Object-files, abhaengig von AutomatTarget und TestAutomatTarget
 # flag:
 # -g --> debug Informationen erzeugen
 # -o --> name des output-files
@@ -30,7 +30,7 @@ makeTestAutomat: AutomatTarget 	TestAutomatTarget
 String :  $(LIB)/String.cpp $(LIB)/String.h
 	g++ -std=c++11 -g  -c -Wall $(LIB)/String.cpp -o objs/String.o
 # compilieren der Source-files
-# Buffer.o ist abhaengig von Buffer.cpp und Buffer.h
+# Buffer.o ist abhaengig von Automat.cpp und Automat.h
 # flag:
 # -c --> nur compilieren
 # -g --> debug Informationen erzeugen
@@ -40,7 +40,7 @@ String :  $(LIB)/String.cpp $(LIB)/String.h
 AutomatTarget :  $(SRCDIR)/Automat.cpp $(HEADERDIR)/Automat.h
 	g++ -std=c++11 -g  -c -Wall  $(SRCDIR)/Automat.cpp -o $(OBJDIR)/Automat.o
 
-#TestBuffer.o ist abhaengig von TestBuffer.cpp und Buffer.h
+#TestAutomat.o ist abhaengig von TestAutomat.cpp und Automat.h
 TestAutomatTarget :  $(SRCDIR)/TestAutomat.cpp $(HEADERDIR)/Automat.h
 	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/TestAutomat.cpp -o $(BINDIRTEST)/TestAutomat.o
 
