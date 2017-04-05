@@ -22,8 +22,9 @@ Buffer::Buffer(const char* filename) {
     try {
         this->open(filename);
     }
-    catch(char* msg) {
-        std::cout << msg;
+    catch(const char* msg) {
+        std::cout << std::endl << msg;
+        return;
     }
 
     this->read();
