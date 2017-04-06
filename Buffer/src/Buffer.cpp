@@ -124,12 +124,10 @@ char Buffer::getCurrentChar() {
 //Public method: put char back -> buffer
 bool Buffer::ungetChar() {
 
-    if(*this->prevChar == '\n') {
-        //Row count is now
-        //throw ?
-        throw "You cannot go back over a \\n";
+    //Error handling
+    if (this->prevChar == nullptr) throw "nope";
+    if(*this->prevChar == '\n')  throw "You cannot go back over a \\n";
 
-    }
 
     //If Pointer is out of bounce
     if(this->currentChar == 0) {

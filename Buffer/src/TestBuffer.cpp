@@ -12,6 +12,14 @@ int main(int argc, char **argv) {
 	Buffer*  buffer;
 	buffer = new Buffer("../TestFile/test2.txt");
 
+    //buffer->getNextChar();
+    try {
+        buffer->ungetChar();
+    }
+    catch (const char* msg) {
+        cout << msg;
+    }
+
 
     string a;
     for (int i = 0; i < 48; ++i) {
