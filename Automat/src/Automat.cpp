@@ -6,11 +6,17 @@
 #include "../includes/Automat.h"
 
 
-Automat::Automat() {
-	// TODO Auto-generated constructor stub
-
+Automat::Automat(Buffer* input) {
+    bufferInput = input;
+    startColumn = input->getCol();
+    startLine = input->getRow();
+    tokenLiteral = "";
+    //currentTokenType = null;
+    currentState = startState;
 }
 
 Automat::~Automat() {
 	// TODO Auto-generated destructor stub
+    delete this;
 }
+

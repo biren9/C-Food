@@ -13,7 +13,7 @@
 
 class Automat {
 public:
-	Automat(Buffer);
+	Automat(Buffer* input);
 	virtual ~Automat();
 
     enum state {
@@ -31,21 +31,23 @@ public:
 
 
 private:
+    Buffer* bufferInput;
     unsigned int startLine, startColumn;
     String tokenLiteral;
     //tokenType currentTokenType;
     state currentState;
 
-    void startTransient();
-    void identifierTransient();
-    void identifierTypeTransient();
-    void numberTransient();
-    void equalSignTransient();
-    void equalColonTransient();
-    void colonSignTransient();
-    void commentStartTransient();
-    void commentEndTransiend();
-    void andSignTransient();
+    void transient(char currentChar);
+    void startTransient(char currentChar);
+    void identifierTransient(char currentChar);
+    void identifierTypeTransient(char currentChar);
+    void numberTransient(char currentChar);
+    void equalSignTransient(char currentChar);
+    void equalColonTransient(char currentChar);
+    void colonSignTransient(char currentChar);
+    void commentStartTransient(char currentChar);
+    void commentEndTransiend(char currentChar);
+    void andSignTransient(char currentChar);
 
 };
 
