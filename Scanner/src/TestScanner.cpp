@@ -2,9 +2,9 @@
 
 int main(int argc, char **argv) {
 
-	Scanner* scanner;
+	//Scanner* scanner;
 
-	scanner = new Scanner();
+	//scanner = new Scanner();
 
 }
 

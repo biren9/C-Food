@@ -10,8 +10,7 @@
 
 Scanner::Scanner() {
 	// TODO Auto-generated constructor stub
-	Automat* automat = new Automat();
-	std:string  tt = "Test";
+	//Automat* automat = new Automat();
 
 }
 
