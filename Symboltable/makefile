@@ -48,11 +48,11 @@ LIB = ../lib
 
 # Variante mit guten Makefile-Kenntnissen
 
-makeTestSymboltable: SymboltableTarget TestSymboltableTarget
+makeTestSymboltable: StringTarget SymboltableTarget TestSymboltableTarget
 	g++ -std=c++11 -g $(OBJDIR)/Symboltable.o $(BINDIRTEST)/TestSymboltable.o $(OBJDIR)/String.o -o $(BINDIRTEST)/SymboltableTest
 	./$(BINDIRTEST)/SymboltableTest
 
-String :  $(LIB)/String.cpp $(LIB)/String.h
+StringTarget :  $(LIB)/String.cpp $(LIB)/String.h
 	g++ -std=c++11 -g  -c -Wall $(LIB)/String.cpp -o objs/String.o
 
 SymboltableTarget: $(OBJS)

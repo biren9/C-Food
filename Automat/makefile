@@ -23,11 +23,11 @@ BINDIRTEST = debug
 
 LIB = ../lib
 
-makeTestAutomat: AutomatTarget 	TestAutomatTarget
+makeTestAutomat: StringTarget AutomatTarget TestAutomatTarget
 	g++ -std=c++11 -g $(OBJDIR)/Automat.o $(OBJDIR)/String.o 	$(BINDIRTEST)/TestAutomat.o  -o $(BINDIRTEST)/TestAutomat
 	./$(BINDIRTEST)/TestAutomat
 
-String :  $(LIB)/String.cpp $(LIB)/String.h
+StringTarget :  $(LIB)/String.cpp $(LIB)/String.h
 	g++ -std=c++11 -g  -c -Wall $(LIB)/String.cpp -o objs/String.o
 # compilieren der Source-files
 # Buffer.o ist abhaengig von Automat.cpp und Automat.h
