@@ -79,6 +79,20 @@ char& String::operator[](int index) {
   throw std::out_of_range("Index out of range");
 }
 
+String& String::operator=(const char *s) {
+  if ((s != NULL) && (s[0] == '\0')) {
+    delete[] str;
+    size = 0;
+    while (*(s + size) != '\0') size++;
+    str = new char[size + 1];
+    for (int i = 0; i <= size; i++)  {
+      str[i] = s[i];
+    }
+  }
+  return *this;
+}
+
+
 /*
  * assignment operator overload.
  * frees old allocated memory

@@ -80,6 +80,9 @@ public:
    */
   String& operator+=(String&);
 
+
+    String& operator=(const char *s);
+
   /*
    * make friend, so we can access private members
    */
