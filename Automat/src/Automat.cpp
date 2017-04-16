@@ -8,10 +8,10 @@
 
 Automat::Automat(Buffer* input) {
     bufferInput = input;
-    startColumn = input->getCol();
+    startColumn = bufferInput->getCol();
     startLine = input->getRow();
     tokenLiteral = "";
-    //currentTokenType = null;
+    currentTokenType = null;
     currentState = startState;
 }
 

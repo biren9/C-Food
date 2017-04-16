@@ -23,8 +23,10 @@ BINDIRTEST = debug
 
 LIB = ../lib
 
-makeTestAutomat: StringTarget AutomatTarget TestAutomatTarget
-	g++ -std=c++11 -g $(OBJDIR)/Automat.o $(OBJDIR)/String.o 	$(BINDIRTEST)/TestAutomat.o  -o $(BINDIRTEST)/TestAutomat
+BufferDIR = ../Buffer
+
+makeTestAutomat: StringTarget AutomatTarget TestAutomatTarget BufferTarget
+	g++ -std=c++11 -g $(OBJDIR)/Automat.o $(OBJDIR)/String.o $(BINDIRTEST)/TestAutomat.o $(OBJDIR)/Buffer.o  -o $(BINDIRTEST)/TestAutomat
 	./$(BINDIRTEST)/TestAutomat
 
 StringTarget :  $(LIB)/String.cpp $(LIB)/String.h
@@ -44,6 +46,8 @@ AutomatTarget :  $(SRCDIR)/Automat.cpp $(HEADERDIR)/Automat.h
 TestAutomatTarget :  $(SRCDIR)/TestAutomat.cpp $(HEADERDIR)/Automat.h
 	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/TestAutomat.cpp -o $(BINDIRTEST)/TestAutomat.o
 
+BufferTarget :  $(BufferDIR)/$(SRCDIR)/Buffer.cpp $(BufferDIR)/$(HEADERDIR)/Buffer.h
+	g++ -std=c++11 -g  -c -Wall  $(BufferDIR)/$(SRCDIR)/Buffer.cpp -o $(OBJDIR)/Buffer.o
 
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu compilieren

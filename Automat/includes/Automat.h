@@ -8,8 +8,8 @@
 #ifndef Automat_H_
 #define Automat_H_
 
-#include "../C-Food/Buffer/includes/Buffer.h"
-#include "../C-Food/Scanner/src/String.h"
+#include "../../Buffer/includes/Buffer.h"
+#include "../../lib/String.h"
 
 class Automat {
 public:
