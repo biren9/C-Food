@@ -15,11 +15,22 @@ enum TokenType
     Minus,
     Colon,
     Equal,
+    EqualAssign,
     Comment,
     Multiply,
     Bang,
     ExclamationMark,
-    AndOP
+    AndOP,
+    Greater,
+    Smaller,
+    OpenParenthesis,
+    CloseParenthesis,
+    OpenBracket,
+    CloseBracket,
+    OpenBrace,
+    CloseBrace,
+    WhileToken,
+    IfToken
 };
 
 class Token {

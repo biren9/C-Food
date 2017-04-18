@@ -17,14 +17,14 @@ public:
 	virtual ~Automat();
 
     enum state {
-        startState , identifier, identifierType, number,
+        startState , identifier, number,
         equalSign, equalColon, colonSign, commentStart,
         commentEnd, andSign, endState
     };
 
     void nextToken();
     String getTokenLiteral();
-    //tokenType getCurrentTokenType();
+    tokenType getCurrentTokenType();
     int getStartLine();
     int getStartColumn();
     state getCurrentState();
@@ -34,13 +34,13 @@ private:
     Buffer* bufferInput;
     unsigned int startLine, startColumn;
     String tokenLiteral;
-    //tokenType currentTokenType;
+    tokenType currentTokenType;
     state currentState;
 
     void transient(char currentChar);
     void startTransient(char currentChar);
     void identifierTransient(char currentChar);
-    void identifierTypeTransient(char currentChar);
+    void identifierType();
     void numberTransient(char currentChar);
     void equalSignTransient(char currentChar);
     void equalColonTransient(char currentChar);
