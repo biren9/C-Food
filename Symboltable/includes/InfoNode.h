@@ -4,8 +4,10 @@
 
 #ifndef TESTPROJECT_INFONODE_H
 #define TESTPROJECT_INFONODE_H
+class StringTabelle;
 struct InfoNode {
-    char *stringTablePointer;
+	StringTabelle* strTabelle;
+	unsigned int Index;
     InfoNode *prev;
     InfoNode *next;
 };
