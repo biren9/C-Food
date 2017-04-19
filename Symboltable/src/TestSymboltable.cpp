@@ -1,15 +1,26 @@
-#include "../includes/Symboltable.h"
 #include <iostream>
-#include "../../lib/String.h"
+#include "Liste.h"
+#include "StringTabelle.h"
+#include "Symboltable.h"
+#include "InfoNode.h"
 
-int main(int argc, char **argv) {
+int main() {
+	Symboltable symboltable;
+	InfoNode *testNode = symboltable.insert("testEingabe");
+	InfoNode *testNode2 = symboltable.insert("philippMachtSchlechteMutterWitze");
+	InfoNode *testNode3 = symboltable.insert("nochEinTest");
+	InfoNode *testNode4 = symboltable.insert("philippMachtSchlechteMutterWitze");
+	InfoNode *testNode5 = symboltable.insert("philippMachtSchlechteMutterWitze");
+	InfoNode *testNode6 = symboltable.insert("philippMachtSchlechteMutterWitze");
+	std::cout << testNode->stringTablePointer << std::endl;
+	std::cout << testNode2->stringTablePointer << std::endl;
+	std::cout << testNode3->stringTablePointer << std::endl;
+	std::cout << testNode4->stringTablePointer << std::endl;
+	std::cout << testNode5->stringTablePointer << std::endl;
+	std::cout << testNode6->stringTablePointer << std::endl;
 
-	//Symboltable* symboltable;
-
-	//symboltable = new Symboltable();
-
-
-	String test = "Test";
-	std::cout << test.getString()<< std::endl;
+	symboltable.stringTabelle->debugPrintStringTable();
+	getchar();
+	return 0;
 
 }
