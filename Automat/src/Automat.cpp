@@ -61,28 +61,24 @@ void Automat::nextToken(){
     }
 }
 
-String Automat::getTokenLiteral(){
-
+String Automat::getTokenLiteral() {
+    return this->tokenLiteral;
 }
 
-tokenType Automat::getCurrentTokenType(){
-
+tokenType Automat::getCurrentTokenType() {
+    return this->currentTokenType;
 }
 
-int Automat::getStartLine(){
-
+int Automat::getStartLine() {
+    return this->startLine;
 }
 
-int Automat::getStartColumn(){
-
+int Automat::getStartColumn() {
+    return this->startColumn;
 }
 
-state Automat::getCurrentState(){
-
-}
-
-void Automat::transient(char currentChar){
-
+state Automat::getCurrentState() {
+    return this->currentState;
 }
 
 void Automat::startTransient(char currentChar){
@@ -166,6 +162,8 @@ void Automat::startTransient(char currentChar){
                 this->tokenLiteral = ";";
                 this->currentTokenType = Semicolon;
                 break;
+            case '\0' : this->currentState = endState;
+                this->currentTokenType = EOL;
             default: this->currentState = endState;
                 this->tokenLiteral += currentChar;
                 this->currentTokenType = Undefined;

@@ -30,7 +30,8 @@ enum TokenType
     OpenBrace,
     CloseBrace,
     WhileToken,
-    IfToken
+    IfToken,
+    EOL
 };
 
 class Token {
