@@ -10,7 +10,9 @@ StringTabelle::StringTabelle() {
 StringTabelle::~StringTabelle() {
     delete[] stringArr;
 }
-
+/*
+ * Fügt ein lexem in einem Char Array ein. Ist das Array zu
+ */
 char* StringTabelle::insert(char* lexem) {
     if (freePlace > strlen(lexem)) {
         unsigned int beginning = freeSpotIndex;
