@@ -11,7 +11,7 @@ Automat::Automat(Buffer* input) {
     startColumn = bufferInput->getCol();
     startLine = input->getRow();
     tokenLiteral = "";
-    currentTokenType = null;
+    currentTokenType = Undefined;
     currentState = startState;
 }
 
@@ -65,7 +65,7 @@ String Automat::getTokenLiteral() {
     return this->tokenLiteral;
 }
 
-tokenType Automat::getCurrentTokenType() {
+TokenType Automat::getCurrentTokenType() {
     return this->currentTokenType;
 }
 

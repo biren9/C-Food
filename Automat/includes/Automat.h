@@ -10,6 +10,7 @@
 
 #include "../../Buffer/includes/Buffer.h"
 #include "../../lib/String.h"
+#include "../../lib/Token.h"
 
 class Automat {
 public:
@@ -24,7 +25,7 @@ public:
 
     void nextToken();
     String getTokenLiteral();
-    tokenType getCurrentTokenType();
+    TokenType getCurrentTokenType();
     int getStartLine();
     int getStartColumn();
     state getCurrentState();
@@ -34,7 +35,7 @@ private:
     Buffer* bufferInput;
     unsigned int startLine, startColumn;
     String tokenLiteral;
-    tokenType currentTokenType;
+    TokenType currentTokenType;
     state currentState;
 
     void transient(char currentChar);
