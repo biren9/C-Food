@@ -12,23 +12,24 @@
 #include "../../lib/String.h"
 #include "../../lib/Token.h"
 
+
+enum State {
+    startState , identifier, number,
+    equalSign, equalColon, colonSign, commentStart,
+    commentEnd, andSign, endState
+};
+
 class Automat {
 public:
 	Automat(Buffer* input);
 	virtual ~Automat();
-
-    enum state {
-        startState , identifier, number,
-        equalSign, equalColon, colonSign, commentStart,
-        commentEnd, andSign, endState
-    };
 
     void nextToken();
     String getTokenLiteral();
     TokenType getCurrentTokenType();
     int getStartLine();
     int getStartColumn();
-    state getCurrentState();
+    State getCurrentState();
 
 
 private:
@@ -36,7 +37,7 @@ private:
     unsigned int startLine, startColumn;
     String tokenLiteral;
     TokenType currentTokenType;
-    state currentState;
+    State currentState;
 
     void transient(char currentChar);
     void startTransient(char currentChar);

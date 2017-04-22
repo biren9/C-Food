@@ -77,7 +77,7 @@ int Automat::getStartColumn() {
     return this->startColumn;
 }
 
-state Automat::getCurrentState() {
+State Automat::getCurrentState() {
     return this->currentState;
 }
 
