@@ -29,7 +29,7 @@ void Automat::nextToken(){
         currentChar = bufferInput->getNextChar();
         switch (this->currentState) {
             case startState :
-                startTransient();
+                startTransient(currentChar);
                 break;
             case identifier :
                 identifierTransient(currentChar);
@@ -122,7 +122,7 @@ void Automat::startTransient(char currentChar){
                 break;
             case '>' : this->currentState = endState;
                 this->tokenLiteral = ">";
-                this->currentTokenType = Bigger;
+                this->currentTokenType = Greater;
                 break;
             case '=' : this->currentState = equalSign;
                 this->tokenLiteral = "=";
