@@ -1,8 +1,8 @@
 //
 // Created by ninja on 09.04.2017.
 //
-#include "../includes/Liste.h"
-#include <iostream>
+#include "Liste.h"
+
 Liste::Liste() {
     first = new InfoNode{"test", nullptr, nullptr};
     last = new InfoNode{"test2", first, nullptr};
@@ -10,10 +10,20 @@ Liste::Liste() {
 
 }
 
-bool Liste::addEnd(char* value) {
-    InfoNode *insertedNode = new InfoNode{"addedNode",last, nullptr};
+Liste::~Liste() {
+    //geht durch die liste durch und deleted alle Knoten
+    for (InfoNode *node = first; node != 0; node = (*node).next) {
+        if (node -> prev != nullptr) {
+            delete (node -> prev);
+        }
+    }
+}
+
+InfoNode* Liste::addEnd(char* lexem, StringTabelle* strTab) {
+    InfoNode *insertedNode = new InfoNode{strTab->insert(lexem),last, nullptr};
     last->next = insertedNode;
     last = insertedNode;
+    return insertedNode;
 }
 
 void Liste::printList() {
