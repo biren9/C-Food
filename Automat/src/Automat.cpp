@@ -201,6 +201,7 @@ void Automat::numberTransient(char currentChar){
         this->tokenLiteral += currentChar;
     }
     else {
+        this->currentTokenType = Integer;
         this->currentState = endState;
         bufferInput->ungetChar();
     }
