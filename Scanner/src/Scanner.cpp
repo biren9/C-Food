@@ -22,6 +22,7 @@ Token* Scanner::nextToken() {
     int startColumn = this->automat->getStartColumn();
 
     if(tokenType == EOL) {
+        std::cout << "EOL" << std::endl;
         return nullptr;
     } else {
         Token *token = new Token(tokenType,startColumn,startLine);
