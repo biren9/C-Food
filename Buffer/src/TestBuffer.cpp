@@ -20,11 +20,18 @@ int main(int argc, char **argv) {
         cout << msg;
     }
 
+    try {
 
-    string a;
-    while (buffer->getNextChar() != '\0') {
-         a = buffer->getCurrentChar();
-        cout << "GET: " << ((a == "\n")?"\\n": a) << "   Row: " << buffer->getRow() << "    Col: "  << buffer->getCol() << endl;
+        string a;
+        while (buffer->getNextChar() != '\0') {
+            a = buffer->getCurrentChar();
+            cout << "GET: " << ((a == "\n") ? "\\n" : a) << "   Row: " << buffer->getRow() << "    Col: "
+                 << buffer->getCol() << endl;
+        }
+    }
+    catch (const char* msg) {
+        cout << msg;
+        exit(0);
     }
 //cout << "----------------------\n";
 //

@@ -25,7 +25,7 @@ public:
 	virtual ~Automat();
 
     void nextToken();
-    std::string getTokenLiteral();
+    String getTokenLiteral();
     TokenType getCurrentTokenType();
     int getStartLine();
     int getStartColumn();
@@ -35,7 +35,7 @@ public:
 private:
     Buffer* bufferInput;
     unsigned int startLine, startColumn;
-    std::string tokenLiteral;
+    String tokenLiteral;
     TokenType currentTokenType;
     State currentState;
 

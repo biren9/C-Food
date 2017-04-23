@@ -18,7 +18,7 @@ Token Scanner::nextToken() {
     this->automat->nextToken();
     String tokenLiteral = this->automat->getTokenLiteral();
     TokenType tokenType = this->automat->getCurrentTokenType();
-    int startLine = this->automat->getStartColumn();
+    int startLine = this->automat->getStartLine();
     int startColumn = this->automat->getStartColumn();
 
     if(tokenType == EOL) {
