@@ -10,15 +10,8 @@ int main(int argc, char **argv) {
     high_resolution_clock::time_point begin = high_resolution_clock::now();
 
 	Buffer*  buffer;
-	buffer = new Buffer("../TestFile/test4.txt");
+	buffer = new Buffer("../TestFile/test2.txt");
 
-    //buffer->getNextChar();
-    try {
-        buffer->ungetChar();
-    }
-    catch (const char* msg) {
-        cout << msg;
-    }
 
     try {
 
@@ -55,11 +48,11 @@ int main(int argc, char **argv) {
 //    }
 //
 //
-//    delete buffer;
+    delete buffer;
 //
-//    high_resolution_clock::time_point end = high_resolution_clock::now();
+    high_resolution_clock::time_point end = high_resolution_clock::now();
 //
-//    cout << endl << duration_cast<microseconds>( end - begin).count() / 1000.0 << "ms";
+   cout << endl << duration_cast<microseconds>( end - begin).count() / 1000.0 << "ms";
 
     return  0;
 }

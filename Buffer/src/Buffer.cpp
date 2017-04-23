@@ -84,7 +84,7 @@ char Buffer::getNextChar() {
         this->lastCol = this->colCount;
         this->colCount += 1;
 
-        if(*this->prevChar == '\n') {
+        if(this->buffCur[this->currentChar] == '\n') {
             this->rowCount += 1;
             this->colCount = 1;
         }
