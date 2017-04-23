@@ -251,11 +251,21 @@ void Automat::commentStartTransient(char currentChar){
     if (currentChar == '*'){
         this->currentState = commentEnd;
     }
+    else if (currentChar == '\0'){
+        this->currentState = endState;
+        this->currentTokenType = EOL;
+        this->tokenLiteral = "";
+    }
 }
 
 void Automat::commentEndTransiend(char currentChar){
     if (currentChar == ':') {
         this->currentState = startState;
+    }
+    else if (currentChar == '\0'){
+        this->currentState = endState;
+        this->currentTokenType = EOL;
+        this->tokenLiteral = "";
     }
     else {
         this->currentState = commentStart;
