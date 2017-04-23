@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
     high_resolution_clock::time_point begin = high_resolution_clock::now();
 
 	Buffer*  buffer;
-	buffer = new Buffer("../TestFile/test2.txt");
+	buffer = new Buffer("../TestFile/test4.txt");
 
     //buffer->getNextChar();
     try {

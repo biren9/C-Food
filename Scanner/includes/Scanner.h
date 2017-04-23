@@ -16,7 +16,7 @@ private:
 	Buffer *buffer;
 	Automat *automat;
 public:
-	Token* nextToken();
+	Token nextToken();
 	Scanner(const char* file);
 	~Scanner();
 };

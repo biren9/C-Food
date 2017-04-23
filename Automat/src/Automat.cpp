@@ -27,7 +27,6 @@ void Automat::nextToken(){
     this->currentState = startState;
     while (this->currentState != endState) {
         currentChar = bufferInput->getNextChar();
-        std::cout << "currentChar: " << currentChar <<std::endl;
         switch (this->currentState) {
             case startState :
                 startTransient(currentChar);

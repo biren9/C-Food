@@ -70,34 +70,16 @@ int main(int argc, char **argv) {
 	//scanner = new Scanner();
 
 
-    Scanner *scanner = new Scanner("../TestFile/test2.txt");
+    Scanner *scanner = new Scanner("../TestFile/test4.txt");
 
-    Token *token = NULL;
-
-    token = scanner->nextToken();
-    std::cout << "TokenType: " << token->getType() << std::endl;
-
-    token = scanner->nextToken();
-    std::cout << "TokenType: " <<token->getType() << std::endl;
-
-    std::cout << static_cast<int>(token->getType()) << std::endl;
-    while((token =scanner->nextToken()) != nullptr){
-        std::cout << "TokenType: " << token->getType() << std::endl;
-        std::cout << "Line: " << token->getLine() << std::endl;
-        std::cout << "Column: " << token->getColumn() << std::endl;
+    Token token = scanner->nextToken();
+    while(token.getType() != EOL){
+        std::cout << "TokenType: " << token.getType() << std::endl;
+        std::cout << "Line: " << token.getLine() << std::endl;
+        std::cout << "Column: " << token.getColumn() << std::endl;
+        token = scanner->nextToken();
     }
 
-    TokenType typeToken1 = Assign;
-    //print(typeToken1);
-
-    std::cout << typeToken1 << std::endl;
 
 
-
-}
-
-std::ostream& operator<<(std::ostream& o, TokenType c)
-{
-    std::cout << static_cast<int>(c);
-    return o;
 }
