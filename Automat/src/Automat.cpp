@@ -165,6 +165,7 @@ void Automat::startTransient(char currentChar){
                 break;
             case '\0' : this->currentState = endState;
                 this->currentTokenType = EOL;
+                break;
             default: this->currentState = endState;
                 this->tokenLiteral += currentChar;
                 this->currentTokenType = Undefined;
