@@ -39,6 +39,7 @@ class Buffer {
         unsigned int currentChar;
         unsigned int rowCount;
         unsigned int colCount;
+		unsigned lastCol;
 
         bool isArraySwap;
 

@@ -177,6 +177,10 @@ void Automat::identifierTransient(char currentChar){
         this->currentState = identifier;
         this->tokenLiteral += currentChar;
     }
+    /*else if (currentChar == '\n') {
+        identifierType();
+        this->currentState = endState;
+    }*/
     else {
         identifierType();
         bufferInput->ungetChar();
@@ -201,6 +205,10 @@ void Automat::numberTransient(char currentChar){
         this->currentState = number;
         this->tokenLiteral += currentChar;
     }
+    /*else if (currentChar == '\n') {
+        this->currentTokenType = Integer;
+        this->currentState = endState;
+    }*/
     else {
         this->currentTokenType = Integer;
         this->currentState = endState;
@@ -213,6 +221,10 @@ void Automat::equalSignTransient(char currentChar){
         this->currentState = equalColon;
         this->tokenLiteral += currentChar;
     }
+    /*else if (currentChar == '\n') {
+        this->currentState = endState;
+        this->currentTokenType = Equal;
+    }*/
     else {
         this->currentState = endState;
         bufferInput->ungetChar();
@@ -225,6 +237,10 @@ void Automat::equalColonTransient(char currentChar){
         this->currentTokenType = EqualAssign;
         this->tokenLiteral += currentChar;
     }
+    /*else if (currentChar == '\n') {
+        this->currentState = endState;
+        this->currentTokenType = Undefined;
+    }*/
     else {
         this->tokenLiteral = "=";
         bufferInput->ungetChar();
@@ -243,6 +259,9 @@ void Automat::colonSignTransient(char currentChar){
         case '*' : this->currentState = commentStart;
             this->tokenLiteral = "";
             break;
+        /*case '\n' : this->currentState = endState;
+            this->currentTokenType = Colon;
+            break;*/
         default: this->currentState = endState;
             bufferInput->ungetChar();
             this->currentTokenType = Colon;
@@ -279,6 +298,9 @@ void Automat::andSignTransient(char currentChar){
         this->currentTokenType = AndOP;
         this->tokenLiteral += currentChar;
     }
+    /*else if (currentChar == '\n') {
+        this->currentTokenType = Undefined;
+    }*/
     else {
         bufferInput->ungetChar();
         this->currentTokenType = Undefined;

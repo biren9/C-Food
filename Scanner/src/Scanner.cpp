@@ -16,9 +16,9 @@ Scanner::Scanner(const char* file) {
 
 Token Scanner::nextToken() {
     this->automat->nextToken();
-    std::string tokenLiteral = this->automat->getTokenLiteral();
+    String tokenLiteral = this->automat->getTokenLiteral();
     TokenType tokenType = this->automat->getCurrentTokenType();
-    int startLine = this->automat->getStartLine();
+    int startLine = this->automat->getStartColumn();
     int startColumn = this->automat->getStartColumn();
 
     if(tokenType == EOL) {
@@ -31,6 +31,4 @@ Token Scanner::nextToken() {
     }
 }
 
-Scanner::~Scanner() {
-
-}
+Scanner::~Scanner() {}

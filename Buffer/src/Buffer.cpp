@@ -15,6 +15,7 @@ Buffer::Buffer(const char* filename) {
     this->currentChar = 0;
     this->colCount = 1;
     this->rowCount = 1;
+    this->lastCol = 0;
     this->prevChar = nullptr;
     this->isArraySwap = false;
 
@@ -80,6 +81,7 @@ char Buffer::getNextChar() {
     if(this->prevChar != nullptr && this->buffCur[this->currentChar] != '\0') {
 
         //Update row & line count
+        this->lastCol = this->colCount;
         this->colCount += 1;
 
         if(*this->prevChar == '\n') {
@@ -126,7 +128,7 @@ bool Buffer::ungetChar() {
 
     //Error handling
     if (this->prevChar == nullptr) throw "nope";
-    if(*this->prevChar == '\n')  throw "You cannot go back over a \\n";
+    //if(*this->prevChar == '\n') throw "You cannot go back over a \\n";
 
 
     //If Pointer is out of bounce
@@ -154,7 +156,8 @@ bool Buffer::ungetChar() {
     if(this->buffCur[this->currentChar] == '\n') this->rowCount -= 1;
 
 
-    this->colCount -= 1;
+    if(*this->prevChar == '\n') this->colCount -= 1;
+    else  this->colCount = this->lastCol;
 
     this->prevChar = &((this->currentChar == 0) ? this->buffPrev[BUFFER_BLOCK-1]: this->buffCur[this->currentChar-1]);
 
