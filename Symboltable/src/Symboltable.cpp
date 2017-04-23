@@ -2,7 +2,7 @@
 // Created by ninja on 16.04.2017.
 //
 
-#include "Symboltable.h"
+#include "../includes/Symboltable.h"
 Symboltable::Symboltable() {
     for  (unsigned int i = 0; i < SYMBOL_TABLE_SIZE; ++i) {
         hashTabelle[i] = new Liste();
