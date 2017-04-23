@@ -6,14 +6,27 @@
  */
 
 #include "../includes/Scanner.h"
-#include "../../Automat/includes/Automat.h"
 
-Scanner::Scanner() {
-	// TODO Auto-generated constructor stub
-	//Automat* automat = new Automat();
+
+Scanner::Scanner(const char* file) {
+    this->buffer = new Buffer(file);
+    this->automat = new Automat(buffer);
 
 }
 
-Scanner::~Scanner() {
-	// TODO Auto-generated destructor stub
+Token* Scanner::nextToken() {
+    this->automat->nextToken();
+    String tokenLiteral = this->automat->getTokenLiteral();
+    TokenType tokenType = this->automat->getCurrentTokenType();
+    int startLine = this->automat->getStartColumn();
+    int startColumn = this->automat->getStartColumn();
+
+    if(tokenType == EOL) {
+        return nullptr;
+    } else {
+        Token *token = new Token(tokenType,startColumn,startLine);
+        return token;
+    }
 }
+
+Scanner::~Scanner() {}

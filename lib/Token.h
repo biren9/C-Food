@@ -44,7 +44,7 @@ public:
     Token(TokenType tokenType,int column, int line);
     TokenType getType();
     int getColumn();
-    int getRow();
+    int getLine();
 };
 
 

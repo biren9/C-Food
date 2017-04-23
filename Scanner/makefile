@@ -49,7 +49,7 @@ OBJS = $(OBJDIR)/Scanner.o \
 	
 	
 # Variante mit guten Makefile-Kenntnissen
-makeTestScanner: $(OBJS) ScannerTest
+makeTestScanner: $(OBJS) TokenTarget ScannerTest
 
 
 $(OBJDIR)/%.o :  $(SRCDIR)/%.cpp $(HEADERDIR)/%.h
@@ -62,10 +62,14 @@ $(OBJDIR)/%.o :  $(SRCDIR)/%.cpp $(HEADERDIR)/%.h
 
 
 ScannerTest: $(SRCDIR)/TestScanner.cpp $(HEADERDIR)/Scanner.h
-	g++ -std=c++11 -g  -c -Wall src/TestScanner.cpp -o $(BINDIRTEST)/TestScanner.o  
-	g++ -std=c++11 -g $(BINDIRTEST)/TestScanner.o $(OBJDIR)/*.o $(AUTOMATDIR)/$(OBJDIR)/Automat.o $(AUTOMATDIR)/$(OBJDIR)/String.o $(BUFFERDIR)/$(OBJDIR)/*.o -o $(BINDIRTEST)/ScannerTest
+	g++ -std=c++11 -g  -c -Wall src/TestScanner.cpp -o $(BINDIRTEST)/TestScanner.o
+	g++ -std=c++11 -g $(BINDIRTEST)/TestScanner.o $(BINDIRTEST)/Token.o   $(OBJDIR)/*.o $(AUTOMATDIR)/$(OBJDIR)/Automat.o $(AUTOMATDIR)/$(OBJDIR)/String.o $(BUFFERDIR)/$(OBJDIR)/*.o -o $(BINDIRTEST)/ScannerTest
+	./debug/ScannerTest
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu erstellen
+
+TokenTarget :  src/Token.cpp ../lib/Token.h
+	g++ -std=c++11 -g  -c -Wall src/Token.cpp -o $(BINDIRTEST)/Token.o
 
 cleanScanner:
 	rm -rf $(OBJDIR)/*.o
