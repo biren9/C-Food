@@ -16,13 +16,14 @@ class StringTabelle {
 public:
     StringTabelle();
     ~StringTabelle();
-    char* insert(char* lexem);
+    unsigned int insert(char* lexem);
     void debugPrintStringTable();
+	char* stringArr;
 private:
     unsigned int size = TABLE_START_SIZE;
     unsigned int freePlace = TABLE_START_SIZE - 1;
     unsigned int freeSpotIndex = 0;
-    char* stringArr;
+    
     void updateFreePlace();
 
 };
