@@ -61,7 +61,7 @@ void Automat::nextToken(){
     }
 }
 
-String Automat::getTokenLiteral() {
+std::string Automat::getTokenLiteral() {
     return this->tokenLiteral;
 }
 
@@ -185,10 +185,10 @@ void Automat::identifierTransient(char currentChar){
 }
 
 void Automat::identifierType(){
-    if (this->tokenLiteral.equals("while") || this->tokenLiteral.equals("WHILE")) {
+    if (this->tokenLiteral.compare("while") || this->tokenLiteral.compare("WHILE")) {
         this->currentTokenType = WhileToken;
     }
-    else if (this->tokenLiteral.equals("if") || this->tokenLiteral.equals("IF")) {
+    else if (this->tokenLiteral.compare("if") || this->tokenLiteral.compare("IF")) {
         this->currentTokenType = IfToken;
     }
     else {

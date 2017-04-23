@@ -36,7 +36,6 @@ enum TokenType
 
 class Token {
 private:
-
     TokenType type;
     int column;
     int line;

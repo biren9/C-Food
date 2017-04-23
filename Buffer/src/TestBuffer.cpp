@@ -22,37 +22,37 @@ int main(int argc, char **argv) {
 
 
     string a;
-    for (int i = 0; i < 48; ++i) {
-         a = buffer->getNextChar();
+    while (buffer->getNextChar() != '\0') {
+         a = buffer->getCurrentChar();
         cout << "GET: " << ((a == "\n")?"\\n": a) << "   Row: " << buffer->getRow() << "    Col: "  << buffer->getCol() << endl;
     }
-cout << "----------------------\n";
-
-
-
-    for (int i = 0; i < 20; ++i) {
-        try {
-            cout << "Unget... " << endl;
-            buffer->ungetChar();
-            cout << "Unget... " << endl;
-            buffer->ungetChar();
-        }
-        catch (const char* msg) {
-            cout << endl << msg << endl;
-        }
-        a = buffer->getCurrentChar();
-        cout << "GET CUR: " << ((a == "\n")?"\\n": a) << "   Row: " << buffer->getRow() << "    Col: "  << buffer->getCol() << endl;
-
-        a = buffer->getNextChar();
-        cout << "GET NXT: " << ((a == "\n")?"\\n": a) << "   Row: " << buffer->getRow() << "    Col: "  << buffer->getCol() << endl;
-    }
-
-
-    delete buffer;
-
-    high_resolution_clock::time_point end = high_resolution_clock::now();
-
-    cout << endl << duration_cast<microseconds>( end - begin).count() / 1000.0 << "ms";
+//cout << "----------------------\n";
+//
+//
+//
+//    for (int i = 0; i < 20; ++i) {
+//        try {
+//            cout << "Unget... " << endl;
+//            buffer->ungetChar();
+//            cout << "Unget... " << endl;
+//            buffer->ungetChar();
+//        }
+//        catch (const char* msg) {
+//            cout << endl << msg << endl;
+//        }
+//        a = buffer->getCurrentChar();
+//        cout << "GET CUR: " << ((a == "\n")?"\\n": a) << "   Row: " << buffer->getRow() << "    Col: "  << buffer->getCol() << endl;
+//
+//        a = buffer->getNextChar();
+//        cout << "GET NXT: " << ((a == "\n")?"\\n": a) << "   Row: " << buffer->getRow() << "    Col: "  << buffer->getCol() << endl;
+//    }
+//
+//
+//    delete buffer;
+//
+//    high_resolution_clock::time_point end = high_resolution_clock::now();
+//
+//    cout << endl << duration_cast<microseconds>( end - begin).count() / 1000.0 << "ms";
 
     return  0;
 }
