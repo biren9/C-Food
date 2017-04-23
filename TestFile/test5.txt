@@ -1,0 +1,45 @@
+<?php
+class Page extends Template {
+	private $dirFilter = array('.', '..', '.DS_Store', '.xml');
+	public function __construct() {
+		parent::__construct();
+		$this->loadPages();
+	}
+	public function loadPages() {
+		$files = array_diff(scandir(DIR_PAGES_DESKTOP), $this->dirFilter);
+		$files = array_values($files);
+		foreach ($files as $key => $value) {
+			$files[$key] = substr($files[$key], 0, -4);
+		}
+		$currentSelect = $_GET['page'];
+		if (!isset($currentSelect) || $currentSelect == 'start') {
+			//$this->assign("tpl", "pages/home.tpl");
+			//$this->display('index.tpl');
+			new HomePage();
+		} elseif(!array_search($currentSelect, $files)) {
+			$this->assign('tpl', 'pages/error.tpl');
+			$this->display('index.tpl');
+		} else {
+			for($i = 0; $i < count($files); $i++) {
+				if($currentSelect == $files[$i]) {
+					//$this->assign("tpl", "pages/".$files[$i].".tpl");
+					$startClass = ucfirst($files[$i]).'Page';
+					new $startClass();
+				} 
+			}
+		}
+			//$this->display('index.tpl');
+	}
+	public function checkDevice() {
+		$useragent = $_SERVER['HTTP_USER_AGENT'];
+		if (preg_match("/(alcatel|amoi|android|avantgo|blackberry|benq|cell|cricket|docomo|elaine
+		|htc|iemobile|iphone|ipad|ipaq|ipod|j2me|java|midp|mini|mmp|mobi|motorola|nec-|nokia|palm|
+		panasonic|philips|phone|playbook|sagem|sharp|sie-|silk|smartphone|sony|symbian|t-mobile|telus
+		|up\.browser|up\.link|vodafone|wap|webos|wireless|xda|xoom|zte)/i",$useragent)) {
+			header('Location: mobile.html');
+		} else {
+			header('Location: http://margna.ch/iphone.html');
+		}
+	}
+}
+?>

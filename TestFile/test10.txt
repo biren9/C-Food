@@ -1,0 +1,27 @@
+12345
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz
++  -  *  :  < >  =  := =:= ! && ; ( ) { } [ ]
+
+? $ & # . ,
+
+1234567890
+0
+0123
+
+dies ist ein :* 111 aaaa +- 1234.0 mod*: Kommentar
+
+print
+read
+printread
+readprint
+ABCDEFGHIJK$LMNOPQRSTUVWXYZ
+
+123Abc
+Abc123
+
+999999999999999999999999999999999999999999999999
+
+int test := 2;
+
+123

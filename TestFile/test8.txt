@@ -1,0 +1,11 @@
+dies ist ein :*Kommentar
+
+Kommentar*: 
+4 Zeile ok
+
+:*kjfksjf*jfjskfj*:
+test
+:*Kommentar***:
+sichtbar
+*:
+end
