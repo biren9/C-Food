@@ -1,12 +1,14 @@
 //
 // Created by ninja on 09.04.2017.
 //
-#include "InfoNode.h"
-#include <iostream>
-#include "StringTabelle.h"
 
 #ifndef HASHTABELLE_LISTE_H
 #define HASHTABELLE_LISTE_H
+
+#include "InfoNode.h"
+#include <iostream>
+#include "../includes/StringTabelle.h"
+
 
 class Liste {
 public:
