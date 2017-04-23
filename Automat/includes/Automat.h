@@ -10,32 +10,34 @@
 
 #include "../../Buffer/includes/Buffer.h"
 #include "../../lib/String.h"
+#include "../../lib/Token.h"
+
+
+enum State {
+    startState , identifier, number,
+    equalSign, equalColon, colonSign, commentStart,
+    commentEnd, andSign, endState
+};
 
 class Automat {
 public:
 	Automat(Buffer* input);
 	virtual ~Automat();
 
-    enum state {
-        startState , identifier, number,
-        equalSign, equalColon, colonSign, commentStart,
-        commentEnd, andSign, endState
-    };
-
     void nextToken();
     String getTokenLiteral();
-    tokenType getCurrentTokenType();
+    TokenType getCurrentTokenType();
     int getStartLine();
     int getStartColumn();
-    state getCurrentState();
+    State getCurrentState();
 
 
 private:
     Buffer* bufferInput;
     unsigned int startLine, startColumn;
     String tokenLiteral;
-    tokenType currentTokenType;
-    state currentState;
+    TokenType currentTokenType;
+    State currentState;
 
     void transient(char currentChar);
     void startTransient(char currentChar);

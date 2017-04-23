@@ -125,6 +125,20 @@ bool String::equals(String& s) {
   return true;
 }
 
+bool String::equals(String s) {
+  if(this->size == s.getSize()) {
+    int length = s.getSize();
+    for(int i = 0; i < length; i++) {
+      if(str[i] != s.str[i]) {
+        return false;
+      }
+    }
+  } else {
+    return false;
+  }
+  return true;
+}
+
 /*
  * Concatenation operator overload
  * sufficient amount of memory is allocated
@@ -162,6 +176,36 @@ String& String::operator+=(String& s) {
   return *this;
 }
 
+
+String& String::operator+=(String s) {
+  int i = 0;
+
+  /* create new C-String */
+  char* tmp;
+  tmp = new char[size + s.size + 1];
+
+  /* move str to tmp */
+  while (i < size) {
+    tmp[i] = str[i];
+    i++;
+  }
+
+  /* move s.str to tmp */
+  i = 0;
+  while (i < s.size) {
+    tmp[i + size] = s.str[i];
+    i++;
+  }
+
+  tmp[size + s.size] = '\0';
+  size += s.size;
+
+  /* free old C-String memory */
+  delete[] str;
+  str = tmp;
+
+  return *this;
+}
 /*
  * Outputstream operator overload
  * chars are copied to ostream and returned

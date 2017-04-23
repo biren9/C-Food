@@ -11,7 +11,7 @@ Automat::Automat(Buffer* input) {
     startColumn = bufferInput->getCol();
     startLine = input->getRow();
     tokenLiteral = "";
-    currentTokenType = null;
+    currentTokenType = Undefined;
     currentState = startState;
 }
 
@@ -29,7 +29,7 @@ void Automat::nextToken(){
         currentChar = bufferInput->getNextChar();
         switch (this->currentState) {
             case startState :
-                startTransient();
+                startTransient(currentChar);
                 break;
             case identifier :
                 identifierTransient(currentChar);
@@ -65,7 +65,7 @@ String Automat::getTokenLiteral() {
     return this->tokenLiteral;
 }
 
-tokenType Automat::getCurrentTokenType() {
+TokenType Automat::getCurrentTokenType() {
     return this->currentTokenType;
 }
 
@@ -77,7 +77,7 @@ int Automat::getStartColumn() {
     return this->startColumn;
 }
 
-state Automat::getCurrentState() {
+State Automat::getCurrentState() {
     return this->currentState;
 }
 
@@ -122,7 +122,7 @@ void Automat::startTransient(char currentChar){
                 break;
             case '>' : this->currentState = endState;
                 this->tokenLiteral = ">";
-                this->currentTokenType = Bigger;
+                this->currentTokenType = Greater;
                 break;
             case '=' : this->currentState = equalSign;
                 this->tokenLiteral = "=";
@@ -201,6 +201,7 @@ void Automat::numberTransient(char currentChar){
         this->tokenLiteral += currentChar;
     }
     else {
+        this->currentTokenType = Integer;
         this->currentState = endState;
         bufferInput->ungetChar();
     }
@@ -251,11 +252,21 @@ void Automat::commentStartTransient(char currentChar){
     if (currentChar == '*'){
         this->currentState = commentEnd;
     }
+    else if (currentChar == '\0'){
+        this->currentState = endState;
+        this->currentTokenType = EOL;
+        this->tokenLiteral = "";
+    }
 }
 
 void Automat::commentEndTransiend(char currentChar){
     if (currentChar == ':') {
         this->currentState = startState;
+    }
+    else if (currentChar == '\0'){
+        this->currentState = endState;
+        this->currentTokenType = EOL;
+        this->tokenLiteral = "";
     }
     else {
         this->currentState = commentStart;

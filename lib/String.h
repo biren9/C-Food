@@ -75,10 +75,13 @@ public:
    */
   String& operator=(String&);
 
+    bool equals(String s);
+
   /*
    * @brief concatenation operator overload
    */
   String& operator+=(String&);
+    String& operator+=(String);
 
 
     String& operator=(const char *s);

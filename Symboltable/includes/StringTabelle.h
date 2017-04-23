@@ -2,11 +2,14 @@
 // Created by ninja on 17.04.2017.
 //
 
-#include <iostream>
-#include <cstring>
+
 #ifndef TESTPROJECT_STRINGTABELLE_H
 #define TESTPROJECT_STRINGTABELLE_H
 constexpr unsigned int TABLE_START_SIZE = 10;
+
+#include <iostream>
+#include <cstring>
+#include "../includes/Liste.h"
 
 class StringTabelle {
 
