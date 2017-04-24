@@ -10,6 +10,7 @@
 #include "../../lib/Token.h"
 #include "../includes/Scanner.h"
 #include "../../Automat/includes/Automat.h"
+#include "../../Symboltable/includes/Symboltable.h"
 #include <string>
 #include <iostream>
 
@@ -17,9 +18,10 @@ class Scanner {
 private:
 	Buffer *buffer;
 	Automat *automat;
+    Symboltable *symbolTable;
 public:
 	Token* nextToken();
-	Scanner(const char* file);
+	Scanner(const char* file,Symboltable *symboltable);
 	~Scanner();
 };
 

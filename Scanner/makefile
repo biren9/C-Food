@@ -63,7 +63,7 @@ $(OBJDIR)/%.o :  $(SRCDIR)/%.cpp $(HEADERDIR)/%.h
 
 ScannerTest: $(SRCDIR)/TestScanner.cpp $(HEADERDIR)/Scanner.h
 	g++ -std=c++11 -g  -c -Wall src/TestScanner.cpp -o $(BINDIRTEST)/TestScanner.o
-	g++ -std=c++11 -g $(BINDIRTEST)/TestScanner.o $(BINDIRTEST)/Token.o   $(OBJDIR)/*.o $(AUTOMATDIR)/$(OBJDIR)/Automat.o $(AUTOMATDIR)/$(OBJDIR)/String.o $(BUFFERDIR)/$(OBJDIR)/*.o -o $(BINDIRTEST)/ScannerTest
+	g++ -std=c++11 -g $(BINDIRTEST)/TestScanner.o $(BINDIRTEST)/Token.o ../Symboltable/objs/StringTabelle.o ../Symboltable/objs/Liste.o ../Symboltable/objs/Symboltable.o    $(OBJDIR)/*.o $(AUTOMATDIR)/$(OBJDIR)/Automat.o $(AUTOMATDIR)/$(OBJDIR)/String.o $(BUFFERDIR)/$(OBJDIR)/*.o -o $(BINDIRTEST)/ScannerTest
 	./debug/ScannerTest
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu erstellen

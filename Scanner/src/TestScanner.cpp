@@ -40,6 +40,8 @@ std::string getName(TokenType type) {
             return (char*) "Smaller        ";
         case OpenParenthesis:
             return (char*) "OpenParenthesis";
+        case CloseParenthesis:
+            return (char*) "CloseParenthesis";
         case OpenBracket:
             return (char*) "OpenBrackets   ";
         case CloseBracket:
@@ -61,14 +63,14 @@ std::string getName(TokenType type) {
 
 int main(int argc, char **argv) {
 
-
-    Scanner *scanner = new Scanner("../TestFile/test4.txt");
+    Symboltable *symboltable = new Symboltable();
+    Scanner *scanner = new Scanner("../TestFile/test4.txt", symboltable);
 
     Token  *token = scanner->nextToken();
     while(token->getType() != EOL){
         std::cout << "Token " << getName(token->getType()) << "\tLine: " << token->getLine() << " Column: " << token->getColumn() << "  " << "Value: "  << token->getTokenLiteral()<< std::endl;
+        delete token;
         token = scanner->nextToken();
     }
 
-    delete scanner;
 }
