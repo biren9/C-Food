@@ -62,11 +62,22 @@ std::string getName(TokenType type) {
 int main(int argc, char **argv) {
 
 
-    Scanner *scanner = new Scanner("../TestFile/test4.txt");
+    Scanner *scanner = new Scanner("../TestFile/test1.txt");
 
     Token  *token = scanner->nextToken();
     while(token->getType() != EOL){
-        std::cout << "Token " << getName(token->getType()) << "\tLine: " << token->getLine() << " Column: " << token->getColumn() << "  " << "Value: "  << token->getTokenLiteral()<< std::endl;
+        std::cout << "Token " << getName(token->getType()) << "\tLine: " << token->getLine() << " Column: " << token->getColumn();
+
+        if(token->getType() == 0) {
+            std::cout << " \t" << " Lexem: "  << token->getTokenLiteral();
+        }
+        else if(token->getType() == 3) {
+            std::cout << " \t" << " Value: "  << token->getTokenLiteral();
+        }
+
+        std::cout << std::endl;
+
+
         token = scanner->nextToken();
     }
 
