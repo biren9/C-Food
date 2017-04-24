@@ -28,7 +28,6 @@ class Buffer {
         bool open(const char*);
 	    bool read();
         void close();
-        void debug(std::string);
 
         static constexpr unsigned int BUFFER_BLOCK = 5;
 
