@@ -14,19 +14,18 @@ Scanner::Scanner(const char* file) {
 
 }
 
-Token Scanner::nextToken() {
+Token* Scanner::nextToken() {
     this->automat->nextToken();
-    String tokenLiteral = this->automat->getTokenLiteral();
+    std::string tokenLiteral = this->automat->getTokenLiteral();
     TokenType tokenType = this->automat->getCurrentTokenType();
     int startLine = this->automat->getStartLine();
     int startColumn = this->automat->getStartColumn();
 
     if(tokenType == EOL) {
-        std::cout << "EOL" << std::endl;
-        Token token = Token(tokenType,startColumn,startLine);
+        Token *token = new Token(tokenType,startColumn,startLine, nullptr,tokenLiteral);
         return token;
     } else {
-        Token token = Token(tokenType,startColumn,startLine);
+        Token *token = new Token(tokenType,startColumn,startLine, nullptr,tokenLiteral);
         return token;
     }
 }

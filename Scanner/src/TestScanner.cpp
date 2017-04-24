@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-char* getName(TokenType type) {
+std::string getName(TokenType type) {
     switch(type) {
         case Identifier:
             return "Identifier      ";
@@ -61,16 +61,13 @@ char* getName(TokenType type) {
 
 int main(int argc, char **argv) {
 
-	//Scanner* scanner;
-
-	//scanner = new Scanner();
 
 
     Scanner *scanner = new Scanner("../TestFile/test4.txt");
 
-    Token token = scanner->nextToken();
-    while(token.getType() != EOL){
-        std::cout << "Token " << getName(token.getType()) << "\tLine: " << token.getLine() << " Column: " << token.getColumn() << "  " << "-" << std::endl;
+    Token  *token = scanner->nextToken();
+    while(token->getType() != EOL){
+        std::cout << "Token " << getName(token->getType()) << "\tLine: " << token->getLine() << " Column: " << token->getColumn() << "  " << "Value: "  << token->getTokenLiteral()<< std::endl;
         token = scanner->nextToken();
     }
 }

@@ -4,6 +4,9 @@
 
 #ifndef C_FOOD_TOKEN_H
 #define C_FOOD_TOKEN_H
+
+#include "../Symboltable/includes/InfoNode.h"
+#include "String.h"
 enum TokenType
 {
     Identifier,
@@ -39,11 +42,15 @@ private:
     TokenType type;
     int column;
     int line;
+    InfoNode *key = nullptr;
+    std::string tokenLiteral;
 public:
-    Token(TokenType tokenType,int column, int line);
+    Token(TokenType tokenType,int column, int line,InfoNode *key,std::string tokenLiteral);
     TokenType getType();
     int getColumn();
     int getLine();
+    InfoNode* getKey();
+    std::string getTokenLiteral();
 };
 
 
