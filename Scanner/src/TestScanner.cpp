@@ -5,69 +5,70 @@
 std::string getName(TokenType type) {
     switch(type) {
         case Identifier:
-            return "Identifier      ";
+            return (char*)"Identifier      ";
         case Assign:
-            return  "Assign         ";
+            return (char*) "Assign         ";
         case Plus:
-            return  "Plus           ";
+            return (char*) "Plus           ";
         case Integer:
-            return  "Integer        ";
+            return (char*) "Integer        ";
         case Semicolon:
-            return  "Semicolon      ";
+            return (char*) "Semicolon      ";
         case Undefined:
-            return  "Undefined      ";
+            return (char*) "Undefined      ";
         case Minus:
-            return  "Minus          ";
+            return (char*) "Minus          ";
         case Colon:
-            return  "Colon          ";
+            return (char*) "Colon          ";
         case Equal:
-            return  "Equal          ";
+            return (char*) "Equal          ";
         case EqualAssign:
-            return  "EqualAssign    ";
+            return (char*) "EqualAssign    ";
         case Comment:
-            return  "Comment        ";
+            return (char*) "Comment        ";
         case Multiply:
-            return  "Multiply       ";
+            return (char*) "Multiply       ";
         case Bang:
-            return  "Bang           ";
+            return (char*) "Bang           ";
         case ExclamationMark:
-            return  "ExclamationMark";
+            return (char*) "ExclamationMark";
         case AndOP:
-            return  "AndOP          ";
+            return (char*) "AndOP          ";
         case Greater:
-            return  "Greater        ";
+            return (char*) "Greater        ";
         case Smaller:
-            return  "Smaller        ";
+            return (char*) "Smaller        ";
         case OpenParenthesis:
-            return  "OpenParenthesis";
+            return (char*) "OpenParenthesis";
         case OpenBracket:
-            return  "OpenBrackets   ";
+            return (char*) "OpenBrackets   ";
         case CloseBracket:
-            return  "CloseBracket   ";
+            return (char*) "CloseBracket   ";
         case OpenBrace:
-            return  "OpenBrace      ";
+            return (char*) "OpenBrace      ";
         case CloseBrace:
-            return  "CloseBrace     ";
+            return (char*) "CloseBrace     ";
         case WhileToken:
-            return  "While          ";
+            return (char*) "While          ";
         case IfToken:
-            return  "If             ";
+            return (char*) "If             ";
         case EOL:
-            return  "End File       ";
+            return (char*) "End File       ";
         default:
-            return "                ";
+            return (char*)"                ";
     }
 }
 
 int main(int argc, char **argv) {
 
 
-
-    Scanner *scanner = new Scanner("../TestFile/test4.txt");
+    Scanner *scanner = new Scanner("../TestFile/test12.txt");
 
     Token  *token = scanner->nextToken();
     while(token->getType() != EOL){
         std::cout << "Token " << getName(token->getType()) << "\tLine: " << token->getLine() << " Column: " << token->getColumn() << "  " << "Value: "  << token->getTokenLiteral()<< std::endl;
         token = scanner->nextToken();
     }
+
+    delete scanner;
 }
