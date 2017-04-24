@@ -28,8 +28,7 @@ Token* Scanner::nextToken() {
     } else {
         InfoNode *key = nullptr;
         if(tokenType == Identifier) {
-            char *p = &*tokenLiteral.begin();
-            key  = this->symbolTable->insert(p);
+            key  = this->symbolTable->insert(tokenLiteral.c_str());
         }
         Token *token = new Token(tokenType,startColumn,startLine,key,tokenLiteral);
         return token;
