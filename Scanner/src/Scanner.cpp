@@ -8,9 +8,10 @@
 #include "../includes/Scanner.h"
 
 
-Scanner::Scanner(const char* file) {
+Scanner::Scanner(const char* file,Symboltable* symboltable) {
     this->buffer = new Buffer(file);
     this->automat = new Automat(buffer);
+    this->symbolTable = new Symboltable();
 
 }
 
@@ -25,9 +26,17 @@ Token* Scanner::nextToken() {
         Token *token = new Token(tokenType,startColumn,startLine, nullptr,tokenLiteral);
         return token;
     } else {
-        Token *token = new Token(tokenType,startColumn,startLine, nullptr,tokenLiteral);
+        InfoNode *key = nullptr;
+        if(tokenType == Identifier) {
+            key  = this->symbolTable->insert(tokenLiteral.c_str());
+        }
+        Token *token = new Token(tokenType,startColumn,startLine,key,tokenLiteral);
         return token;
     }
 }
 
-Scanner::~Scanner() {}
+Scanner::~Scanner() {
+    delete buffer;
+    delete automat;
+    delete symbolTable;
+}

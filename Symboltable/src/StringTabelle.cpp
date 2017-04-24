@@ -11,7 +11,7 @@ StringTabelle::~StringTabelle() {
     delete[] stringArr;
 }
 
-unsigned int StringTabelle::insert(char* lexem) {
+unsigned int StringTabelle::insert(const char* lexem) {
     if (freePlace > strlen(lexem)) {
         unsigned int beginning = freeSpotIndex;
         for (unsigned int i = 0; lexem[i] != '\0'; ++i) {

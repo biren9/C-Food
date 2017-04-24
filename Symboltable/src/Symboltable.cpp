@@ -17,11 +17,11 @@ Symboltable::~Symboltable() {
     }
 }
 
-InfoNode* Symboltable::insert(char *lexem) {
+InfoNode* Symboltable::insert(const char *lexem) {
     return hashTabelle[hash(lexem)]->addEnd(lexem, stringTabelle);
 }
 
-unsigned int Symboltable::hash(char *lexem) {
+unsigned int Symboltable::hash(const char *lexem) {
     unsigned int hash = 5381;
     for (int i = 0 ; lexem[i] != '\0'; ++i) {
         hash = ((hash << 5)) + lexem[i];

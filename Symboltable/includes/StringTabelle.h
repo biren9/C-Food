@@ -16,7 +16,7 @@ class StringTabelle {
 public:
     StringTabelle();
     ~StringTabelle();
-    unsigned int insert(char* lexem);
+    unsigned int insert(const char* lexem);
     void debugPrintStringTable();
 	char* stringArr;
 private:

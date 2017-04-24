@@ -14,7 +14,7 @@ class Liste {
 public:
     Liste();
     ~Liste();
-    InfoNode* addEnd(char* lexem, StringTabelle* strTab);
+    InfoNode* addEnd(const char* lexem, StringTabelle* strTab);
     void printList();
 private:
     InfoNode *first;

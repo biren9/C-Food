@@ -6,16 +6,20 @@
 #include "../../lib/String.h"
 
 int main() {
-
+	InfoNode *testNode = nullptr;
 	String test = "Test";
+	String test2 = "ende";
 	Symboltable symboltable;
-	InfoNode *testNode = symboltable.insert(test.getString());
+	testNode = symboltable.insert(test2.getString());
+	std::cout << &(testNode->strTabelle->stringArr[testNode->Index])<<std::endl;
+	getchar();
+	
 //	InfoNode *testNode2 = symboltable.insert("philippMachtSchlechteMutterWitze");
 //	InfoNode *testNode3 = symboltable.insert("nochEinTest");
 //	InfoNode *testNode4 = symboltable.insert("philippMachtSchlechteMutterWitze");
 //	InfoNode *testNode5 = symboltable.insert("philippMachtSchlechteMutterWitze");
 //	InfoNode *testNode6 = symboltable.insert("philippMachtSchlechteMutterWitze");
-	std::cout << &(testNode->strTabelle->stringArr[testNode->Index]) << std::endl;
+	
 //	std::cout << &(testNode2->strTabelle->stringArr[testNode2->Index]) << std::endl;
 //	std::cout << &(testNode3->strTabelle-> stringArr[testNode3->Index]) << std::endl;
 //
@@ -38,7 +42,7 @@ int main() {
 //	std::cout << testNode6->stringTablePointer << std::endl;
 //
 //	symboltable.stringTabelle->debugPrintStringTable();
-//	getchar();
+	
 	return 0;
 
 }

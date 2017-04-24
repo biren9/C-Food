@@ -15,11 +15,11 @@ class Symboltable {
 public:
     Symboltable();
     ~Symboltable();
-	InfoNode* insert(char *lexem);
+	InfoNode* insert(const char *lexem);
 	StringTabelle *stringTabelle;
 private:
     Liste* hashTabelle[SYMBOL_TABLE_SIZE];
-    unsigned int hash(char *lexem);
+    unsigned int hash(const char *lexem);
     
 };
 
