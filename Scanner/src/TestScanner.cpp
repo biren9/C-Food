@@ -2,86 +2,60 @@
 #include <iostream>
 
 
-void print(TokenType type) {
-    std:: cout << "TokenType: ";
+char* getName(TokenType type) {
     switch(type) {
         case Identifier:
-            std::cout << "Identifier" << std::endl;
-            break;
+            return "Identifier      ";
         case Assign:
-            std::cout << "Assign" << std::endl;
-            break;
+            return  "Assign         ";
         case Plus:
-            std::cout << "Plus" << std::endl;
-            break;
+            return  "Plus           ";
         case Integer:
-            std::cout << "Integer" << std::endl;
-            break;
+            return  "Integer        ";
         case Semicolon:
-            std::cout << "Semicolon" << std::endl;
-            break;
+            return  "Semicolon      ";
         case Undefined:
-            std::cout << "Undefined" << std::endl;
-            break;
+            return  "Undefined      ";
         case Minus:
-            std::cout << "Minus" << std::endl;
-            break;
+            return  "Minus          ";
         case Colon:
-            std::cout << "Colon" << std::endl;
-            break;
+            return  "Colon          ";
         case Equal:
-            std::cout << "Equal" << std::endl;
-            break;
+            return  "Equal          ";
         case EqualAssign:
-            std::cout << "EqualAssign" << std::endl;
-            break;
+            return  "EqualAssign    ";
         case Comment:
-            std::cout << "Comment" << std::endl;
-            break;
+            return  "Comment        ";
         case Multiply:
-            std::cout << "Multiply" << std::endl;
-            break;
+            return  "Multiply       ";
         case Bang:
-            std::cout << "Bang" << std::endl;
-            break;
+            return  "Bang           ";
         case ExclamationMark:
-            std::cout << "ExclamationMark" << std::endl;
-            break;
+            return  "ExclamationMark";
         case AndOP:
-            std::cout << "AndOP" << std::endl;
-            break;
+            return  "AndOP          ";
         case Greater:
-            std::cout << "Greater" << std::endl;
-            break;
+            return  "Greater        ";
         case Smaller:
-            std::cout << "Smaller" << std::endl;
-            break;
+            return  "Smaller        ";
         case OpenParenthesis:
-            std::cout << "OpenParenthesis" << std::endl;
-            break;
+            return  "OpenParenthesis";
         case OpenBracket:
-            std::cout << "OpenBrackets" << std::endl;
-            break;
+            return  "OpenBrackets   ";
         case CloseBracket:
-            std::cout << "CloseBracket" << std::endl;
-            break;
+            return  "CloseBracket   ";
         case OpenBrace:
-            std::cout << "OpenBrace" << std::endl;
-            break;
+            return  "OpenBrace      ";
         case CloseBrace:
-            std::cout << "CloseBrace" << std::endl;
-            break;
+            return  "CloseBrace     ";
         case WhileToken:
-            std::cout << "While" << std::endl;
-            break;
+            return  "While          ";
         case IfToken:
-            std::cout << "If" << std::endl;
-            break;
+            return  "If             ";
         case EOL:
-            std::cout << "End File" << std::endl;
-            break;
+            return  "End File       ";
         default:
-            break;
+            return "                ";
     }
 }
 
@@ -96,12 +70,7 @@ int main(int argc, char **argv) {
 
     Token token = scanner->nextToken();
     while(token.getType() != EOL){
-        print(token.getType());
-        std::cout << "Line: " << token.getLine() << std::endl;
-        std::cout << "Column: " << token.getColumn() << std::endl;
+        std::cout << "Token " << getName(token.getType()) << "\tLine: " << token.getLine() << " Column: " << token.getColumn() << "  " << "-" << std::endl;
         token = scanner->nextToken();
     }
-
-
-
 }
