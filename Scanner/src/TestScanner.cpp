@@ -66,13 +66,13 @@ int main(int argc, char **argv) {
 
     Token  *token = scanner->nextToken();
     while(token->getType() != EOL){
-        std::cout << "Token " << getName(token->getType()) << "\tLine: " << token->getLine() << " Column: " << token->getColumn();
+        std::cout << "Token " << getName(token->getType()) << "\tLine: " << token->getLine() << " Column: " << token->getColumn() << "   ";
 
         if(token->getType() == 0) {
-            std::cout << " \t" << " Lexem: "  << token->getTokenLiteral();
+            std::cout << "\t" << " Lexem: "  << token->getTokenLiteral();
         }
         else if(token->getType() == 3) {
-            std::cout << " \t" << " Value: "  << token->getTokenLiteral();
+            std::cout << "\t" << " Value: "  << token->getTokenLiteral();
         }
 
         std::cout << std::endl;
