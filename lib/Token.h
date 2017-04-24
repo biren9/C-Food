@@ -44,12 +44,16 @@ private:
     int line;
     InfoNode *key = nullptr;
     std::string tokenLiteral;
+    int value;
 public:
-    Token(TokenType tokenType,int column, int line,InfoNode *key,std::string tokenLiteral);
+    Token(TokenType tokenType,int column, int line,std::string tokenLiteral);
     TokenType getType();
+    void setValue(int i);
+    void setKey(InfoNode *key);
+    InfoNode* getKey();
+    int getValue();
     int getColumn();
     int getLine();
-    InfoNode* getKey();
     std::string getTokenLiteral();
 };
 

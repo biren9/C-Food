@@ -6,6 +6,9 @@
  */
 
 #include "../includes/Scanner.h"
+#include <string>
+#include <cerrno>
+#include <cstdlib>
 
 
 Scanner::Scanner(const char* file,Symboltable* symboltable) {
@@ -22,17 +25,25 @@ Token* Scanner::nextToken() {
     int startLine = this->automat->getStartLine();
     int startColumn = this->automat->getStartColumn();
 
-    if(tokenType == EOL) {
-        Token *token = new Token(tokenType,startColumn,startLine, nullptr,tokenLiteral);
-        return token;
-    } else {
-        InfoNode *key = nullptr;
-        if(tokenType == Identifier) {
-            key  = this->symbolTable->insert(tokenLiteral.c_str());
+    Token *token = new Token(tokenType,startColumn,startLine,tokenLiteral);
+
+    InfoNode *key = nullptr;
+    if(tokenType == Identifier) {
+        key  = this->symbolTable->insert(tokenLiteral.c_str());
+        token->setKey(key);
+    } else if(tokenType == Integer) {
+        char *p;
+        int value1 = strtol(tokenLiteral.c_str(),&p,10);
+
+        if(errno == ERANGE) {
+            errno = 0;
+            std::cout << "Error: " << "Value is out of range" << std::endl;
+        } else {
+            token->setValue(value1);
         }
-        Token *token = new Token(tokenType,startColumn,startLine,key,tokenLiteral);
-        return token;
     }
+    return token;
+
 }
 
 Scanner::~Scanner() {
