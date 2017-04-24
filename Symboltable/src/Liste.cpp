@@ -17,7 +17,7 @@ Liste::~Liste() {
     }
 }
 
-InfoNode* Liste::addEnd(char* lexem, StringTabelle* strTab) {
+InfoNode* Liste::addEnd(const char* lexem, StringTabelle* strTab) {
 	if (first == nullptr) {
 		InfoNode *insertedNode = new InfoNode{ strTab,strTab->insert(lexem),last, nullptr };
 		first = insertedNode;
