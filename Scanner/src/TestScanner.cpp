@@ -62,7 +62,7 @@ std::string getName(TokenType type) {
 int main(int argc, char **argv) {
 
 
-    Scanner *scanner = new Scanner("../TestFile/test12.txt");
+    Scanner *scanner = new Scanner("../TestFile/test4.txt");
 
     Token  *token = scanner->nextToken();
     while(token->getType() != EOL){
