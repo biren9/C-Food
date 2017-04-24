@@ -65,12 +65,13 @@ int main(int argc, char **argv) {
 
 	//scanner = new Scanner();
 
-
-    Scanner *scanner = new Scanner("../TestFile/test1.txt");
+    Scanner *scanner = new Scanner("../TestFile/test12.txt");
 
     Token token = scanner->nextToken();
     while(token.getType() != EOL){
         std::cout << "Token " << getName(token.getType()) << "\tLine: " << token.getLine() << " Column: " << token.getColumn() << "  " << "-" << std::endl;
         token = scanner->nextToken();
     }
+
+    delete scanner;
 }

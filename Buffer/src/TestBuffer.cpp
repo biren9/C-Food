@@ -10,15 +10,15 @@ int main(int argc, char **argv) {
     high_resolution_clock::time_point begin = high_resolution_clock::now();
 
 	Buffer*  buffer;
-	buffer = new Buffer("../TestFile/test4.txt");
+	buffer = new Buffer("../TestFile/test10.txt");
 
 
     try {
 
         string a;
-        while (buffer->getNextChar() != '\0') { //buffer->getNextChar(); buffer->ungetChar();
+        while (buffer->getNextChar() != '\0') {
             a = buffer->getCurrentChar();
-            //cout << "GET: " << ((a == "\n") ? "\\n" : a) << "   Row: " << buffer->getRow() << "    Col: " << buffer->getCol() << endl;
+            cout << "GET: " << ((a == "\n") ? "\\n" : a) << "   Row: " << buffer->getRow() << "    Col: " << buffer->getCol() << endl;
         }
     }
     catch (const char* msg) {
