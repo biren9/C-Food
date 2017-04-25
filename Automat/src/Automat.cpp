@@ -17,7 +17,6 @@ Automat::Automat(Buffer* input) {
 
 Automat::~Automat() {
 	// TODO Auto-generated destructor stub
-    delete this;
 }
 
 

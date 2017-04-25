@@ -86,5 +86,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    delete scanner;
+    return 0;
 
 }
