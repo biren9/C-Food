@@ -38,6 +38,7 @@ Token* Scanner::nextToken() {
         if(errno == ERANGE) {
             errno = 0;
             std::cout << "Error: " << "Value is out of range" << std::endl;
+            token->setType(Undefined);
         } else {
             token->setValue(value1);
         }

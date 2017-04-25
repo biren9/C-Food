@@ -51,6 +51,7 @@ public:
     TokenType getType();
     void setValue(int i);
     void setKey(InfoNode *key);
+    void setType(TokenType type);
     InfoNode* getKey();
     int getValue();
     int getColumn();

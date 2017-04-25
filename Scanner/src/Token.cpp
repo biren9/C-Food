@@ -42,6 +42,10 @@ void Token::setKey(InfoNode *key) {
     this->key = key;
 }
 
+void Token::setType(TokenType type) {
+    this->type = type;
+}
+
 Token::~Token() {
 
 }
