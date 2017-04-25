@@ -47,6 +47,7 @@ private:
     int value;
 public:
     Token(TokenType tokenType,int column, int line,std::string tokenLiteral);
+    ~Token();
     TokenType getType();
     void setValue(int i);
     void setKey(InfoNode *key);

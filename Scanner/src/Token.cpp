@@ -42,6 +42,10 @@ void Token::setKey(InfoNode *key) {
     this->key = key;
 }
 
+Token::~Token() {
+
+}
+
 
 
 
