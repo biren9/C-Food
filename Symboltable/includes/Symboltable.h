@@ -17,9 +17,9 @@ public:
     ~Symboltable();
 	InfoNode* insert(const char *lexem);
 	StringTabelle *stringTabelle;
+	unsigned int hash(const char *lexem);
 private:
     Liste* hashTabelle[SYMBOL_TABLE_SIZE];
-    unsigned int hash(const char *lexem);
     
 };
 
