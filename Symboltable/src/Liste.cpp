@@ -28,7 +28,7 @@ InfoNode* Liste::addEnd(const char* lexem, StringTabelle* strTab) {
 	else {
         //if lexem already added return InfoNode pointer
 		for (InfoNode *node = first; node != 0; node = (*node).next) {
-			std::cout << !(strcmp(&(node->strTabelle->stringArr[node->Index]),lexem));
+			//std::cout << !(strcmp(&(node->strTabelle->stringArr[node->Index]),lexem));
 			if (!(strcmp(&(node->strTabelle->stringArr[node->Index]),lexem))) {
 				return node;
 			}

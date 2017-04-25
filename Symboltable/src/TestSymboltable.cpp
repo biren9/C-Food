@@ -7,7 +7,7 @@
 int main() {
 	Symboltable symt;
 
-	InfoNode *testNode = nullptr;
+	//InfoNode *testNode = nullptr;
 	std::string test = "Test";
 	std::string test2 = "Test";
 	symt.insert("Test");
