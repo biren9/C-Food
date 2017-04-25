@@ -5,8 +5,8 @@
 #ifndef C_FOOD_TOKEN_H
 #define C_FOOD_TOKEN_H
 
-#include "../Symboltable/includes/InfoNode.h"
-#include "String.h"
+#include "../../Symboltable/includes/InfoNode.h"
+#include <iostream>
 enum TokenType
 {
     Identifier,

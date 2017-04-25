@@ -9,8 +9,7 @@
 #define Automat_H_
 
 #include "../../Buffer/includes/Buffer.h"
-#include "../../lib/String.h"
-#include "../../lib/Token.h"
+#include "../../Scanner/includes/Token.h"
 
 
 enum State {

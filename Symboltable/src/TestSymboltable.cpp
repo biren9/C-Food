@@ -3,7 +3,6 @@
 #include "../includes/StringTabelle.h"
 #include "../includes/Symboltable.h"
 #include "../includes/InfoNode.h"
-#include "../../lib/String.h"
 
 int main() {
 	Symboltable symt;

@@ -2,7 +2,7 @@
 // Created by josef on 4/23/17.
 //
 
-#include "../../lib/Token.h"
+#include "../includes/Token.h"
 
 Token::Token(TokenType tokenType,int column, int line,std::string tokenLiteral1) {
     this->type = tokenType;

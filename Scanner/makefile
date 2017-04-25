@@ -55,7 +55,7 @@ ScannerTest:  $(SRCDIR)/TestScanner.cpp $(HEADERDIR)/Scanner.h
 	g++ -std=c++11 -g  -c -Wall src/TestScanner.cpp -o $(BINDIRTEST)/TestScanner.o
 	g++ -std=c++11 -g $(BINDIRTEST)/TestScanner.o $(OBJDIR)/Scanner.o $(OBJDIR)/Token.o ../Symboltable/$(OBJDIR)/StringTabelle.o ../Symboltable/$(OBJDIR)/Liste.o ../Symboltable/$(OBJDIR)/Symboltable.o  $(AUTOMATDIR)/$(OBJDIR)/Automat.o  $(BUFFERDIR)/$(OBJDIR)/Buffer.o -o $(BINDIRTEST)/ScannerTest
 
-TokenTarget :  $(SRCDIR)/Token.cpp ../lib/Token.h
+TokenTarget :  $(SRCDIR)/Token.cpp  $(HEADERDIR)/Token.h
 	g++ -std=c++11 -g  -c -Wall src/Token.cpp -o $(OBJDIR)/Token.o
 
 ScannerTarget :  $(SRCDIR)/Scanner.cpp $(HEADERDIR)/Scanner.h
