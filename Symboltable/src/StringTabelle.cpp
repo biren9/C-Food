@@ -10,7 +10,7 @@ StringTabelle::StringTabelle() {
 StringTabelle::~StringTabelle() {
     delete[] stringArr;
 }
-//inserts if  enough place in StringTable, otherwise create new dynamic array twice the size.
+//inserts lexem if  enough place in StringTable, otherwise create new dynamic array twice the size of the old Array.
 unsigned int StringTabelle::insert(const char* lexem) {
     if (freePlace > strlen(lexem)) {
         unsigned int beginning = freeSpotIndex;
@@ -32,11 +32,11 @@ unsigned int StringTabelle::insert(const char* lexem) {
         return insert(lexem);
     }
 }
-
+//recompute free place in the Stringtable array
 void StringTabelle::updateFreePlace() {
     freePlace = size -1 - freeSpotIndex;
 }
-
+//debug function printing the Stringtable with empty space.
 void StringTabelle::debugPrintStringTable() {
     for (unsigned int j = 0; j < size; j++)
         std::cout << stringArr[j];
