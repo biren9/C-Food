@@ -16,7 +16,6 @@ public:
     Liste();
     ~Liste();
     InfoNode* addEnd(const char* lexem, StringTabelle* strTab);
-    void printList();
 private:
     InfoNode *first;
 	InfoNode *last;
