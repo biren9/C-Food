@@ -4,6 +4,9 @@
 
 #include "../includes/Token.h"
 
+/**
+ *  Constructor
+ */
 Token::Token(TokenType tokenType,int column, int line,std::string tokenLiteral1) {
     this->type = tokenType;
     this->column = column;

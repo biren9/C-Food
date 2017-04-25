@@ -1,7 +1,9 @@
 #include "../includes/Scanner.h"
 #include <iostream>
 
-
+/**
+ * getName of TokenType
+ */
 std::string getName(TokenType type) {
     switch(type) {
         case Identifier:
@@ -60,7 +62,9 @@ std::string getName(TokenType type) {
             return "                ";
     }
 }
-
+/**
+ * test the testFiles
+ */
 int main(int argc, char *argv[]) {
 
     Symboltable *symboltable = nullptr;
