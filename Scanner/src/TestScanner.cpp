@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
 
 
     Symboltable *symboltable = new Symboltable();
-    Scanner *scanner = new Scanner("../TestFile/test12.txt",symboltable);
+    Scanner *scanner = new Scanner(argv[1] ,symboltable);
 
     Token  *token = scanner->nextToken();
     while(token->getType() != EOL) {

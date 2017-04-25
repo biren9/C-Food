@@ -1,5 +1,5 @@
 var HoffentlichLäuftDieScheißeJetzt = 42;
-
+:=:=:=:=:=:=:=:=:=:=::=:=:==:=::=:=::=::====:=:==:=::=
 while ( true ) {
     ! + !
     ++i;
@@ -18,7 +18,6 @@ while ( true ) {
     *=*
 
     :* nope
-
 
     nope
     nope
@@ -66,5 +65,13 @@ ifelseifelseifelse (bool nope) {
     return NOPE NOPE NOPE;
 }
 
+a
 
 
+
+
+
+    =
+6
+:=<=
+:*= 1212:=*:!}{?

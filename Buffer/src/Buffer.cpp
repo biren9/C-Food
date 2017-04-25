@@ -46,7 +46,7 @@ bool Buffer::open(const char* filename) {
     //Try to open the file. Should throw exception on error
     this->in.open(filename, std::ios::in | std::ios::binary);
     if (!this->in) {
-        throw "Cannot open file.\n";
+        throw "Cannot open file or file not found!\n";
     }
 
     return true;
