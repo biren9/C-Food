@@ -24,6 +24,7 @@ Buffer::Buffer(const char* filename) {
         this->open(filename);
     }
     catch(const char* msg) {
+        //Error if file is missing or access denied
         std::cout << std::endl << msg;
         return;
     }
@@ -89,6 +90,8 @@ char Buffer::getNextChar() {
             this->rowCount += 1;
             this->colCount = 1;
         }
+
+        //Save last char & move pointer
         this->prevChar = &(this->buffCur[this->currentChar]);
         this->currentChar += 1;
     }
@@ -165,13 +168,13 @@ bool Buffer::ungetChar() {
     return true;
 }
 
-
+//Return the current Column
 unsigned int Buffer::getCol() {
 
     return colCount;
 }
 
-
+//Return the current Row
 unsigned int Buffer::getRow() {
 
     return rowCount;
