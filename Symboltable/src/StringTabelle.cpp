@@ -10,7 +10,7 @@ StringTabelle::StringTabelle() {
 StringTabelle::~StringTabelle() {
     delete[] stringArr;
 }
-
+//inserts if  enough place in StringTable, otherwise create new dynamic array twice the size.
 unsigned int StringTabelle::insert(const char* lexem) {
     if (freePlace > strlen(lexem)) {
         unsigned int beginning = freeSpotIndex;

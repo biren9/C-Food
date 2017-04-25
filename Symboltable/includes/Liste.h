@@ -7,6 +7,7 @@
 
 #include "InfoNode.h"
 #include <iostream>
+#include <cstring>
 #include "../includes/StringTabelle.h"
 
 
@@ -19,6 +20,7 @@ public:
 private:
     InfoNode *first;
 	InfoNode *last;
+	unsigned int size = 0;
 
 };
 #endif //HASHTABELLE_LISTE_H

@@ -6,13 +6,15 @@
 #include "../../lib/String.h"
 
 int main() {
+	Symboltable symt;
+
 	InfoNode *testNode = nullptr;
-	String test = "Test";
-	String test2 = "ende";
-	Symboltable symboltable;
-	testNode = symboltable.insert(test2.getString());
-	std::cout << &(testNode->strTabelle->stringArr[testNode->Index])<<std::endl;
-	getchar();
+	std::string test = "Test";
+	std::string test2 = "Test";
+	symt.insert("Test");
+	symt.insert("Test2");
+	symt.insert("Test2");
+    symt.insert("Test");
 	
 //	InfoNode *testNode2 = symboltable.insert("philippMachtSchlechteMutterWitze");
 //	InfoNode *testNode3 = symboltable.insert("nochEinTest");
