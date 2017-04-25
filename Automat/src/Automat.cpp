@@ -19,7 +19,10 @@ Automat::~Automat() {
 	// TODO Auto-generated destructor stub
 }
 
-
+/*
+ * Setzt den Automaten zurueck und startet das Einlesen des naechsten Tokens
+ * Ruft abhaengig vom Zustand die entsprechende Zustandsuebergangsfunktion auf
+ */
 void Automat::nextToken(){
     char currentChar;
     this->tokenLiteral = "";
@@ -80,6 +83,12 @@ State Automat::getCurrentState() {
     return this->currentState;
 }
 
+/*
+ * Uebergangsfunktion des Startzustands
+ * Token bestehend aus einem Zeichen werden direkt abgehandelt
+ * fuer Token aus mehreren Zeichen wird der entsprechende Zustand angenommen
+ * speichert die Positition des aktuellen neuen Tokens
+ */
 void Automat::startTransient(char currentChar){
     this->startColumn = bufferInput->getCol();
     this->startLine = bufferInput->getRow();
@@ -171,6 +180,9 @@ void Automat::startTransient(char currentChar){
     }
 }
 
+/*
+ * Uebergangsfunktion fuer den Identifier-Zustand.
+ */
 void Automat::identifierTransient(char currentChar){
     if ((currentChar >= 'A' && currentChar <= 'Z') || (currentChar >= 'a' && currentChar <= 'z') || (currentChar >= '0' && currentChar <= '9')){
         this->currentState = identifier;
@@ -187,6 +199,9 @@ void Automat::identifierTransient(char currentChar){
     }
 }
 
+/*
+ * prueft Identifier-Token auf Schluesselworte
+ */
 void Automat::identifierType(){
     if ((this->tokenLiteral == "while") || (this->tokenLiteral == "WHILE")) {
         this->currentTokenType = WhileToken;
@@ -199,6 +214,9 @@ void Automat::identifierType(){
     }
 }
 
+/*
+ * Ubergangsfunktion fuer Integer-Token
+ */
 void Automat::numberTransient(char currentChar){
     if (currentChar >= '0' && currentChar <= '9'){
         this->currentState = number;
@@ -214,7 +232,9 @@ void Automat::numberTransient(char currentChar){
         bufferInput->ungetChar();
     }
 }
-
+/*
+ * Uebergangsfunktion fuer ein eingelesenes = Zeichen
+ */
 void Automat::equalSignTransient(char currentChar){
     if (currentChar == ':') {
         this->currentState = equalColon;
@@ -231,6 +251,9 @@ void Automat::equalSignTransient(char currentChar){
     }
 }
 
+/*
+ * Uebergangsfunktion fuer ein eingelesenes =:
+ */
 void Automat::equalColonTransient(char currentChar){
     if (currentChar == '=') {
         this->currentTokenType = EqualAssign;
@@ -249,6 +272,9 @@ void Automat::equalColonTransient(char currentChar){
     this->currentState = endState;
 }
 
+/*
+ * Uebergangsfunktion fuer ein eingelesenen :
+ */
 void Automat::colonSignTransient(char currentChar){
     switch (currentChar){
         case '=' : this->currentTokenType = Assign;
@@ -267,6 +293,9 @@ void Automat::colonSignTransient(char currentChar){
     }
 }
 
+/*
+ * Uebergangsfunktion fuer Kommentare, die mit :* gestartet werden
+ */
 void Automat::commentStartTransient(char currentChar){
     if (currentChar == '*'){
         this->currentState = commentEnd;
@@ -278,6 +307,9 @@ void Automat::commentStartTransient(char currentChar){
     }
 }
 
+/*
+ * Uebergangsfunktion falls in einem Kommentar * eingelesen wurde
+ */
 void Automat::commentEndTransiend(char currentChar){
     if (currentChar == ':') {
         this->currentState = startState;
@@ -292,6 +324,9 @@ void Automat::commentEndTransiend(char currentChar){
     }
 }
 
+/*
+ * Uebergangsfunktion fuer ein eingelesenes &
+ */
 void Automat::andSignTransient(char currentChar){
     if (currentChar == '&') {
         this->currentTokenType = AndOP;
