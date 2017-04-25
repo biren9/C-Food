@@ -61,26 +61,29 @@ std::string getName(TokenType type) {
     }
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
 
+    Symboltable *symboltable = nullptr;
+    Scanner *scanner = nullptr;
+    for(int i = 1; i < argc; i++) {
+        symboltable = new Symboltable();
+        scanner = new Scanner(argv[i], symboltable);
 
-    Symboltable *symboltable = new Symboltable();
-    Scanner *scanner = new Scanner("../TestFile/test12.txt",symboltable);
+        Token *token = scanner->nextToken();
+        while (token->getType() != EOL) {
+            std::cout << "Token " << getName(token->getType()) << "\tLine: " << token->getLine() << " Column: "
+                      << token->getColumn() << "   ";
 
-    Token  *token = scanner->nextToken();
-    while(token->getType() != EOL) {
-        std::cout << "Token " << getName(token->getType()) << "\tLine: " << token->getLine() << " Column: "
-                  << token->getColumn() << "   ";
+            if (token->getType() == Identifier) {
+                std::cout << "\t" << " Lexem: " << token->getTokenLiteral();
+            } else if (token->getType() == Integer) {
+                std::cout << "\t" << " Value: " << token->getTokenLiteral();
+            }
 
-        if (token->getType() == Identifier) {
-            std::cout << "\t" << " Lexem: " << token->getTokenLiteral();
-        } else if (token->getType() == Integer) {
-            std::cout << "\t" << " Value: " << token->getTokenLiteral();
+            std::cout << std::endl;
+            delete token;
+            token = scanner->nextToken();
         }
-
-        std::cout << std::endl;
-        delete token;
-        token = scanner->nextToken();
     }
 
 

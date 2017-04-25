@@ -47,7 +47,7 @@ Token* Scanner::nextToken() {
 }
 
 Scanner::~Scanner() {
-    delete buffer;
-    delete automat;
-    delete symbolTable;
+    delete this->buffer;
+    delete this->automat;
+    delete this->symbolTable;
 }
