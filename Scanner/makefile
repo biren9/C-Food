@@ -47,30 +47,31 @@ OBJS = $(OBJDIR)/Scanner.o \
 #	g++ -std=c++11 -g  -c -Wall  -o $(OBJDIR)/TestScanner.o  $(SRCDIR)/TestScanner.cpp
 #
 # Variante mit guten Makefile-Kenntnissen
-makeTestScanner: $(OBJS) TokenTarget ScannerTest
+
+makeTestScanner:  TokenTarget ScannerTarget ScannerTest
 
 
-$(OBJDIR)/%.o :  $(SRCDIR)/%.cpp $(HEADERDIR)/%.h
-	@echo "g++ -std=c++11 $*.cpp"
-	g++ -std=c++11 -g  -c -Wall  -o $@  $<
-
-# 
-# $@ name des object files
-# $< erste abhaengigkeit
-
-
-ScannerTest: $(SRCDIR)/TestScanner.cpp $(HEADERDIR)/Scanner.h
+ScannerTest:  $(SRCDIR)/TestScanner.cpp $(HEADERDIR)/Scanner.h
 	g++ -std=c++11 -g  -c -Wall src/TestScanner.cpp -o $(BINDIRTEST)/TestScanner.o
-	g++ -std=c++11 -g $(BINDIRTEST)/TestScanner.o $(BINDIRTEST)/Token.o ../Symboltable/objs/StringTabelle.o ../Symboltable/objs/Liste.o ../Symboltable/objs/Symboltable.o    $(OBJDIR)/*.o $(AUTOMATDIR)/$(OBJDIR)/Automat.o  $(BUFFERDIR)/$(OBJDIR)/*.o -o $(BINDIRTEST)/ScannerTest
+	g++ -std=c++11 -g $(BINDIRTEST)/TestScanner.o $(OBJDIR)/Scanner.o $(OBJDIR)/Token.o ../Symboltable/$(OBJDIR)/StringTabelle.o ../Symboltable/$(OBJDIR)/Liste.o ../Symboltable/$(OBJDIR)/Symboltable.o  $(AUTOMATDIR)/$(OBJDIR)/Automat.o  $(BUFFERDIR)/$(OBJDIR)/Buffer.o -o $(BINDIRTEST)/ScannerTest
 
-# loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu erstellen
+TokenTarget :  $(SRCDIR)/Token.cpp ../lib/Token.h
+	g++ -std=c++11 -g  -c -Wall src/Token.cpp -o $(OBJDIR)/Token.o
 
-TokenTarget :  src/Token.cpp ../lib/Token.h
-	g++ -std=c++11 -g  -c -Wall src/Token.cpp -o $(BINDIRTEST)/Token.o
+ScannerTarget :  $(SRCDIR)/Scanner.cpp $(HEADERDIR)/Scanner.h
+	g++ -std=c++11 -g  -c -Wall src/Scanner.cpp -o $(OBJDIR)/Scanner.o
+
+cleanCompileScanner:
+	rm -rf $(OBJDIR)/*.o
+	rm -rf $(BINDIRTEST)/*
+	$(MAKE) ScannerTest
 
 cleanScanner:
 	rm -rf $(OBJDIR)/*.o
 	rm -rf $(BINDIRTEST)/*
+
+## objs fuer GesamtProjekt neu erzeugen
+ScannerOBJTarget:
 	$(MAKE) makeTestScanner
 
 

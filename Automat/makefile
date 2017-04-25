@@ -25,9 +25,8 @@ LIB = ../lib
 
 BufferDIR = ../Buffer
 
-makeTestAutomat: StringTarget AutomatTarget TestAutomatTarget BufferTarget
+makeTestAutomat: AutomatTarget TestAutomatTarget BufferTarget
 	g++ -std=c++11 -g $(OBJDIR)/Automat.o $(BINDIRTEST)/TestAutomat.o $(OBJDIR)/Buffer.o  -o $(BINDIRTEST)/TestAutomat
-	./$(BINDIRTEST)/TestAutomat
 
 # compilieren der Source-files
 # Buffer.o ist abhaengig von Automat.cpp und Automat.h
@@ -44,16 +43,20 @@ AutomatTarget :  $(SRCDIR)/Automat.cpp $(HEADERDIR)/Automat.h
 TestAutomatTarget :  $(SRCDIR)/TestAutomat.cpp $(HEADERDIR)/Automat.h
 	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/TestAutomat.cpp -o $(BINDIRTEST)/TestAutomat.o
 
-BufferTarget :  $(BufferDIR)/$(SRCDIR)/Buffer.cpp $(BufferDIR)/$(HEADERDIR)/Buffer.h
+BufferTarget :  $(SRCDIR)/Buffer.cpp $(HEADERDIR)/Buffer.h
 	g++ -std=c++11 -g  -c -Wall  $(BufferDIR)/$(SRCDIR)/Buffer.cpp -o $(OBJDIR)/Buffer.o
 
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu compilieren
 
-cleanAutomat:
+cleanCompileAutomat:
 	rm -f $(OBJDIR)/*.o
 	rm -f $(BINDIRTEST)/*
 	$(MAKE) makeTestAutomat
+
+cleanAutomat:
+	rm -f $(OBJDIR)/*.o
+	rm -f $(BINDIRTEST)/*
 
 
 # dieses Target wird vom makefile des Gesamtprojekts verwendet

@@ -16,10 +16,6 @@ BINDIRTEST = debug
 ## hier alle Object Files eintragen, ausser das File mit der Mainmethode
 ## darauf achten, dass letzte Zeile ohne "\" eingetragen wird
 
-OBJS = $(OBJDIR)/Symboltable.o \
-	#$(OBJDIR)/xx1.o \
-	#$(OBJDIR)/xxn.o
-
 LIB = ../lib
 #
 #		Targets zum Bauen des Tests
@@ -48,9 +44,9 @@ LIB = ../lib
 
 # Variante mit guten Makefile-Kenntnissen
 
-makeTestSymboltable: StringTarget SymboltableTarget TestSymboltableTarget ListTarget StringTarget StringTabelleTarget
-	g++ -std=c++11 -g $(OBJDIR)/Symboltable.o $(OBJDIR)/Liste.o  $(OBJDIR)/StringTabelle.o $(BINDIRTEST)/TestSymboltable.o -o $(BINDIRTEST)/SymboltableTest
-	./$(BINDIRTEST)/SymboltableTest
+makeSymboltable: SymboltableTarget TestSymboltableTarget ListTarget StringTabelleTarget
+	g++ -std=c++11 -g -Wall $(OBJDIR)/Symboltable.o $(OBJDIR)/Liste.o  $(OBJDIR)/StringTabelle.o $(BINDIRTEST)/TestSymboltable.o -o $(BINDIRTEST)/SymboltableTest
+
 
 
 
@@ -61,38 +57,26 @@ StringTabelleTarget :  $(SRCDIR)/StringTabelle.cpp $(HEADERDIR)/StringTabelle.h
 	g++ -std=c++11 -g  -c -Wall  $(SRCDIR)/StringTabelle.cpp -o $(OBJDIR)/StringTabelle.o
 
 
-
-
-
-
-SymboltableTarget: $(OBJS)
-
-# $@ name des object files = name auf der linken Seite vom Doppelpunkt des Targets
-# $< erste abhaengigkeit, $< das erste Element in der Liste der Abhaengigkeiten
-# $@ --> linke Seite vom Doppelpunkt
-# $^ --> rechte Seite vom Doppelpunkt
-
-$(OBJDIR)/%.o :  $(SRCDIR)/%.cpp $(HEADERDIR)/%.h
-	g++ -std=c++11 -g  -c -Wall  $<  -o $@
-
-
-
 TestSymboltableTarget: $(SRCDIR)/TestSymboltable.cpp $(HEADERDIR)/Symboltable.h
-	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/TestSymboltable.cpp -o $(BINDIRTEST)/TestSymboltable.o  
-	
+	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/TestSymboltable.cpp -o $(BINDIRTEST)/TestSymboltable.o
+
+SymboltableTarget: $(SRCDIR)/Symboltable.cpp $(HEADERDIR)/Symboltable.h
+	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/Symboltable.cpp -o $(OBJDIR)/Symboltable.o
 
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu compilieren
 
+cleanCompileSymboltable:
+	rm -rf $(OBJDIR)/*.o
+	rm -rf $(BINDIRTEST)/*
+	$(MAKE) makeSymboltable
+	
 cleanSymboltable:
 	rm -rf $(OBJDIR)/*.o
 	rm -rf $(BINDIRTEST)/*
-	$(MAKE) makeTestSymboltable
-	
-	
 	
 ## objs fuer GesamtProjekt neu erzeugen
 SymboltableOBJTarget:
-	$(MAKE) SymboltableTarget
+	$(MAKE) makeSymboltable
 
 	
