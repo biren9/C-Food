@@ -26,11 +26,9 @@ LIB = ../lib
 BufferDIR = ../Buffer
 
 makeTestAutomat: StringTarget AutomatTarget TestAutomatTarget BufferTarget
-	g++ -std=c++11 -g $(OBJDIR)/Automat.o $(OBJDIR)/String.o $(BINDIRTEST)/TestAutomat.o $(OBJDIR)/Buffer.o  -o $(BINDIRTEST)/TestAutomat
+	g++ -std=c++11 -g $(OBJDIR)/Automat.o $(BINDIRTEST)/TestAutomat.o $(OBJDIR)/Buffer.o  -o $(BINDIRTEST)/TestAutomat
 	./$(BINDIRTEST)/TestAutomat
 
-StringTarget :  $(LIB)/String.cpp $(LIB)/String.h
-	g++ -std=c++11 -g  -c -Wall $(LIB)/String.cpp -o objs/String.o
 # compilieren der Source-files
 # Buffer.o ist abhaengig von Automat.cpp und Automat.h
 # flag:
