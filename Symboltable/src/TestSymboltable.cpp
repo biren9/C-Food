@@ -60,7 +60,7 @@ int main() {
         for(std::map<int,int>::iterator it = map.begin(); it != map.end(); ++it) {
             v.push_back(it->first);
             //std::cout << "Key: "<< it->first << "\n";
-            auto value = map.find(it->first);
+            //auto value = map.find(it->first);
             std::cout << "Value: "<< it->second << std::endl;
         }
 
