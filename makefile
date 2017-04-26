@@ -44,4 +44,3 @@ symboltableOBJs:
 
 scanner: 
 	$(MAKE) -C $(SCANNERDIR) ScannerOBJTarget
-	$(SCANNERDIR)/debug/ScannerTest TestFile/comment.txt
