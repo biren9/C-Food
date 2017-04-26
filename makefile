@@ -44,4 +44,4 @@ symboltableOBJs:
 
 scanner: 
 	$(MAKE) -C $(SCANNERDIR) ScannerOBJTarget
-	$(SCANNERDIR)/debug/ScannerTest TestFile/test2.txt TestFile/test2.txt
+	$(SCANNERDIR)/debug/ScannerTest TestFile/comment.txt
