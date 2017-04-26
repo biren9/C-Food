@@ -71,11 +71,11 @@ TokenType Automat::getCurrentTokenType() {
     return this->currentTokenType;
 }
 
-int Automat::getStartLine() {
+unsigned int Automat::getStartLine() {
     return this->startLine;
 }
 
-int Automat::getStartColumn() {
+unsigned int Automat::getStartColumn() {
     return this->startColumn;
 }
 

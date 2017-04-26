@@ -26,8 +26,8 @@ public:
     void nextToken();
     std::string getTokenLiteral();
     TokenType getCurrentTokenType();
-    int getStartLine();
-    int getStartColumn();
+    unsigned int getStartLine();
+    unsigned int getStartColumn();
     State getCurrentState();
 
 
