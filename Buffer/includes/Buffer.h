@@ -29,7 +29,7 @@ class Buffer {
 	    bool read();
         void close();
 
-        static constexpr unsigned int BUFFER_BLOCK = 5;
+        static constexpr unsigned int BUFFER_BLOCK = 1024;
 
         char buffCur[BUFFER_BLOCK]{};
         char buffPrev[BUFFER_BLOCK]{};
