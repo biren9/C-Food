@@ -7,7 +7,7 @@
 
 #ifndef SCANNER_H_
 #define SCANNER_H_
-#include "../../lib/Token.h"
+#include "../includes/Token.h"
 #include "../includes/Scanner.h"
 #include "../../Automat/includes/Automat.h"
 #include "../../Symboltable/includes/Symboltable.h"

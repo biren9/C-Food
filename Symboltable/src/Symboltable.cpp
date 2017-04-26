@@ -3,6 +3,7 @@
 //
 
 #include "../includes/Symboltable.h"
+//create Linked List on heap for each field of the Symboltable array. Create a unique Stringtable.
 Symboltable::Symboltable() {
     for  (unsigned int i = 0; i < SYMBOL_TABLE_SIZE; ++i) {
         hashTabelle[i] = new Liste();
@@ -16,7 +17,7 @@ Symboltable::~Symboltable() {
         delete hashTabelle[i];
     }
 }
-
+//insert lexem into the Hashtable.
 InfoNode* Symboltable::insert(const char *lexem) {
     return hashTabelle[hash(lexem)]->addEnd(lexem, stringTabelle);
 }

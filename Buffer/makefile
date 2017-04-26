@@ -21,7 +21,7 @@ BINDIRTEST = debug
 # -g --> debug Informationen erzeugen
 # -o --> name des output-files
 
-makeTestBuffer: BufferTarget 	TestBufferTarget
+makeTestBuffer: BufferTarget TestBufferTarget
 	g++ -std=c++11 -g $(OBJDIR)/Buffer.o 	$(BINDIRTEST)/TestBuffer.o  -o $(BINDIRTEST)/BufferTest
 	./$(BINDIRTEST)/BufferTest
 
@@ -43,12 +43,14 @@ TestBufferTarget :  $(SRCDIR)/TestBuffer.cpp $(HEADERDIR)/Buffer.h
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu compilieren
 
-cleanBuffer:
+cleanCompileBuffer:
 	rm -f $(OBJDIR)/*.o
 	rm -f $(BINDIRTEST)/*
 	$(MAKE) makeTestBuffer
 	
-
+cleanBuffer:
+	rm -f $(OBJDIR)/*.o
+	rm -f $(BINDIRTEST)/*
 # dieses Target wird vom makefile des Gesamtprojekts verwendet
 # objs fuer GesamtProjekt loeschen und dann neu erzeugen
 BufferOBJTarget:

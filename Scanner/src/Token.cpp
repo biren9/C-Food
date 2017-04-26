@@ -2,8 +2,11 @@
 // Created by josef on 4/23/17.
 //
 
-#include "../../lib/Token.h"
+#include "../includes/Token.h"
 
+/**
+ *  Constructor
+ */
 Token::Token(TokenType tokenType,int column, int line,std::string tokenLiteral1) {
     this->type = tokenType;
     this->column = column;
@@ -40,6 +43,10 @@ void Token::setValue(int i) {
 
 void Token::setKey(InfoNode *key) {
     this->key = key;
+}
+
+void Token::setType(TokenType type) {
+    this->type = type;
 }
 
 Token::~Token() {

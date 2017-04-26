@@ -9,8 +9,7 @@
 #define Automat_H_
 
 #include "../../Buffer/includes/Buffer.h"
-#include "../../lib/String.h"
-#include "../../lib/Token.h"
+#include "../../Scanner/includes/Token.h"
 
 
 enum State {
@@ -27,8 +26,8 @@ public:
     void nextToken();
     std::string getTokenLiteral();
     TokenType getCurrentTokenType();
-    int getStartLine();
-    int getStartColumn();
+    unsigned int getStartLine();
+    unsigned int getStartColumn();
     State getCurrentState();
 
 

@@ -25,6 +25,9 @@ clean:
 	rm -f $(SYMBOLTABLEDIR)/$(OBJDIR)/*.o
 	rm -f $(SCANNERDIR)/$(OBJDIR)/*.o
 	rm -f $(SCANNERDIR)/debug/*
+	rm -f $(AUTOMATDIR)/debug/*
+	rm -f $(SYMBOLTABLEDIR)/debug/*
+	rm -f $(BUFFERDIR)/debug/*
 	
 
 automatOBJs:
@@ -40,6 +43,5 @@ symboltableOBJs:
 	
 
 scanner: 
-	$(MAKE) -C $(SCANNERDIR) makeTestScanner
-
-	
+	$(MAKE) -C $(SCANNERDIR) ScannerOBJTarget
+	$(SCANNERDIR)/debug/ScannerTest TestFile/comment.txt

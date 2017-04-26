@@ -1,16 +1,12 @@
-/*
- * Scanner.cpp
- *
- *  Created on: Sep 26, 2012
- *      Author: knad0001
- */
-
 #include "../includes/Scanner.h"
 #include <string>
 #include <cerrno>
 #include <cstdlib>
 
 
+/**
+ * initialize
+ */
 Scanner::Scanner(const char* file,Symboltable* symboltable) {
     this->buffer = new Buffer(file);
     this->automat = new Automat(buffer);
@@ -18,6 +14,9 @@ Scanner::Scanner(const char* file,Symboltable* symboltable) {
 
 }
 
+/**
+ * get data from automat to create Token
+ */
 Token* Scanner::nextToken() {
     this->automat->nextToken();
     std::string tokenLiteral = this->automat->getTokenLiteral();
@@ -38,6 +37,7 @@ Token* Scanner::nextToken() {
         if(errno == ERANGE) {
             errno = 0;
             std::cout << "Error: " << "Value is out of range" << std::endl;
+            token->setType(Undefined);
         } else {
             token->setValue(value1);
         }
@@ -46,6 +46,9 @@ Token* Scanner::nextToken() {
 
 }
 
+/**
+ * delete heap
+ */
 Scanner::~Scanner() {
     delete this->buffer;
     delete this->automat;

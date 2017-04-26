@@ -3,7 +3,6 @@
 #include "../includes/StringTabelle.h"
 #include "../includes/Symboltable.h"
 #include "../includes/InfoNode.h"
-#include "../../lib/String.h"
 #include <cmath>
 #include <map>
 #include <vector>
