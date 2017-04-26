@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
                 if (token->getType() == Identifier) {
                     std::cout << "\t" << " Lexem: " << token->getTokenLiteral();
                 } else if (token->getType() == Integer) {
-                    std::cout << "\t" << " Value: " << token->getTokenLiteral();
+                    std::cout << "\t" << " Value: " << token->getValue();
                 }
 
                 std::cout << std::endl;
