@@ -160,8 +160,8 @@ bool Buffer::ungetChar() {
     if(this->buffCur[this->currentChar] == '\n') this->rowCount -= 1;
 
     // Update colume
-    if(*this->prevChar == '\n') this->colCount -= 1;
-    else  this->colCount = this->lastCol;
+    if(*this->prevChar == '\n')  this->colCount = this->lastCol;
+    else this->colCount -= 1;
 
     this->prevChar = &((this->currentChar == 0) ? this->buffPrev[BUFFER_BLOCK-1]: this->buffCur[this->currentChar-1]);
 
