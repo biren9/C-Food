@@ -39,9 +39,10 @@ int main() {
 
     std::map<int,int> map; //<HashCode,Counter>
     Symboltable symboltable;
-    for(int i = 0; i < 10000; i++) {
+    for(int i = 0; i < 2000000; i++) {
         std::string randomStr = generateRandomString(10);
 
+        //symboltable.insert(randoStr.);
         int hashCode = symboltable.hash(randomStr.c_str());
 
         if (map.find(hashCode) == map.end()) {
@@ -59,7 +60,7 @@ int main() {
         std::vector<int> v;
         for(std::map<int,int>::iterator it = map.begin(); it != map.end(); ++it) {
             v.push_back(it->first);
-            std::cout << "Key: "<< it->first << "\n";
+            //std::cout << "Key: "<< it->first << "\n";
             auto value = map.find(it->first);
             std::cout << "Value: "<< it->second << std::endl;
         }
