@@ -314,6 +314,9 @@ void Automat::commentEndTransiend(char currentChar){
     if (currentChar == ':') {
         this->currentState = startState;
     }
+    else if (currentChar == '*') {
+        this->currentState = commentEnd;
+    }
     else if (currentChar == '\0'){
         this->currentState = endState;
         this->currentTokenType = EOL;
