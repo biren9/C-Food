@@ -7,13 +7,52 @@ import (
 	"fmt"
 )
 
-var sign = [18]string{"+", "-", ":", "*", "<", ">", "=", ":=", "=:=", "!", "&&", ";", "(", ")", "{", "}", "[", "]"};
+var sign2 = [18]string{"+", "-", ":", "*", "<", ">", "=", ":=", "=:=", "!", "&&", ";", "(", ")", "{", "}", "[", "]"};
+var sign = [18]string{"=", "+", ";", "-", ":", ":=", "*", "!", "&&", ">", "<", "(", ")", "[", "]", "{", "}"};
 var letter = [52]string{"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"}
 
 func random(min,max int ) int {
 	number := rand.Intn(max) + min
 	return number
 
+}
+
+type Type int
+
+const (
+	Assign Type = iota
+	Plus
+	Semicolon
+	Minus
+	Colon
+	Equal
+	EqualAssign
+	Multiply
+	ExclamationMark
+	AndOP
+	Greater
+	Smaller
+	OpenParenthesis
+	CloseParenthesis
+	OpenBracket
+	CloseBracket
+	OpenBrace
+	CloseBrace
+	WhileToken
+	IfToken
+	Comment
+	Identifier
+	Undefined
+	Integer
+	EOL
+)
+
+
+
+type Token struct {
+	row int
+	column int
+	tokenType Type
 }
 
 func generateToken() {
@@ -28,7 +67,6 @@ func generateToken() {
 			case randomLanguage == 1:
 				break;
 			case randomLanguage > 1 && randomLanguage <= 7:
-
 				break;
 			case randomLanguage > 7 && randomLanguage <= 13:
 				break;
@@ -74,7 +112,7 @@ func generateInteger() string {
 	}
 }
 
-func generateSign() {
+func generateSign(row int,column int) []*Token {
 	randomCountRange := random(1,26);
 
 	var lengthSign int;
@@ -106,19 +144,31 @@ func generateSign() {
 	}
 	var signWord string;
 	//fmt.Println("Length: %d",lengthSign)
+	signList := make([]*Token, lengthSign)
+
 	for i := 0; i < lengthSign; i++ {
-		randomSign := random(0, 17)
+		randomSign := random(0, 16)
+
+		var typeToken Type = Type(randomSign)
+		token := &Token{}
+		token.tokenType = typeToken;
+		token.row = row;
+        token.column = column + i + 1;
+
+        signList[lengthSign] = token;
+
+
 		s := sign[randomSign]
 		signWord = signWord + s
 	}
 
-	fmt.Println(signWord)
+	return signList;
 }
 
 func main() {
 	rand.Seed(time.Now().Unix())
 	for i := 0; i < 30; i++ {
-		generateSign()
+
 	}
 
 }
