@@ -34,6 +34,10 @@ enum TokenType
     CloseBrace,
     WhileToken,
     IfToken,
+    ReadToken,
+    WriteToken,
+    ElseToken,
+    IntToken,
     EOL
 };
 
