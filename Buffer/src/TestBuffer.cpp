@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
 	Buffer*  buffer;
 	buffer = new Buffer("../TestFile/test10.txt");
 
-
+/*
     try {
 
         string a;
@@ -24,7 +24,26 @@ int main(int argc, char **argv) {
     catch (const char* msg) {
         cout << msg;
         exit(0);
-    }
+    }*/
+
+
+
+    buffer->getNextChar();
+    buffer->getNextChar();
+    buffer->getNextChar();
+    buffer->getNextChar();
+    buffer->getNextChar();
+    buffer->getNextChar();
+    buffer->getNextChar();
+
+
+    std::cout << buffer->getRow() << std::endl;
+
+    buffer->ungetChar();
+    buffer->ungetChar();
+
+    std::cout << buffer->getRow();
+
 //cout << "----------------------\n";
 //
 //
