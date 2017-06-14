@@ -209,6 +209,18 @@ void Automat::identifierType(){
     else if (((this->tokenLiteral == "if")) || (this->tokenLiteral == "IF")) {
         this->currentTokenType = IfToken;
     }
+    else if (this->tokenLiteral == "read") {
+        this->currentTokenType = ReadToken;
+    }
+    else if (this->tokenLiteral == "write") {
+        this->currentTokenType = WriteToken;
+    }
+    else if (this->tokenLiteral == "else") {
+        this->currentTokenType = ElseToken;
+    }
+    else if (this->tokenLiteral == "int") {
+        this->currentTokenType = IntToken;
+    }
     else {
         this->currentTokenType = Identifier;
     }

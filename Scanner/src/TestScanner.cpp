@@ -56,10 +56,18 @@ std::string getName(TokenType type) {
             return "While          ";
         case IfToken:
             return "If             ";
+        case ElseToken:
+            return "Else           ";
+        case ReadToken:
+            return "Read           ";
+        case WriteToken:
+            return "Write          ";
+        case IntToken:
+            return "Int            ";
         case EOL:
             return "End File       ";
         default:
-            return "                ";
+            return "               ";
     }
 }
 /**
