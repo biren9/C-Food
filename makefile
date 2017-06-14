@@ -49,6 +49,6 @@ parser: FORCE
 	$(MAKE) -C $(PARSERDIR) ParserOBJTarget
 
 run:
-	$(PARSERDIR)/debug/parserTest
+	./$(PARSERDIR)/debug/ParserTest
 
 FORCE:
