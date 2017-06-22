@@ -1,0 +1,40 @@
+digraph Scanner_Automaton {    
+  rankdir=LR;
+  size="8,5"
+
+  node [shape = point ]; qi
+  node [shape = doublecircle ]; E
+  node [shape = circle];
+  qi -> Startstate;
+  Startstate -> Startstate [label = "Space, \\t, \\n"];
+  Startstate -> Id [label = "A...Z, a...z"];
+  Startstate -> Num [label = "0...9"];
+  Startstate -> colon [label = ":"];
+  Startstate -> equal [label = "="];
+  Startstate -> and [label = "&"];
+  Startstate -> E [label = "\\0"];
+  Startstate -> E [label = "invalid"];
+  Startstate -> E [label = "+-*<>!()[]{};"];
+  Id -> Id [label = "A...B, a...b, 0...9"];
+  Id -> Id2 [label = "invalid"];
+  Id2 -> E [label = "id"];
+  Id2 -> E [label = "if, while, else, ..."];
+  Num -> Num [label = "0...9"];
+  Num -> E [label = "invalid"];
+  equal -> "=:" [label = ":"];
+  equal -> E [label = "invalid"];
+  "=:" -> E [label = "="];
+  "=:" -> E [label = "invalid"];
+  colon -> E [label = "="];
+  colon -> comment [label = "*"];
+  colon -> E [label = "invalid"];
+  comment -> comment [label = "default"];
+  comment -> E [label = "\\0"];
+  comment -> comment2 [label = "*"];
+  comment2 -> comment2 [label = "*"];
+  comment2 -> Startstate [label = ":"];
+  comment2 -> E [label = "\\0"];
+  comment2 -> comment [label = "default"];
+  and -> E [label = "&"];
+  and -> E [label = "invalid"];
+}

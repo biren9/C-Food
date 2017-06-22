@@ -2,8 +2,8 @@
 #ifndef PARSER_NODEIDENTIFIER_H_
 #define PARSER_NODEIDENTIFIER_H_
 
-#include "../../../Symboltable/includes/Information.h"
-#include "../../../Scanner/includes/Token.h"
+#include "../../Symboltable/includes/InfoNode.h"
+#include "../../Scanner/includes/Token.h"
 
 class NodeIdentifier: public Node {
 private:
