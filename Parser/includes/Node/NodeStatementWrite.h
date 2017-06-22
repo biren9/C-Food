@@ -1,7 +1,0 @@
-
-#ifndef PARSER_NODESTATEMENTWRITE_H_
-#define PARSER_NODESTATEMENTWRITE_H_
-
-
-
-#endif

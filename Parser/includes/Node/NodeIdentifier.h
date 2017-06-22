@@ -1,7 +1,0 @@
-
-#ifndef PARSER_NODEIDENTIFIER_H_
-#define PARSER_NODEIDENTIFIER_H_
-
-
-
-#endif

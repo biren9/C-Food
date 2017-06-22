@@ -1,7 +1,0 @@
-
-
-#ifndef PARSER_NODEEXP2MINUS_H_
-#define PARSER_NODEEXP2MINUS_H_
-
-
-#endif

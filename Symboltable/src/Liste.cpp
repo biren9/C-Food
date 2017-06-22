@@ -17,7 +17,7 @@ Liste::~Liste() {
     }
 }
 /* add unique lexem to the end of a list.
- * returns pointer to a new InfoNode on heap or to an old Node if the lexem was already inserted.
+ * returns pointer to a new InfoNode on heap or to an old Nodes if the lexem was already inserted.
  */
 InfoNode* Liste::addEnd(const char* lexem, StringTabelle* strTab) {
 	if (!size) {

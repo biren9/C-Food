@@ -1,8 +1,0 @@
-
-
-#ifndef PARSER_NODESTATEMENT_H_
-#define PARSER_NODESTATEMENT_H_
-
-
-
-#endif

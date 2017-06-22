@@ -10,7 +10,6 @@ private:
 
 public:
     NodeInteger(Token* token) {
-        this->value = value;
         this->token = token;
     }
 
@@ -20,7 +19,7 @@ public:
         this->value = value;
     }*/
 
-    void accept(ParseTreeVisitor* visitor) {
+    void accept(Visitor* visitor) {
         visitor->visitNode(this);
     }
 
