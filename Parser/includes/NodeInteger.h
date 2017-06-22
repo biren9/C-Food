@@ -7,26 +7,22 @@
 
 class NodeInteger: public Node {
 private:
-	unsigned long value;
+
 	Token* token;
 
 public:
-	NodeInteger(unsigned long value, Token* token) {
+	NodeInteger(Token* token) {
 		this->value = value;
 	}
 
 	~NodeInteger() {}
-
-	void addInteger(long int value) {
-		this->value = value;
-	}
 
 	void accept(ParseTreeVisitor* visitor) {
 		visitor->visitNode(this);
 	}
 
 	unsigned long getValue() {
-		return this->value;
+		return this->token->getValue();
 	}
 
 	unsigned int getLine() {

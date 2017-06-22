@@ -8,7 +8,7 @@
 
 class NodeProg: public Node {
 private:
-	NodeDecls* decls;
+	NodeDecls* decls = nullptr;
 	NodeStatements* statements;
 
 public:

@@ -12,6 +12,7 @@ public:
 	void accept(ParseTreeVisitor* visitor) {
 		visitor->visitNode(this);
 	}
+
 };
 
 

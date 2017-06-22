@@ -5,8 +5,14 @@
 #ifndef C_FOOD_PARSETREE_H
 #define C_FOOD_PARSETREE_H
 
-class Parser {
+class ParseTree {
+public:
+    NodeProg* parse();
 
+private:
+    Token* currentToken;
+    Scanner* scanner;
+    void nextToken();
 };
 
 #endif //C_FOOD_PARSETREE_H
