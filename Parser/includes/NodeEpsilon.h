@@ -15,12 +15,12 @@ class NodeEpsilon: public NodeDecls, public NodeArray, public NodeStatements, pu
 
 private:
 	Node::NodeType type;
-	NodeEpsilon::EpsilonType epsType;
+	EpsilonType epsType;
 
 
 public:
 
-	NodeEpsilon(NodeEpsilon::EpsilonType epsType) {
+	NodeEpsilon(EpsilonType epsType) {
 		this->epsType = epsType;
 	}
 
