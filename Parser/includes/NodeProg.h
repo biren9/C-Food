@@ -4,7 +4,7 @@
 
 #include "NodeDecls.h"
 #include "NodeStatements.h"
-#include "../ParseTreeVisitor.h"
+#include "Visitor.h"
 
 class NodeProg: public Node {
 private:
@@ -33,7 +33,7 @@ public:
 		return this->statements;
 	}
 
-	void accept(ParseTreeVisitor* visitor) {
+	void accept(Visitor* visitor) {
 		visitor->visitNode(this);
 	}
 

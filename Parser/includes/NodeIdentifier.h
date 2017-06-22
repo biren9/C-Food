@@ -19,7 +19,7 @@ public:
 		this->information = information;
 	}
 
-	void accept(ParseTreeVisitor* visitor) {
+	void accept(Visitor* visitor) {
 		visitor->visitNode(this);
 	}
 

@@ -21,7 +21,7 @@ public:
 		this->index = index;
 	}
 
-	void accept(ParseTreeVisitor* visitor) {
+	void accept(Visitor* visitor) {
 		visitor->visitNode(this);
 	}
 

@@ -4,7 +4,7 @@
 #define PARSER_NODEDECLS_H_
 
 #include "NodeDecl.h"
-#include "../Node.h"
+#include "Node.h"
 
 class NodeDecls: public Node {
 private:
@@ -25,7 +25,7 @@ public:
 		this->decls = decls;
 	}
 
-	void accept(ParseTreeVisitor* visitor) {
+	void accept(Visitor* visitor) {
 		visitor->visitNode(this);
 	}
 

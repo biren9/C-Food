@@ -2,7 +2,7 @@
 #ifndef PARSER_INCLUDES_NODES_NODE_H_
 #define PARSER_INCLUDES_NODES_NODE_H_
 
-#include "ParseTreeVisitor.h"
+#include "Visitor.h"
 
 
 enum NodeType {
@@ -24,13 +24,13 @@ enum NodeType {
 
 class Node {
 private:
-	Node::NodeType type;
+	NodeType type;
 public:
 	Node();
 	virtual ~Node();
-	virtual void setNodeType(Node::NodeType type);
-	virtual Node::NodeType getType();
-	virtual void accept(ParseTreeVisitor* visitor) = 0;
+	virtual void setNodeType(NodeType type);
+	virtual NodeType getType();
+	virtual void accept(Visitor* visitor) = 0;
 
 };
 

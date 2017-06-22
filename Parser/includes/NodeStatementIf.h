@@ -28,7 +28,7 @@ public:
 		this->statementElse = statementElse;
 	}
 
-	void accept(ParseTreeVisitor* visitor) {
+	void accept(Visitor* visitor) {
 		visitor->visitNode(this);
 	}
 

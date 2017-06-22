@@ -2,7 +2,7 @@
 #ifndef PARSER_NODEDECL_H_
 #define PARSER_NODEDECL_H_
 
-#include "../Node.h"
+#include "Node.h"
 #include "NodeArray.h"
 #include "NodeIdentifier.h"
 
@@ -25,7 +25,7 @@ public:
 		this->identifier = identifier;
 	}
 
-	void accept(ParseTreeVisitor* visitor) {
+	void accept(Visitor* visitor) {
 		visitor->visitNode(this);
 	}
 

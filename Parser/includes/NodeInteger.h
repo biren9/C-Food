@@ -3,7 +3,7 @@
 #ifndef PARSER_NODEINTEGER_H_
 #define PARSER_NODEINTEGER_H_
 
-#include "../../../Scanner/includes/Token.h"
+#include "../../Scanner/includes/Token.h"
 
 class NodeInteger: public Node {
 private:
@@ -21,7 +21,7 @@ public:
 		this->value = value;
 	}
 
-	void accept(ParseTreeVisitor* visitor) {
+	void accept(Visitor* visitor) {
 		visitor->visitNode(this);
 	}
 
