@@ -5,8 +5,5 @@
 #ifndef C_FOOD_PARSETREE_H
 #define C_FOOD_PARSETREE_H
 
-class Parser {
-
-};
 
 #endif //C_FOOD_PARSETREE_H
