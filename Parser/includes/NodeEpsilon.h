@@ -34,11 +34,11 @@ public:
 		this->type = type;
 	}
 
-	Node::NodeType getEpsilonType() {
+	NodeType getEpsilonType() {
 		return this->type;
 	}
 
-	NodeEpsilon::EpsilonType getEpsilonNodeType() {
+	EpsilonType getEpsilonNodeType() {
 		return this->epsType;
 	}
 };

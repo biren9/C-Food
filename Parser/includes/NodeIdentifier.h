@@ -31,7 +31,7 @@ public:
 		information->setType(type);
 	}
 
-	virtual Node::NodeType getType() {
+	virtual NodeType getType() {
 		return information->getType();
 	}
 
