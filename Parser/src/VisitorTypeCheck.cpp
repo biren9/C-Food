@@ -75,7 +75,7 @@ void VisitorTypeCheck::visitNode(NodeExp2* node) {
     //
 }
 
-void VisitorTypeCheck::visitNode(NodeExp2Bracket* node) {
+void VisitorTypeCheck::visitNode(NodeExp2Parenthesis* node) {
     //
 }
 
