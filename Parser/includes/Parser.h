@@ -7,7 +7,9 @@
 class Parser {
 public:
     Parser(char *filename);
-    NodeProg* createTree();
+
+    NodeProg *createTree();
+
 private:
     ParseTree *parseTree;
 

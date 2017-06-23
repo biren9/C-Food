@@ -1,11 +1,4 @@
 #include "../includes/ParseTree.h"
-#include "../../Scanner/includes/Token.h"
-#include "../../Scanner/includes/Scanner.h"
-
-
-
-#include <iostream>
-#include <stdlib.h>
 
 
 ParseTree::ParseTree(Scanner *scanner) {
@@ -13,7 +6,7 @@ ParseTree::ParseTree(Scanner *scanner) {
     this->currentToken = this->scanner->nextToken();
 }
 
-NodeProg* ParseTree::parse() {
+NodeProg *ParseTree::parse() {
     this->progTree = prog();
     return progTree;
 }

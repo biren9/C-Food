@@ -1,8 +1,4 @@
 #include "../includes/Parser.h"
-#include <iostream>
-
-#include "../includes/Visitor.h"
-#include "../../Scanner/includes/Scanner.h"
 
 Parser::Parser(char *filename) {
     Symboltable *symboltable = new Symboltable();
@@ -10,7 +6,7 @@ Parser::Parser(char *filename) {
     this->parseTree = new ParseTree(scanner);
 }
 
-NodeProg* Parser::createTree() {
+NodeProg *Parser::createTree() {
     return this->parseTree->parse();
 }
 
