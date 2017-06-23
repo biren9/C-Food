@@ -1,0 +1,4 @@
+objs/VisitorMakeCode.o: In function `VisitorMakeCode::VisitorMakeCode()':
+/mnt/c/Users/ninja/CLionProjects/C-Food/Parser/src/VisitorMakeCode.cpp:3: undefined reference to `vtable for VisitorMakeCode'
+collect2: error: ld returned 1 exit status
+make: *** [makeTestParser] Error 1

@@ -47,8 +47,10 @@ using namespace std;
 
 class VisitorMakeCode: public Visitor {
 public:
+    VisitorMakeCode();
+    ~VisitorMakeCode();
     unsigned long getLabelNumber();
-    void makeCode(ParseTree* tree, char* filename);
+    void makeCode(NodeProg* prog, char* filename);
     void visitNode(Node* node);
     void visitNode(NodeProg* node);
     void visitNode(NodeArray* node);
