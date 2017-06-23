@@ -51,6 +51,7 @@ void VisitorTypeCheck::visitNode(NodeDecl* node) {
 
         }
     }
+    node->getIdentifier()->
 }
 
 //DECLS	::=	DECL; DECLS
