@@ -13,7 +13,9 @@ public:
 		this->token = token;
 	}
 
-	~NodeOp() {}
+	~NodeOp() {
+		delete this->token;
+	}
 
 	void accept(ParseTreeVisitor* visitor) {
 		visitor->visitNode(this);
