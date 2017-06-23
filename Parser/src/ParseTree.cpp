@@ -54,6 +54,9 @@ NodeProg* ParseTree::prog() {
             prog->addNode(decls());
             prog->addNode(statements());
             break;
+        case EOL:
+            error("Prog Error: No code found");
+            break;
         default:
             error("Prog Error");
     }
@@ -108,6 +111,7 @@ NodeDecls* ParseTree::decls() {
         case AndOP:
         case Integer:
         case Identifier:
+        case EOL:
             return nullptr;
         default:
             error("decls-Error");
@@ -166,6 +170,7 @@ NodeArray* ParseTree::array() {
         case AndOP:
         case Integer:
         case Identifier:
+        case EOL:
             return nullptr;
         default:
             error("array-Error");
@@ -204,6 +209,7 @@ NodeArray* ParseTree::array() {
             case ExclamationMark:
             case AndOP:
             case Integer:
+            case EOL:
                 return nullptr;
             default:
                 error("statements-Error");
@@ -271,6 +277,7 @@ NodeArray* ParseTree::array() {
             case AndOP:
             case Integer:
             case Identifier:
+            case EOL:
                 return nullptr;
             default:
                 error("Index-Error");
@@ -369,6 +376,7 @@ NodeArray* ParseTree::array() {
             case ExclamationMark:
             case Integer:
             case Identifier:
+            case EOL:
                 return nullptr;
             default:
                 error("OP_EXP-Error");
