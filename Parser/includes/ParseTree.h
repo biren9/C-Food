@@ -60,6 +60,8 @@ private:
     void error(std::string parseTreeError);
     std::string getName(TokenType type);
     NodeExp2* exp2();
+
+    NodeIndex *index();
     
 };
 

@@ -173,7 +173,7 @@ NodeArray* ParseTree::array() {
 }
 
     NodeStatements* ParseTree::statements() {
-        switch(this->currentType->getType()) {
+        switch (this->currentToken->getType()) {
             case WriteToken:
             case ReadToken:
             case OpenBrace:
@@ -211,7 +211,7 @@ NodeArray* ParseTree::array() {
     }
 
     NodeStatement* ParseTree::statement() {
-        switch(this->currentType->getType()){
+        switch (this->currentToken->getType()) {
             case Identifier: return statementAssign();
             case WhileToken: return statementWhile();
             case IfToken: return statementIf();
@@ -240,7 +240,7 @@ NodeArray* ParseTree::array() {
     }
 
     NodeIndex* ParseTree::index() {
-        switch (this->currentType->getType()) {
+        switch (this->currentToken->getType()) {
             case OpenBracket: {
                 nextToken();
                 NodeIndex *nodeIndex = new NodeIndex();
@@ -341,7 +341,7 @@ NodeArray* ParseTree::array() {
     }
 
     NodeOpExp* ParseTree::opExp() {
-        switch (this->currentType->getType()) {
+        switch (this->currentToken->getType()) {
             case Plus:
             case Minus:
             case Multiply:
@@ -375,7 +375,7 @@ NodeArray* ParseTree::array() {
         }
     }
 
-    StatementWhile* ParseTree::statementWhile() {
+NodeStatementWhile *ParseTree::statementWhile() {
         nextToken();
         NodeStatementWhile *statementWhile = new NodeStatementWhile();
         if(this->currentToken->getType() == OpenParenthesis) {
@@ -554,16 +554,3 @@ NodeArray* ParseTree::array() {
                 return "               ";
         }
     }
-
-
-
-
-
-
-
-
-}
-
-
-
-
