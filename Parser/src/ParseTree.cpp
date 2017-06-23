@@ -1,10 +1,5 @@
 #include "../includes/ParseTree.h"
-#include "../includes/NodeDecl.h"
-#include "../includes/NodeArray.h"
-#include "../includes/NodeDecls.h"
-#include "../includes/NodeInteger.h"
 #include "../../Scanner/includes/Token.h"
-#include "../includes/NodeStatement.h"
 
 
 
