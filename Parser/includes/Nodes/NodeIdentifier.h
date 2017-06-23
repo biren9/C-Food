@@ -8,7 +8,6 @@
 
 class NodeIdentifier: public Node {
 private:
-    InfoNode* information;
     Token* token;
 
 public:
@@ -16,16 +15,12 @@ public:
         this->token = token;
     }
 
-    void addInformation(InfoNode* information) {
-        this->information = information;
-    }
-
     void accept(Visitor* visitor) {
         visitor->visitNode(this);
     }
 
     char* getInformation() {
-        return this->information->strTabelle->stringArr+(this->information->Index);
+        return this->token->getKey()->strTabelle->stringArr+(this->information->Index);
     }
 
     unsigned int getLine() {

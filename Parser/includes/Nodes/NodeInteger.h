@@ -1,4 +1,3 @@
-
 #ifndef PARSER_NODEINTEGER_H_
 #define PARSER_NODEINTEGER_H_
 
@@ -14,10 +13,6 @@ public:
     }
 
     ~NodeInteger() {}
-
-    /*void addInteger(long int value) {
-        this->value = value;
-    }*/
 
     void accept(Visitor* visitor) {
         visitor->visitNode(this);

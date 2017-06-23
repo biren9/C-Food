@@ -5,9 +5,6 @@
 #include "NodeExp2.h"
 #include "NodeOpExp.h"
 
-#include "NodeExp2.h"
-#include "NodeOpExp.h"
-
 class NodeExp: public Node {
 private:
     NodeExp2* exp2;
