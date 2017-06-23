@@ -15,7 +15,7 @@ NodeProg* Parser::createTree() {
 }
 
 int main(int argc, char *argv[]) {
-    Parser *parser = new Parser(argv[1]);
+    Parser *parser = new Parser("/home/josef/Desktop/Cloud/Projekte/Compiler/Branch/C-Food/TestFile/Parser/test1");
     NodeProg *prog = parser->createTree();
     std::cout << "Success!";
 }

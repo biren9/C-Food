@@ -28,7 +28,6 @@ void ParseTree::nextToken() {
  * PROG ::= DECLS STATEMENTS
  */
 NodeProg* ParseTree::prog() {
-    NodeProg* prog = nullptr;
     switch(this->currentToken->getType()) {
         case IntToken:
         case OpenBracket:
@@ -49,18 +48,18 @@ NodeProg* ParseTree::prog() {
         case ExclamationMark:
         case AndOP:
         case Integer:
-        case Identifier:
-            prog = new NodeProg();
+        case Identifier: {
+            NodeProg *prog = new NodeProg();
             prog->addNode(decls());
             prog->addNode(statements());
-            break;
+            return prog;
+        }
         case EOL:
             error("Prog Error: No code found");
             break;
         default:
             error("Prog Error");
     }
-    return prog;
 }
 
 
@@ -92,8 +91,17 @@ NodeDecls* ParseTree::decls() {
             nodeDecls->addNode(decls());
             return nodeDecls;
         }
-        default:
+        case ReadToken:
+        case WriteToken:
+        case OpenBrace:
+        case IfToken:
+        case WhileToken:
+        case EOL:
+        case Identifier: {
             return nullptr;
+        }
+        default:
+            error("decls-Error");
     }
 }
 
@@ -130,8 +138,11 @@ NodeArray* ParseTree::array() {
             }
             return nodeArray;
         }
-        default:
+        case Identifier: {
             return nullptr;
+        }
+        default:
+            error("Array-Error");
     }
 }
 
@@ -153,8 +164,11 @@ NodeArray* ParseTree::array() {
                 nodeStatements->addNode(statements());
                 return nodeStatements;
             }
-            default:
+            case EOL:
+            case CloseBrace:
                 return nullptr;
+            default:
+                error("statements-Error");
         }
     }
 
@@ -200,8 +214,22 @@ NodeArray* ParseTree::array() {
                 }
                 return nodeIndex;
             }
-            default:
+            case Semicolon:
+            case CloseBracket:
+            case CloseParenthesis:
+            case Plus:
+            case Minus:
+            case Multiply:
+            case Colon:
+            case Smaller:
+            case Greater:
+            case Equal:
+            case EqualAssign:
+            case AndOP:
+            case Assign:
                 return nullptr;
+            default:
+                error("Index-error");
         }
     }
 
@@ -286,8 +314,12 @@ NodeArray* ParseTree::array() {
                 nodeOpExp->addNode(exp());
                 return nodeOpExp;
             }
-            default:
+            case Semicolon:
+            case CloseBracket:
+            case CloseParenthesis:
                 return nullptr;
+            default:
+                error("OpExp-Error");
         }
     }
 

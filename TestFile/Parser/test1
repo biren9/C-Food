@@ -3,4 +3,9 @@ int a;
 a := a +5;
 while (---!(-(5+5+--5+5))) { };
 if (penis[5]) {}
-else {};
+else {write(5+2+3);};
+
+write(5);
+
+read(a[2]);;;;
+while (---!(-(5+5+--5+5))) { };
