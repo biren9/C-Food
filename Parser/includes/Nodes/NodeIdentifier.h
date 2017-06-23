@@ -30,6 +30,10 @@ public:
     unsigned int getColumn() {
         return this->token->getColumn();
     }
+
+    Token* getToken() {
+        return this->token;
+    }
 };
 
 #endif
