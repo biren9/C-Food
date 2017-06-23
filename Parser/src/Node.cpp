@@ -1,19 +1,17 @@
 #include "../includes/Node.h"
 
-Node::Node() {
-    this->type = Node::noType;
-}
+Node::Node() {}
 
 Node::~Node() {}
 
-void Node::accept(ParseTreeVisitor* visitor) {
+void Node::accept(Visitor *visitor) {
     visitor->visitNode(this);
 }
 
-void Node::setType(Node::NodeType type) {
+void Node::setNodeType(NodeType type) {
     this->type = type;
 }
 
-Node::NodeType Node::getType() {
+NodeType Node::getType() {
     return this->type;
 }

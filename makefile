@@ -49,7 +49,7 @@ parser: FORCE
 	$(MAKE) -C $(PARSERDIR) ParserOBJTarget
 
 run:
-	./$(PARSERDIR)/debug/ParserTest
+	./$(PARSERDIR)/debug/ParserTest TestFile/Parser/test1
 	#./$(SCANNERDIR)/debug/ScannerTest TestFile/comment.txt
 
 FORCE:
