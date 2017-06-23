@@ -20,22 +20,46 @@ void VisitorTypeCheck::error(char* errorMessage, unsigned int line, unsigned int
 void VisitorTypeCheck::visitNode(Node* node) {
     //
 }
-
+//PROG	::=	DECLS STATEMENTS
 void VisitorTypeCheck::visitNode(NodeProg* node) {
-    //
+    node->getDecls()->accept(this);
+    node->getStatements()->accept(this);
+    node->setNodeType(NodeType::noType);
 }
-
+//ARRAY::=[integer])
 void VisitorTypeCheck::visitNode(NodeArray* node) {
-    //
+    if (node != 0) {
+        if (node->getInteger()->getValue() > 0) {
+            node->setNodeType(NodeType::arrayType);
+        } else {
+            error("no valid dimension", node->getInteger()->getLine(), node->getInteger()->getColumn());
+        }
+    }
 }
-
+//DECL::=	int ARRAY identifier
+//TODO store typinformation
 void VisitorTypeCheck::visitNode(NodeDecl* node) {
-    //
+    if (node->getIdentifier()->getType() != NodeType::noType) {
+        error("identifier already defined",node->getIdentifier()->getLine(),node->getIdentifier()->getColumn());
+    }
+    else if (node->getArray()->getType() == NodeType::errorType) {
+        node->setNodeType(NodeType::errorType);
+    }
+    else {
+        node->setNodeType(NodeType::noType);
+        if (node->getArray()->getType() == NodeType::arrayType){
+
+        }
+    }
 }
 
-//PROG ::= DECLS STATEMENTS
+//DECLS	::=	DECL; DECLS
 void VisitorTypeCheck::visitNode(NodeDecls* node) {
-    ///////
+    node->getDecl()->accept(this);
+    if (node != 0) {
+        node->getDecls()->accept(this);
+    }
+    node->setNodeType(NodeType::noType);
 }
 
 void VisitorTypeCheck::visitNode(NodeEpsilon* node) {
@@ -89,8 +113,9 @@ void VisitorTypeCheck::visitNode(NodeOpExp* node) {
     //
 }
 
+//STATEMENT ::= identifier INDEX := EXP
 void VisitorTypeCheck::visitNode(NodeStatement* node) {
-    //
+    if (node->)
 }
 
 void VisitorTypeCheck::visitNode(NodeStatementAssign* node) {
@@ -117,6 +142,11 @@ void VisitorTypeCheck::visitNode(NodeStatementWrite* node) {
     //
 }
 
+//STATEMENTS ::=	STATEMENT ; STATEMENTS
 void VisitorTypeCheck::visitNode(NodeStatements* node) {
-    //
+    node->getStatement()->accept(this);
+    if (node->getStatements() != 0) {
+        node->getStatements()->accept(this);
+    }
+    node->setNodeType(NodeType::noType);
 }
