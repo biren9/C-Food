@@ -23,11 +23,12 @@ ParserTarget :  $(SRCDIR)/Parser.cpp $(HEADERDIR)/Parser.h
 TestParserTarget :  $(SRCDIR)/TestParser.cpp $(HEADERDIR)/Parser.h
 	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/TestParser.cpp -o $(OBJDIR)/TestParser.o
 
+
 VisitorMakeCode :  $(SRCDIR)/VisitorMakeCode.cpp $(HEADERDIR)/VisitorMakeCode.h
-	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/VisitorMakeCode.cpp -o $(OBJDIR)/VisitorMakeCode.o
+	g++ -std=c++11 -g  -c -w $(SRCDIR)/VisitorMakeCode.cpp -o $(OBJDIR)/VisitorMakeCode.o
 
 VisitorTypeCheck :  $(SRCDIR)/VisitorTypeCheck.cpp $(HEADERDIR)/VisitorTypeCheck.h
-	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/VisitorTypeCheck.cpp -o $(OBJDIR)/VisitorTypeCheck.o
+	g++ -std=c++11 -g  -c -w $(SRCDIR)/VisitorTypeCheck.cpp -o $(OBJDIR)/VisitorTypeCheck.o
 
 cleanCompileParser:
 	rm -f $(OBJDIR)/*.o

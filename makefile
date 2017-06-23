@@ -50,6 +50,6 @@ parser: FORCE
 
 run:
 	./$(PARSERDIR)/debug/ParserTest
-	./$(SCANNERDIR)/debug/ScannerTest TestFile/comment.txt
+	#./$(SCANNERDIR)/debug/ScannerTest TestFile/comment.txt
 
 FORCE:

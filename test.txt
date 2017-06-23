@@ -1,0 +1,166 @@
+In file included from src/../includes/VisitorMakeCode.h:3:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeBracketExp2.h:6:31: error: invalid use of incomplete type ‘class NodeExp2’
+ class NodeExp2Bracket: public NodeExp2 {
+                               ^
+In file included from src/../includes/Node.h:5:0,
+                 from src/../includes/VisitorMakeCode.h:1,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/Visitor.h:11:7: note: forward declaration of ‘class NodeExp2’
+ class NodeExp2;
+       ^
+In file included from src/../includes/VisitorMakeCode.h:3:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeBracketExp2.h: In destructor ‘NodeExp2Bracket::~NodeExp2Bracket()’:
+src/../includes/NodeBracketExp2.h:12:16: warning: possible problem detected in invocation of delete operator: [-Wdelete-incomplete]
+   delete this->exp;
+                ^
+src/../includes/NodeBracketExp2.h:12:16: warning: invalid use of incomplete type ‘class NodeExp’
+In file included from src/../includes/Node.h:5:0,
+                 from src/../includes/VisitorMakeCode.h:1,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/Visitor.h:10:7: note: forward declaration of ‘class NodeExp’
+ class NodeExp;
+       ^
+In file included from src/../includes/VisitorMakeCode.h:3:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeBracketExp2.h:12:16: note: neither the destructor nor the class-specific operator delete will be called, even if they are declared when the class is defined
+   delete this->exp;
+                ^
+In file included from src/../includes/NodeDecl.h:7:0,
+                 from src/../includes/VisitorMakeCode.h:4,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeIdentifier.h: At global scope:
+src/../includes/NodeIdentifier.h:10:2: error: ‘Information’ does not name a type
+  Information* information;
+  ^
+src/../includes/NodeIdentifier.h:18:22: error: ‘Information’ has not been declared
+  void addInformation(Information* information) {
+                      ^
+src/../includes/NodeIdentifier.h:26:2: error: ‘Information’ does not name a type
+  Information* getInformation() {
+  ^
+src/../includes/NodeIdentifier.h: In member function ‘void NodeIdentifier::addInformation(int*)’:
+src/../includes/NodeIdentifier.h:19:9: error: ‘class NodeIdentifier’ has no member named ‘information’
+   this->information = information;
+         ^
+src/../includes/NodeIdentifier.h: In member function ‘virtual void NodeIdentifier::setNodeType(NodeType)’:
+src/../includes/NodeIdentifier.h:31:3: error: ‘information’ was not declared in this scope
+   information->setType(type);
+   ^
+src/../includes/NodeIdentifier.h: In member function ‘virtual NodeType NodeIdentifier::getType()’:
+src/../includes/NodeIdentifier.h:35:10: error: ‘information’ was not declared in this scope
+   return information->getType();
+          ^
+In file included from src/../includes/VisitorMakeCode.h:6:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeEpsilon.h: At global scope:
+src/../includes/NodeEpsilon.h:14:104: error: invalid use of incomplete type ‘class NodeStatements’
+ class NodeEpsilon: public NodeDecls, public NodeArray, public NodeStatements, public NodeIndex, public NodeOpExp {
+                                                                                                        ^
+In file included from src/../includes/Node.h:5:0,
+                 from src/../includes/VisitorMakeCode.h:1,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/Visitor.h:29:7: note: forward declaration of ‘class NodeStatements’
+ class NodeStatements;
+       ^
+In file included from src/../includes/VisitorMakeCode.h:6:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeEpsilon.h:14:104: error: invalid use of incomplete type ‘class NodeIndex’
+ class NodeEpsilon: public NodeDecls, public NodeArray, public NodeStatements, public NodeIndex, public NodeOpExp {
+                                                                                                        ^
+In file included from src/../includes/Node.h:5:0,
+                 from src/../includes/VisitorMakeCode.h:1,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/Visitor.h:18:7: note: forward declaration of ‘class NodeIndex’
+ class NodeIndex;
+       ^
+In file included from src/../includes/VisitorMakeCode.h:6:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeEpsilon.h:14:104: error: invalid use of incomplete type ‘class NodeOpExp’
+ class NodeEpsilon: public NodeDecls, public NodeArray, public NodeStatements, public NodeIndex, public NodeOpExp {
+                                                                                                        ^
+In file included from src/../includes/Node.h:5:0,
+                 from src/../includes/VisitorMakeCode.h:1,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/Visitor.h:21:7: note: forward declaration of ‘class NodeOpExp’
+ class NodeOpExp;
+       ^
+In file included from src/../includes/VisitorMakeCode.h:6:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeEpsilon.h:17:8: error: ‘NodeType’ in ‘class Node’ does not name a type
+  Node::NodeType type;
+        ^
+In file included from src/../includes/VisitorMakeCode.h:1:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/Node.h: In member function ‘void NodeEpsilon::setEpsilonType(NodeType)’:
+src/../includes/Node.h:27:11: error: ‘NodeType Node::type’ is private
+  NodeType type;
+           ^
+In file included from src/../includes/VisitorMakeCode.h:6:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeEpsilon.h:34:9: error: within this context
+   this->type = type;
+         ^
+src/../includes/NodeEpsilon.h:34:9: error: request for member ‘type’ is ambiguous
+In file included from src/../includes/VisitorMakeCode.h:1:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/Node.h:27:11: note: candidates are: NodeType Node::type
+  NodeType type;
+           ^
+src/../includes/Node.h:27:11: note:                 NodeType Node::type
+src/../includes/Node.h: In member function ‘NodeType NodeEpsilon::getEpsilonType()’:
+src/../includes/Node.h:27:11: error: ‘NodeType Node::type’ is private
+In file included from src/../includes/VisitorMakeCode.h:6:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeEpsilon.h:38:16: error: within this context
+   return this->type;
+                ^
+src/../includes/NodeEpsilon.h:38:16: error: request for member ‘type’ is ambiguous
+In file included from src/../includes/VisitorMakeCode.h:1:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/Node.h:27:11: note: candidates are: NodeType Node::type
+  NodeType type;
+           ^
+src/../includes/Node.h:27:11: note:                 NodeType Node::type
+In file included from src/../includes/NodeExp.h:6:0,
+                 from src/../includes/VisitorMakeCode.h:7,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeOpExp.h: In destructor ‘virtual NodeOpExp::~NodeOpExp()’:
+src/../includes/NodeOpExp.h:19:16: warning: possible problem detected in invocation of delete operator: [-Wdelete-incomplete]
+   delete this->exp;
+                ^
+src/../includes/NodeOpExp.h:19:16: warning: invalid use of incomplete type ‘class NodeExp’
+In file included from src/../includes/Node.h:5:0,
+                 from src/../includes/VisitorMakeCode.h:1,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/Visitor.h:10:7: note: forward declaration of ‘class NodeExp’
+ class NodeExp;
+       ^
+In file included from src/../includes/NodeExp.h:6:0,
+                 from src/../includes/VisitorMakeCode.h:7,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeOpExp.h:19:16: note: neither the destructor nor the class-specific operator delete will be called, even if they are declared when the class is defined
+   delete this->exp;
+                ^
+In file included from src/../includes/VisitorMakeCode.h:10:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeExp2Identifier.h: In destructor ‘virtual NodeExp2Identifier::~NodeExp2Identifier()’:
+src/../includes/NodeExp2Identifier.h:13:16: warning: possible problem detected in invocation of delete operator: [-Wdelete-incomplete]
+   delete this->index;
+                ^
+src/../includes/NodeExp2Identifier.h:13:16: warning: invalid use of incomplete type ‘class NodeIndex’
+In file included from src/../includes/Node.h:5:0,
+                 from src/../includes/VisitorMakeCode.h:1,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/Visitor.h:18:7: note: forward declaration of ‘class NodeIndex’
+ class NodeIndex;
+       ^
+In file included from src/../includes/VisitorMakeCode.h:10:0,
+                 from src/VisitorMakeCode.cpp:1:
+src/../includes/NodeExp2Identifier.h:13:16: note: neither the destructor nor the class-specific operator delete will be called, even if they are declared when the class is defined
+   delete this->index;
+                ^
+make[2]: *** [VisitorMakeCode] Error 1
+make[1]: *** [ParserOBJTarget] Error 2
+make: *** [parser] Error 2
