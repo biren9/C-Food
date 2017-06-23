@@ -51,7 +51,7 @@ void VisitorTypeCheck::visitNode(NodeDecl* node) {
 
         }
     }
-    node->getIdentifier()->
+    //node->getIdentifier()->
 }
 
 //DECLS	::=	DECL; DECLS
@@ -116,7 +116,7 @@ void VisitorTypeCheck::visitNode(NodeOpExp* node) {
 
 //STATEMENT ::= identifier INDEX := EXP
 void VisitorTypeCheck::visitNode(NodeStatement* node) {
-    if (node->)
+    //if (node->)
 }
 
 void VisitorTypeCheck::visitNode(NodeStatementAssign* node) {
