@@ -1,6 +1,6 @@
 #include "../includes/ParseTree.h"
 #include "../../Scanner/includes/Token.h"
-
+#include "../../Scanner/includes/Scanner.h"
 
 
 
@@ -10,11 +10,11 @@
 
 ParseTree::ParseTree(Scanner *scanner) {
     this->scanner = scanner;
-    this->currentToken = this->scanner->nextToken();
+    //this->currentToken = this->scanner->nextToken();
 }
 
 void ParseTree::parse() {
-    this->progTree = prog();
+    //this->progTree = prog();
 }
 
 void ParseTree::nextToken() {
