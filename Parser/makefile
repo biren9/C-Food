@@ -14,7 +14,7 @@ BINDIRTEST = debug
 
 
 makeTestParser: ParserTarget TestParserTarget ParseTreeTarget VisitorMakeCode VisitorTypeCheck
-	g++ -std=c++11 -g $(OBJDIR)/TestParser.o $(OBJDIR)/VisitorMakeCode.o $(OBJDIR)/VisitorTypeCheck.o $(OBJDIR)/Parser.o $(OBJDIR)/TestParser.o ../Scanner/$(OBJDIR)/Scanner.o ../Scanner/$(OBJDIR)/Token.o ../Symboltable/$(OBJDIR)/StringTabelle.o ../Symboltable/$(OBJDIR)/Liste.o ../Symboltable/$(OBJDIR)/Symboltable.o  ../Automat/$(OBJDIR)/Automat.o  ../Buffer/$(OBJDIR)/Buffer.o -o $(BINDIRTEST)/ParserTest
+	g++ -std=c++11 -g $(OBJDIR)/ParseTree.o $(OBJDIR)/VisitorMakeCode.o $(OBJDIR)/VisitorTypeCheck.o $(OBJDIR)/Parser.o $(OBJDIR)/TestParser.o ../Scanner/$(OBJDIR)/Scanner.o ../Scanner/$(OBJDIR)/Token.o ../Symboltable/$(OBJDIR)/StringTabelle.o ../Symboltable/$(OBJDIR)/Liste.o ../Symboltable/$(OBJDIR)/Symboltable.o  ../Automat/$(OBJDIR)/Automat.o  ../Buffer/$(OBJDIR)/Buffer.o -o $(BINDIRTEST)/ParserTest
 
 ParserTarget :  $(SRCDIR)/Parser.cpp $(HEADERDIR)/Parser.h
 	g++ -std=c++11 -g  -c -w  $(SRCDIR)/Parser.cpp -o $(OBJDIR)/Parser.o
