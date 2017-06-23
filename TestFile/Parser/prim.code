@@ -1,0 +1,74 @@
+DS $n 1
+DS $arr 1000
+DS $i 1
+DS $j 1
+LC 1000
+LA $n
+STR
+LC 2
+LA $i
+STR
+#label1 NOP
+LA $i
+LV
+LA $n
+LV
+LES
+JIN #label2
+LA $arr
+LA $i
+LV
+ADD
+LV
+LC 0
+EQU
+JIN #label3
+LA $i
+LV
+PRI
+NOP
+JMP #label4
+#label3 NOP
+NOP
+#label4 NOP
+LA $i
+LV
+LA $i
+LV
+MUL
+LA $j
+STR
+#label5 NOP
+LA $j
+LV
+LA $n
+LV
+LES
+JIN #label6
+LC 1
+LA $arr
+LA $j
+LV
+ADD
+STR
+LA $j
+LV
+LA $i
+LV
+ADD
+LA $j
+STR
+NOP
+JMP #label5
+#label6 NOP
+LA $i
+LV
+LC 1
+ADD
+LA $i
+STR
+NOP
+JMP #label1
+#label2 NOP
+NOP
+STP

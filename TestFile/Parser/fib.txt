@@ -1,0 +1,19 @@
+:*
+ * Calculates Fibonacci sequence up to 46 numbers
+ *:
+int a;
+int b;
+int n;
+int tmp;
+
+a := 1;
+b := 0;
+n := 0;
+
+while (n < 46) {
+  write(a);
+  tmp := a+b;
+  b := a;
+  a := tmp;
+  n := n+1;
+};

@@ -1,0 +1,21 @@
+int n;
+int[1000] arr;
+int i;
+int j;
+
+n := 1000;
+
+i := 2;
+while (i < n) {
+  if (arr[i] = 0) {
+    write(i);
+  } else{};
+
+  j := i*i;
+  while (j < n) {
+    arr[j] := 1;
+    j := j+i;
+  };
+
+  i := i+1;
+};

@@ -1,0 +1,48 @@
+DS $a 1
+DS $b 1
+DS $n 1
+DS $tmp 1
+LC 1
+LA $a
+STR
+LC 0
+LA $b
+STR
+LC 0
+LA $n
+STR
+#label1 NOP
+LA $n
+LV
+LC 46
+LES
+JIN #label2
+LA $a
+LV
+PRI
+LA $a
+LV
+LA $b
+LV
+ADD
+LA $tmp
+STR
+LA $a
+LV
+LA $b
+STR
+LA $tmp
+LV
+LA $a
+STR
+LA $n
+LV
+LC 1
+ADD
+LA $n
+STR
+NOP
+JMP #label1
+#label2 NOP
+NOP
+STP
