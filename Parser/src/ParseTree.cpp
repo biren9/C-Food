@@ -10,19 +10,17 @@
 
 ParseTree::ParseTree(Scanner *scanner) {
     this->scanner = scanner;
-    //this->currentToken = this->scanner->nextToken();
+    this->currentToken = this->scanner->nextToken();
 }
 
-void ParseTree::parse() {
-    //this->progTree = prog();
+NodeProg* ParseTree::parse() {
+    this->progTree = prog();
+    return progTree;
 }
 
 void ParseTree::nextToken() {
     if (this->currentToken->getType() != EOL) {
         this->currentToken = this->scanner->nextToken();
-        if (currentToken->getType() == Token::Comment) {
-            nextToken();
-        }
     }
 }
 
