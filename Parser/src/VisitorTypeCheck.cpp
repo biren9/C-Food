@@ -38,6 +38,7 @@ void VisitorTypeCheck::visitNode(NodeArray* node) {
 }
 //DECL::=	int ARRAY identifier
 //TODO store typinformation
+
 void VisitorTypeCheck::visitNode(NodeDecl* node) {
     if (node->getIdentifier()->getType() != NodeType::noType) {
         error("identifier already defined",node->getIdentifier()->getLine(),node->getIdentifier()->getColumn());
@@ -51,7 +52,9 @@ void VisitorTypeCheck::visitNode(NodeDecl* node) {
 
         }
     }
+    /*
     node->getIdentifier()->
+     */
 }
 
 //DECLS	::=	DECL; DECLS
@@ -116,7 +119,9 @@ void VisitorTypeCheck::visitNode(NodeOpExp* node) {
 
 //STATEMENT ::= identifier INDEX := EXP
 void VisitorTypeCheck::visitNode(NodeStatement* node) {
+    /*
     if (node->)
+     */
 }
 
 void VisitorTypeCheck::visitNode(NodeStatementAssign* node) {

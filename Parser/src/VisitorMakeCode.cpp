@@ -6,7 +6,7 @@ VisitorMakeCode::VisitorMakeCode() {
 }
 
 void VisitorMakeCode::makeCode(NodeProg *prog, char *filename) {
-this->labelNumber = 1;
+    this->labelNumber = 1;
     code.open(filename);
     prog->accept(this);
     code.close();
@@ -27,20 +27,26 @@ void VisitorMakeCode::visitNode(Node *node) {
 //PROG	::=	DECLS	STATEMENTS
 void VisitorMakeCode::visitNode(NodeProg *node) {
     node->getDecls()->accept(this);
-    node->getStatements()->accept(this);
+    if (node->getStatements()!=0) {
+        node->getStatements()->accept(this);
+    }
     code << " STP ";
 }
 
 //ARRAY	::=	[ integer ] )
 void VisitorMakeCode::visitNode(NodeArray *node) {
-    (node != 0) ? code << node->getInteger() : code << 1;
-
+    code << node->getInteger();
 }
 
 //
 void VisitorMakeCode::visitNode(NodeDecl *node) {
     code << " DS " <<  "$" << node->getIdentifier()->getInformation();
-    node->getArray()->accept(this);
+    if (node->getArray() != 0) {
+        node->getArray()->accept(this);
+    }
+    else {
+        code << 1;
+    }
 }
 //DECLS	::=	DECL	; DECLS
 void VisitorMakeCode::visitNode(NodeDecls *node) {
@@ -60,13 +66,13 @@ void VisitorMakeCode::visitNode(NodeExp *node) {
         node->getExp2()->accept(this);
     }
     else if (node->getOpExp()->getOp()->getType() == NodeType::opGreater) {
-        node->getOpExp()->accept(this);
+        if (node->getOpExp() != 0) { node->getOpExp()->accept(this); }
         node->getExp2()->accept(this);
         code << "LES";
     }
     else if (node->getOpExp()->getOp()->getType() == NodeType::opUnEqual) {
         node->getExp2()->accept(this);
-        node->getOpExp()->accept(this);
+        if (node->getOpExp() != 0) {node->getOpExp()->accept(this);}
         code << "NOT";
     }
     else {
@@ -92,7 +98,7 @@ void VisitorMakeCode::visitNode(NodeExp2Exclamation *node) {
 //EXP2 ::= identifier INDEX
 void VisitorMakeCode::visitNode(NodeExp2Identifier *node) {
     code << "LA " << "$" << node->getIdentifier()->getInformation();
-    node->getIndex()->accept(this);
+    if (node->getIndex() != 0) {node->getIndex()->accept(this);}
     code << " LV ";
 }
 
@@ -114,10 +120,8 @@ void VisitorMakeCode::visitNode(NodeIdentifier *node) {
 
 //INDEX	::=	[ EXP	]){makeCode(EXP
 void VisitorMakeCode::visitNode(NodeIndex *node) {
-    if (node->getExp() != 0) {
-        node->getExp()->accept(this);
-        code << " ADD";
-    }
+    node->getExp()->accept(this);
+    code << " ADD";
 }
 
 void VisitorMakeCode::visitNode(NodeInteger *node) {
@@ -153,13 +157,18 @@ void VisitorMakeCode::visitNode(NodeStatement *node) {
 void VisitorMakeCode::visitNode(NodeStatementAssign *node) {
     node->getExp()->accept(this);
     code <<	"LA" << "$" << node->getIdentifier()->getInformation();
-    node->getIndex()->accept(this);
+    if (node->getIndex() != 0) {node->getIndex()->accept(this);}
     code <<	"STR";
 }
 
 //STATEMENT ::= { STATEMENTS } ){	makeCode(STATEMENTS);
 void VisitorMakeCode::visitNode(NodeStatementBlock *node) {
-    node->getStatements()->accept(this);
+    if (node->getStatements() != 0) {
+        node->getStatements()->accept(this);
+    }
+    else {
+        code << " NOP ";
+    }
 }
 
 //STATEMENT ::= if	(	EXP ) STATEMENT else STATEMENT
@@ -177,7 +186,7 @@ void VisitorMakeCode::visitNode(NodeStatementIf *node) {
 void VisitorMakeCode::visitNode(NodeStatementRead *node) {
     code << " REA ";
     code << " LA " << "$" << node->getIdentifier()->getInformation();
-    node->getIndex()->accept(this);
+    if (node->getIndex() != 0) {node->getIndex()->accept(this);}
     code << " STR ";
 }
 
