@@ -1,16 +1,6 @@
 #ifndef PARSER_INCLUDES_VISITORMAKECODE_H_
 #define PARSER_INCLUDES_VISITORMAKECODE_H_
 
-/*
- * ParseTreeVisitorCode.h
- *
- *  Created on: 14.01.2017
- *      Author: yannick
- */
-
-#ifndef PARSER_INCLUDES_PARSETREEVISITORCODE_H_
-#define PARSER_INCLUDES_PARSETREEVISITORCODE_H_
-
 #include <fstream>
 #include <iostream>
 
@@ -79,9 +69,6 @@ private:
     ofstream code;
     unsigned long labelNumber;
 };
-
-
-#endif /* PARSER_INCLUDES_PARSETREEVISITORCODE_H_ */
 
 
 #endif
