@@ -1,5 +1,5 @@
 #include "../includes/VisitorTypeCheck.h"
-
+#include "../../Scanner/includes/Token.h"
 VisitorTypeCheck::VisitorTypeCheck() {
     //
 }
@@ -69,40 +69,105 @@ void VisitorTypeCheck::visitNode(NodeDecls* node) {
 void VisitorTypeCheck::visitNode(NodeEpsilon* node) {
     //
 }
-
+//EXP ::=	EXP2	OP_EXP
 void VisitorTypeCheck::visitNode(NodeExp* node) {
-    //
-}
+    NodeExp2 *exp2 = node->getExp2();
+    NodeOpExp *opExp = node->getOpExp();
+    NodeType  exp2Type = (exp2 == 0) ? NodeType::noType : exp2->getType();
+    NodeType  opExpType = (opExp == 0) ? NodeType::noType : opExp->getType();
 
+    if(exp2 != 0) {
+        exp2->accept(this);
+    }
+    if(opExp != 0) {
+        opExp->accept(this);
+    }
+
+    if (opExpType == NodeType::noType) {
+        node->setNodeType(exp2Type);
+    }
+    else if (exp2Type != opExpType) {
+        node->setNodeType(NodeType::errorType);
+    }
+    else {
+        node->setNodeType(exp2Type);
+    }
+
+}
+//
 void VisitorTypeCheck::visitNode(NodeExp2* node) {
-    //
 }
-
+//(EXP2 ::= ( EXP ))
 void VisitorTypeCheck::visitNode(NodeExp2Parenthesis* node) {
-    //
+    node->getExp()->accept(this);
+    node->setNodeType(node->getExp()->getType());
 }
-
+//EXP2 ::= ! EXP2
 void VisitorTypeCheck::visitNode(NodeExp2Exclamation* node) {
-    //
+    NodeExp2 *exp2 = node->getExp2();
+    NodeType exp2Type = exp2->getType();
+    if (exp2!=0) {
+        exp2->accept(this);
+    }
+    if (exp2Type != NodeType::intType) {
+        node->setNodeType(NodeType::errorType);
+    }
+    else {
+        node->setNodeType(NodeType::intType);
+    }
 }
-
+//EXP2 ::= identifier INDEX
 void VisitorTypeCheck::visitNode(NodeExp2Identifier* node) {
-    //
-}
-void VisitorTypeCheck::visitNode(NodeExp2Integer* node) {
-    //
-}
+    NodeIndex *index = node->getIndex();
+    NodeType indexType;
+    NodeType identifierType = node->getIdentifier()->getToken()->getKey()->getType();
+    (index == 0) ? indexType == NodeType ::noType : indexType= index->getType();
+    if (index != 0) {
+        index->accept(this);
+    }
+    if (identifierType == NodeType::noType) {
+        error("identifier not defined",node->getIdentifier()->getLine(),node->getIdentifier()->getColumn());
+        node->setNodeType(NodeType::errorType);
+    }
+    else if ((identifierType ==  NodeType::intType) && (indexType == NodeType::noType)) {
+        node->setNodeType(identifierType);
+    }
+    else if ((identifierType == NodeType ::intArrayType) &&(indexType ==NodeType::arrayType)) {
+        node->setNodeType(NodeType::intType);
+    }
+    else {
+        error("no primitive type",node->getIdentifier()->getLine(),node->getIdentifier()->getColumn());
+        node->setNodeType(NodeType::errorType);
+    }
 
+}
+//EXP2 ::= integer
+void VisitorTypeCheck::visitNode(NodeExp2Integer* node) {
+    node->setNodeType(NodeType::intType);
+}
+//EXP2 ::= - EXP2
 void VisitorTypeCheck::visitNode(NodeExp2Minus* node) {
-    //
+    NodeExp2 *exp2 = node->getExp2();
+    NodeType exp2Type = exp2->getType();
+    if (exp2!=0) {
+        exp2->accept(this);
+    }
+    (exp2 == 0) ? node->setNodeType(NodeType::noType): node->setNodeType(exp2Type);
 }
 
 void VisitorTypeCheck::visitNode(NodeIdentifier* node) {
     //
 }
-
+//INDEX ::= [ EXP ]
 void VisitorTypeCheck::visitNode(NodeIndex* node) {
-    //
+    NodeExp *exp = node->getExp();
+    exp->accept(this);
+    if (exp->getType() == NodeType::errorType) {
+        node->setNodeType(NodeType::errorType);
+    }
+    else {
+        node->setNodeType(NodeType::noType);
+    }
 }
 
 void VisitorTypeCheck::visitNode(NodeInteger* node) {
@@ -110,11 +175,28 @@ void VisitorTypeCheck::visitNode(NodeInteger* node) {
 }
 
 void VisitorTypeCheck::visitNode(NodeOp* node) {
-    //
-}
+    TokenType tokenType = node->getToken()->getType();
+    switch (tokenType) {
+        case TokenType::Plus: node->setNodeType(NodeType::opPlus); break;
+        case TokenType::Minus: node->setNodeType(NodeType::opMinus); break;
+        case TokenType::Multiply: node->setNodeType(NodeType::opMultiplication); break;
+        case TokenType::Colon: node->setNodeType(NodeType::opDivision); break;
+        case TokenType::Smaller: node->setNodeType(NodeType::opLess); break;
+        case TokenType::Greater: node->setNodeType(NodeType::opGreater); break;
+        case TokenType::Equal: node->setNodeType(NodeType::opEqual); break;
+        case TokenType::EqualAssign: node->setNodeType(NodeType::opUnEqual); break;
+        case TokenType::AndOP: node->setNodeType(NodeType::opAnd); break;
+        default: node->setNodeType(NodeType::noType);
 
+    }
+}
+//OP_EXP ::= OP	EXP
 void VisitorTypeCheck::visitNode(NodeOpExp* node) {
-    //
+    NodeOp *op = node->getOp();
+    NodeExp *exp = node->getExp();
+    op->accept(this);
+    exp->accept(this);
+    node->setNodeType(exp->getType());
 }
 
 //STATEMENT ::= identifier INDEX := EXP
@@ -142,11 +224,26 @@ void VisitorTypeCheck::visitNode(NodeStatementAssign* node) {
 }
 //STATEMENT ::= { STATEMENTS }
 void VisitorTypeCheck::visitNode(NodeStatementBlock* node) {
-    
+    NodeStatements *statements = node->getStatements();
+    if (statements !=0) {
+        node->accept(this);
+    }
+    node->setNodeType(NodeType::noType);
 }
-
+//STATEMENT ::= if	( EXP ) STATEMENT else STATEMENT
 void VisitorTypeCheck::visitNode(NodeStatementIf* node) {
-    //
+    NodeStatement *ifBlock = node->getStatementIf();
+    NodeStatement *elseBlock = node->getStatementElse();
+    NodeExp *exp = node->getExp();
+    exp->accept(this);
+    ifBlock->accept(this);
+    elseBlock->accept(this);
+    if (exp->getType() == NodeType::errorType) {
+        node->setNodeType(NodeType::errorType);
+    }
+    else  {
+        node->setNodeType(NodeType::noType);
+    }
 }
 //(STATEMENT ::= read(	identifier INDEX)
 void VisitorTypeCheck::visitNode(NodeStatementRead* node) {
@@ -170,10 +267,18 @@ void VisitorTypeCheck::visitNode(NodeStatementRead* node) {
         node->setNodeType(NodeType::errorType);
     }
 }
-
+//STATEMENT ::= while	(	EXP ) STATEMENT
 void VisitorTypeCheck::visitNode(NodeStatementWhile* node) {
-    //
+    NodeExp *exp = node->getExp();
+    NodeStatement *statement = node->getStatement();
+    if (exp->getType() == NodeType::errorType) {
+        node->setNodeType(NodeType::errorType);
+    }
+    else {
+        node->setNodeType(NodeType::noType);
+    }
 }
+
 //STATEMENT ::=	write(	EXP )
 void VisitorTypeCheck::visitNode(NodeStatementWrite* node) {
     node->getExp()->accept(this);

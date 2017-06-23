@@ -27,7 +27,7 @@ void VisitorMakeCode::visitNode(Node *node) {
 //PROG	::=	DECLS	STATEMENTS
 void VisitorMakeCode::visitNode(NodeProg *node) {
     node->getDecls()->accept(this);
-    if (node->getStatements()!=0) {
+    if (node->getStatements() != 0) {
         node->getStatements()->accept(this);
     }
     code << " STP ";
@@ -144,8 +144,10 @@ void VisitorMakeCode::visitNode(NodeOp *node) {
 
 //OP_EXP ::= OP	EXP
 void VisitorMakeCode::visitNode(NodeOpExp *node) {
-    if (node != 0) {
+    if (node->getExp()!=0) {
         node->getExp()->accept(this);
+    }
+    if (node->getExp()!=0) {
         node->getOp()->accept(this);
     }
 }
