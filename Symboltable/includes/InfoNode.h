@@ -9,6 +9,12 @@
 class StringTabelle;
 class InfoNode {
 public:
+	InfoNode(StringTabelle* strTabelle, unsigned int Index, InfoNode *prev, InfoNode *next) {
+		this->strTabelle = strTabelle;
+		this->Index = Index;
+		this->prev = prev;
+		this->next = next;
+	}
 	StringTabelle* strTabelle;
 	unsigned int Index;
 	InfoNode *prev;
