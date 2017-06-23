@@ -20,7 +20,7 @@ public:
     }
 
     char* getInformation() {
-        return this->token->getKey()->strTabelle->stringArr+(this->information->Index);
+        return this->token->getKey()->strTabelle->stringArr+(this->token->getKey()->Index);
     }
 
     unsigned int getLine() {

@@ -79,7 +79,7 @@ void VisitorMakeCode::visitNode(NodeExp2 *node) {
 }
 
 //EXP2 ::= ( EXP )
-void VisitorMakeCode::visitNode(NodeExp2Bracket *node) {
+void VisitorMakeCode::visitNode(NodeExp2Parenthesis *node) {
     node->getExp()->accept(this);
 }
 

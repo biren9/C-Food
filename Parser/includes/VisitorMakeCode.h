@@ -24,7 +24,7 @@
 #include "Nodes/NodeExp.h"
 #include "Nodes/NodeOpExp.h"
 #include "Nodes/NodeExp2.h"
-#include "Nodes/NodeExp2Bracket.h"
+#include "Nodes/NodeExp2Parenthesis.h"
 #include "Nodes/NodeExp2Exclamation.h"
 #include "Nodes/NodeExp2Identifier.h"
 #include "Nodes/NodeExp2Integer.h"
@@ -49,7 +49,7 @@ public:
     void visitNode(NodeEpsilon* node);
     void visitNode(NodeExp* node);
     void visitNode(NodeExp2* node);
-    void visitNode(NodeExp2Bracket* node);
+    void visitNode(NodeExp2Parenthesis* node);
     void visitNode(NodeExp2Exclamation* node);
     void visitNode(NodeExp2Identifier* node);
     void visitNode(NodeExp2Integer* node);

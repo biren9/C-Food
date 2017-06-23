@@ -3,7 +3,7 @@
 #ifndef PARSER_NODEOP_H_
 #define PARSER_NODEOP_H_
 
-#include "../../../Scanner/includes/Token.h
+#include "../../../Scanner/includes/Token.h"
 
 class NodeOp: public Node {
 private:

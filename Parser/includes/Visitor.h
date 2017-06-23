@@ -10,7 +10,7 @@ class NodeDecls;
 class NodeEpsilon;
 class NodeExp;
 class NodeExp2;
-class NodeExp2Bracket;
+class NodeExp2Parenthesis;
 class NodeExp2Exclamation;
 class NodeExp2Identifier;
 class NodeExp2Integer;
@@ -46,7 +46,7 @@ public:
     virtual void visitNode(NodeEpsilon* node) = 0;
     virtual void visitNode(NodeExp* node) = 0;
     virtual void visitNode(NodeExp2* node) = 0;
-    virtual void visitNode(NodeExp2Bracket* node) = 0;
+    virtual void visitNode(NodeExp2Parenthesis* node) = 0;
     virtual void visitNode(NodeExp2Exclamation* node) = 0;
     virtual void visitNode(NodeExp2Identifier* node) = 0;
     virtual void visitNode(NodeExp2Integer* node) = 0;
