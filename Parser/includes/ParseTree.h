@@ -49,6 +49,7 @@ private:
     NodeDecl* decl();
     NodeArray* array();
     NodeStatements* statements();
+    NodeStatement* statement();
     NodeStatementAssign* statementAssign();
     NodeStatementWhile* statementWhile();
     NodeStatementIf* statementIf();
@@ -57,6 +58,8 @@ private:
     NodeStatementWrite* statementWrite();
     NodeOpExp* opExp();
     NodeExp* exp();
+    void error(std::string parseTreeError);
+    std::string getName(TokenType type);
     NodeExp2* exp2();
     
 };

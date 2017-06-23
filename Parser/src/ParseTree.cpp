@@ -62,7 +62,7 @@ NodeProg* ParseTree::prog() {
             prog->addNode(statements());
             break;
         default:
-            error();
+            error("Prog Error");
     }
     return prog;
 }
@@ -71,9 +71,12 @@ NodeProg* ParseTree::prog() {
 
 
 
-void ParseTree::error() {
-    //cerr << "unexpected Token Line: " << currentToken->getLine() << " Column: " << currentToken->getColumn() << " " << currentToken->typeToString() << endl;
-    cerr << "stop" << endl;
+void ParseTree::error(std::string parseTreeError) {
+    std::cerr << "ParseTree.cpp: " << parseTreeError << std::endl;
+    std::cerr << " unexpected Token " << getName(this->currentToken->getType())
+            << " Line: " << currentToken->getLine() << " Column: " << currentToken->getColumn()
+         << " " << currentToken->typeToString() << std::endl;
+    std::cerr << "stop" << std::endl;
     exit(EXIT_FAILURE);
 }
 
@@ -88,7 +91,7 @@ NodeDecls* ParseTree::decls() {
         if(this->currentToken->getType() == Semicolon) {
             nextToken();
         } else {
-            error();
+            error("decls-Error: Expected 'int'");
         }
         nodeDecls->addNode(decls());
         return nodeDecls;
@@ -113,7 +116,7 @@ NodeDecls* ParseTree::decls() {
     case Identifier:
         return nullptr;
     default:
-        error();
+        error("decls-Error");
 }
 
 NodeDecl* ParseTree::decl() {
@@ -125,7 +128,7 @@ NodeDecl* ParseTree::decl() {
         nodeDecl->addNode(nodeIdentifier);
         nextToken();
     } else {
-        error();
+        error("decl-Error: Expected Identifier");
     }
     return nodeDecl;
 }
@@ -142,10 +145,10 @@ NodeArray* ParseTree::array() {
                 if(currentToken->getType() == CloseBracket) {
                     nextToken();
                 } else {
-                    error();
+                    error("array-Error: Expected )");
                 }
             } else {
-                error();
+                error("array-Error: Expected Integer");
             }
             return nodeArray;
         case IntToken:
@@ -169,7 +172,7 @@ NodeArray* ParseTree::array() {
         case Identifier:
             return nullptr;
         default:
-            error();
+            error("array-Error");
     }
 }
 
@@ -182,28 +185,14 @@ NodeArray* ParseTree::array() {
             case WhileToken:
             case Identifier:
                 NodeStatements *nodeStatements = new NodeStatements();
-                switch(this->currentType->getType()){
-                    case Identifier: nodeStatements->addNode(statementAssign());
-                    break;
-                    case WhileToken: nodeStatements->addNode(statementWhile());
-                        break;
-                    case IfToken: nodeStatements->addNode(statementIf());
-                        break;
-                    case OpenBrace: nodeStatements->addNode(statementBlock());
-                        break;
-                    case ReadToken: nodeStatements->addNode(statementRead());
-                        break;
-                    case WriteToken: nodeStatements->addNode(statementWrite());
-                    break;
-                }
+                nodeStatements->addNode(statement());
                 if(this->currentToken->getType() == Semicolon) {
                     nextToken();
                 } else {
-                    error();
+                    error("statements-Error: Expected ;");
                 }
                 nodeStatements->addNode(statements());
                 return nodeStatements;
-
             case OpenBracket:
             case IntToken:
             case OpenParenthesis:
@@ -220,7 +209,20 @@ NodeArray* ParseTree::array() {
             case Integer:
                 return nullptr;
             default:
-                error();
+                error("statements-Error");
+        }
+    }
+
+    NodeStatement* ParseTree::statement() {
+        switch(this->currentType->getType()){
+            case Identifier: return statementAssign();
+            case WhileToken: return statementWhile();
+            case IfToken: return statementIf();
+            case OpenBrace: return statementBlock();
+            case ReadToken: return statementRead();
+            case WriteToken: return statementWrite();
+            default:
+                error("statement-Error");
         }
     }
 
@@ -234,7 +236,7 @@ NodeArray* ParseTree::array() {
         if(currentToken->getType() == Assign) {
             nextToken();
         } else {
-            error();
+            error("Assign-Error: Expected :=");
         }
         nodeStatementAssign->addNode(exp());
         return nodeStatementAssign;
@@ -249,7 +251,7 @@ NodeArray* ParseTree::array() {
                 if(currentToken->getType() == CloseBracket) {
                     nextToken();
                 } else {
-                    error();
+                    error("index-Error: Expected ]");
                 }
                 return nodeIndex;
             case IntToken:
@@ -273,7 +275,7 @@ NodeArray* ParseTree::array() {
             case Identifier:
                 return nullptr;
             default:
-                error();
+                error("Index-Error");
         }
     }
 
@@ -289,7 +291,7 @@ NodeArray* ParseTree::array() {
                 nodeExp->addNode(exp2());
                 nodeExp->addNode(opExp());
             default:
-                error();
+                error("exp-Error");
         }
     }
 
@@ -302,7 +304,7 @@ NodeArray* ParseTree::array() {
                 if(currentToken->getType() == CloseParenthesis) {
                     nextToken();
                 } else {
-                    error();
+                    error("exp2-Error: expected )");
                 }
                 return nodeExp2Parenthesis;
             case Minus:
@@ -329,7 +331,7 @@ NodeArray* ParseTree::array() {
                 nodeExp2Identifier->addNode(index());
                 return nodeExp2Identifier;
             default:
-                error();
+                error("exp2-Error");
         }
     }
 
@@ -363,9 +365,191 @@ NodeArray* ParseTree::array() {
             case Identifier:
                 return nullptr;
             default:
-                error();
+                error("OP_EXP-Error");
         }
     }
+
+    StatementWhile* ParseTree::statementWhile() {
+        nextToken();
+        NodeStatementWhile *statementWhile = new NodeStatementWhile();
+        if(this->currentToken->getType() == OpenParenthesis) {
+            nextToken();
+        } else {
+            error("while-Error: Expected (");
+        }
+        statementWhile->addNode(exp());
+        if(this->currentToken->getType() == CloseParenthesis) {
+            nextToken();
+        } else {
+            error("while-Error: Expected )");
+        }
+
+        statementWhile->addNode(statement());
+        return statementWhile;
+    }
+
+    NodeStatementIf* ParseTree::statementIf() {
+        nextToken();
+        NodeStatementIf *nodeStatementIf = new NodeStatementIf();
+        if(this->currentToken->getType() == OpenParenthesis) {
+            nextToken();
+        } else {
+            error("if-Error: Expected (");
+        }
+
+        nodeStatementIf->addNode(exp());
+
+        if(this->currentToken->getType() == CloseParenthesis) {
+            nextToken();
+        } else {
+            error("if-Error: Expected )");
+        }
+        nodeStatementIf->addNodeIf(statement());
+
+        if(this->currentToken->getType() == ElseToken) {
+            nextToken();
+        } else {
+            error("if-Error: Expected else");
+        }
+
+        nodeStatementIf->addNodeElse(statement());
+
+        return nodeStatementIf;
+    }
+
+    NodeStatementBlock* ParseTree::statementBlock() {
+        nextToken();
+        NodeStatementBlock *nodeStatementBlock = new NodeStatementBlock();
+        nodeStatementBlock->addNode(statements());
+
+        if(this->currentToken->getType() == CloseBrace) {
+            nextToken();
+        } else {
+            error("Block-Error: Expected }");
+        }
+
+        return nodeStatementBlock;
+
+    }
+
+    NodeStatementRead* ParseTree::statementRead() {
+        NodeStatementRead *nodeStatementRead = new NodeStatementRead();
+        nextToken();
+        if(this->currentToken->getType() == OpenParenthesis) {
+            nextToken();
+        } else {
+            error("Read-Error: Expected (");
+        }
+
+        if(this->currentToken->getType() == Identifier) {
+            NodeIdentifier *nodeIdentifier = new NodeIdentifier(this->currentToken);
+            nodeStatementRead->addNode(nodeIdentifier);
+            nextToken();
+        } else {
+            error("Read-Error: Expected Identifier");
+        }
+
+        nodeStatementRead->addNode(index());
+
+        if(this->currentToken->getType() == CloseParenthesis) {
+            nextToken();
+        } else {
+            error("Read-Error: Expected )");
+        }
+
+        return nodeStatementRead;
+    }
+
+    NodeStatementWrite* ParseTree::statementWrite() {
+        nextToken();
+        NodeStatementWrite *nodeStatementWrite = new NodeStatementWrite();
+
+        if(this->currentToken->getType() == OpenParenthesis) {
+            nextToken();
+        } else {
+            error("Write-Error: Expected (");
+        }
+
+        nodeStatementWrite->addNode(exp());
+
+        if(this->currentToken->getType() == CloseParenthesis) {
+            nextToken();
+        } else {
+            error("Write-Error: Expected )");
+        }
+
+        return nodeStatementWrite;
+    }
+
+
+    std::string ParseTree::getName(TokenType type) {
+        switch(type) {
+            case Identifier:
+                return "Identifier      ";
+            case Assign:
+                return "Assign         ";
+            case Plus:
+                return "Plus           ";
+            case Integer:
+                return  "Integer        ";
+            case Semicolon:
+                return "Semicolon      ";
+            case Undefined:
+                return "Undefined      ";
+            case Minus:
+                return "Minus          ";
+            case Colon:
+                return "Colon          ";
+            case Equal:
+                return "Equal          ";
+            case EqualAssign:
+                return "EqualAssign    ";
+            case Comment:
+                return "Comment        ";
+            case Multiply:
+                return "Multiply       ";
+            case Bang:
+                return "Bang           ";
+            case ExclamationMark:
+                return "ExclamationMark";
+            case AndOP:
+                return "AndOP          ";
+            case Greater:
+                return "Greater        ";
+            case Smaller:
+                return "Smaller        ";
+            case OpenParenthesis:
+                return "OpenParenthesis";
+            case CloseParenthesis:
+                return "CloseParenthesis";
+            case OpenBracket:
+                return "OpenBrackets   ";
+            case CloseBracket:
+                return "CloseBracket   ";
+            case OpenBrace:
+                return "OpenBrace      ";
+            case CloseBrace:
+                return "CloseBrace     ";
+            case WhileToken:
+                return "While          ";
+            case IfToken:
+                return "If             ";
+            case ElseToken:
+                return "Else           ";
+            case ReadToken:
+                return "Read           ";
+            case WriteToken:
+                return "Write          ";
+            case IntToken:
+                return "Int            ";
+            case EOL:
+                return "End File       ";
+            default:
+                return "               ";
+        }
+    }
+
+
 
 
 
