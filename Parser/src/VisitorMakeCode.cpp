@@ -28,16 +28,18 @@ void VisitorMakeCode::visitNode(Node *node) {
 void VisitorMakeCode::visitNode(NodeProg *node) {
     node->getDecls()->accept(this);
     node->getStatements()->accept(this);
-    code << "STP";
+    code << " STP ";
 }
+
 //ARRAY	::=	[ integer ] )
 void VisitorMakeCode::visitNode(NodeArray *node) {
     (node != 0) ? code << node->getInteger() : code << 1;
 
 }
+
 //
 void VisitorMakeCode::visitNode(NodeDecl *node) {
-    code << "DS" <<  "$" << node->getIdentifier()->getInformation();
+    code << " DS " <<  "$" << node->getIdentifier()->getInformation();
     node->getArray()->accept(this);
 }
 //DECLS	::=	DECL	; DECLS
@@ -75,35 +77,41 @@ void VisitorMakeCode::visitNode(NodeExp *node) {
 
 void VisitorMakeCode::visitNode(NodeExp2 *node) {
 }
+
 //EXP2 ::= ( EXP )
 void VisitorMakeCode::visitNode(NodeExp2Bracket *node) {
     node->getExp()->accept(this);
 }
+
 //EXP2 ::= ! EXP2
 void VisitorMakeCode::visitNode(NodeExp2Exclamation *node) {
     node->getExp2()->accept(this);
     code << " NOT ";
 }
+
 //EXP2 ::= identifier INDEX
 void VisitorMakeCode::visitNode(NodeExp2Identifier *node) {
     code << "LA " << "$" << node->getIdentifier()->getInformation();
     node->getIndex()->accept(this);
     code << " LV ";
 }
+
 //EXP2 ::= integer
 void VisitorMakeCode::visitNode(NodeExp2Integer *node) {
     code << " LC " << node->getInteger();
 }
+
 //EXP2 ::= - EXP2
 void VisitorMakeCode::visitNode(NodeExp2Minus *node) {
     code << " LC " << 0;
     node->getExp2()->accept(this);
     code << " SUB ";
 }
+
 //
 void VisitorMakeCode::visitNode(NodeIdentifier *node) {
-
 }
+
 //INDEX	::=	[ EXP	]){makeCode(EXP
 void VisitorMakeCode::visitNode(NodeIndex *node) {
     if (node->getExp() != 0) {
@@ -129,6 +137,7 @@ void VisitorMakeCode::visitNode(NodeOp *node) {
         case NodeType::opAnd: code << "AND"; break;
     }
 }
+
 //OP_EXP ::= OP	EXP
 void VisitorMakeCode::visitNode(NodeOpExp *node) {
     if (node != 0) {
@@ -138,8 +147,8 @@ void VisitorMakeCode::visitNode(NodeOpExp *node) {
 }
 
 void VisitorMakeCode::visitNode(NodeStatement *node) {
-
 }
+
 //STATEMENT ::= identifier	INDEX := EXP
 void VisitorMakeCode::visitNode(NodeStatementAssign *node) {
     node->getExp()->accept(this);
@@ -147,10 +156,12 @@ void VisitorMakeCode::visitNode(NodeStatementAssign *node) {
     node->getIndex()->accept(this);
     code <<	"STR";
 }
+
 //STATEMENT ::= { STATEMENTS } ){	makeCode(STATEMENTS);
 void VisitorMakeCode::visitNode(NodeStatementBlock *node) {
     node->getStatements()->accept(this);
 }
+
 //STATEMENT ::= if	(	EXP ) STATEMENT else STATEMENT
 void VisitorMakeCode::visitNode(NodeStatementIf *node) {
     unsigned long label1 = getLabelNumber(), label2 = getLabelNumber();
@@ -161,6 +172,7 @@ void VisitorMakeCode::visitNode(NodeStatementIf *node) {
     node->getStatementElse()->accept(this);
     code << "#" << label2 << " NOP " ;
 }
+
 //STATEMENT ::= read( identifier INDEX	)
 void VisitorMakeCode::visitNode(NodeStatementRead *node) {
     code << " REA ";
@@ -168,6 +180,7 @@ void VisitorMakeCode::visitNode(NodeStatementRead *node) {
     node->getIndex()->accept(this);
     code << " STR ";
 }
+
 //STATEMENT ::= while	( EXP ) STATEMENT
 void VisitorMakeCode::visitNode(NodeStatementWhile *node) {
     unsigned long label1 = getLabelNumber(), label2 = getLabelNumber();
@@ -177,12 +190,13 @@ void VisitorMakeCode::visitNode(NodeStatementWhile *node) {
     node->getStatement()->accept(this);
     code << " JMP " << "#" << label1;
     code << "#" << label2 << " NOP ";
-
 }
+
 //STATEMENT ::=	write( EXP	)
 void VisitorMakeCode::visitNode(NodeStatementWrite *node) {
     code << " PRI ";
 }
+
 //STATEMENTS ::=	STATEMENT ; STATEMENTS
 void VisitorMakeCode::visitNode(NodeStatements *node) {
     node->getStatement()->accept(this);
@@ -192,9 +206,3 @@ void VisitorMakeCode::visitNode(NodeStatements *node) {
         code << " NOP ";
     }
 }
-
-
-
-
-
-
