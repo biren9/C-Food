@@ -21,7 +21,7 @@ Liste::~Liste() {
  */
 InfoNode* Liste::addEnd(const char* lexem, StringTabelle* strTab) {
 	if (!size) {
-		InfoNode *insertedNode = new InfoNode{ strTab,strTab->insert(lexem),last, nullptr };
+		InfoNode *insertedNode = new InfoNode(strTab,strTab->insert(lexem),last, nullptr);
 		first = insertedNode;
 		last = insertedNode;
         ++size;
@@ -36,7 +36,7 @@ InfoNode* Liste::addEnd(const char* lexem, StringTabelle* strTab) {
 			}
 		}
         //if lexem not added, Create new InfoNode and return its pointer;
-		InfoNode *insertedNode = new InfoNode{ strTab,strTab->insert(lexem),last, nullptr };
+		InfoNode *insertedNode = new InfoNode(strTab,strTab->insert(lexem),last, nullptr);
 		last->next = insertedNode;
 		last = insertedNode;
 		return insertedNode;
