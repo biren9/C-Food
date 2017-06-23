@@ -17,4 +17,5 @@ NodeProg* Parser::createTree() {
 int main(int argc, char *argv[]) {
     Parser *parser = new Parser(argv[1]);
     NodeProg *prog = parser->createTree();
+    std::cout << "Success!";
 }

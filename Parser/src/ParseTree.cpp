@@ -92,29 +92,8 @@ NodeDecls* ParseTree::decls() {
             nodeDecls->addNode(decls());
             return nodeDecls;
         }
-        case OpenBracket:
-        case OpenParenthesis:
-        case OpenBrace:
-        case ReadToken:
-        case WriteToken:
-        case IfToken:
-        case WhileToken:
-        case Plus:
-        case Minus:
-        case Multiply:
-        case Smaller:
-        case Greater:
-        case Colon:
-        case EqualAssign:
-        case Equal:
-        case ExclamationMark:
-        case AndOP:
-        case Integer:
-        case Identifier:
-        case EOL:
-            return nullptr;
         default:
-            error("decls-Error");
+            return nullptr;
     }
 }
 
@@ -151,29 +130,8 @@ NodeArray* ParseTree::array() {
             }
             return nodeArray;
         }
-        case IntToken:
-        case OpenParenthesis:
-        case OpenBrace:
-        case ReadToken:
-        case WriteToken:
-        case IfToken:
-        case WhileToken:
-        case Plus:
-        case Minus:
-        case Multiply:
-        case Smaller:
-        case Greater:
-        case Colon:
-        case EqualAssign:
-        case Equal:
-        case ExclamationMark:
-        case AndOP:
-        case Integer:
-        case Identifier:
-        case EOL:
-            return nullptr;
         default:
-            error("array-Error");
+            return nullptr;
     }
 }
 
@@ -195,24 +153,8 @@ NodeArray* ParseTree::array() {
                 nodeStatements->addNode(statements());
                 return nodeStatements;
             }
-            case OpenBracket:
-            case IntToken:
-            case OpenParenthesis:
-            case Plus:
-            case Minus:
-            case Multiply:
-            case Smaller:
-            case Greater:
-            case Colon:
-            case EqualAssign:
-            case Equal:
-            case ExclamationMark:
-            case AndOP:
-            case Integer:
-            case EOL:
-                return nullptr;
             default:
-                error("statements-Error");
+                return nullptr;
         }
     }
 
@@ -258,29 +200,8 @@ NodeArray* ParseTree::array() {
                 }
                 return nodeIndex;
             }
-            case IntToken:
-            case OpenParenthesis:
-            case OpenBrace:
-            case ReadToken:
-            case WriteToken:
-            case IfToken:
-            case WhileToken:
-            case Plus:
-            case Minus:
-            case Multiply:
-            case Smaller:
-            case Greater:
-            case Colon:
-            case EqualAssign:
-            case Equal:
-            case ExclamationMark:
-            case AndOP:
-            case Integer:
-            case Identifier:
-            case EOL:
-                return nullptr;
             default:
-                error("Index-Error");
+                return nullptr;
         }
     }
 
@@ -365,21 +286,8 @@ NodeArray* ParseTree::array() {
                 nodeOpExp->addNode(exp());
                 return nodeOpExp;
             }
-            case OpenBracket:
-            case IntToken:
-            case OpenParenthesis:
-            case OpenBrace:
-            case ReadToken:
-            case WriteToken:
-            case IfToken:
-            case WhileToken:
-            case ExclamationMark:
-            case Integer:
-            case Identifier:
-            case EOL:
-                return nullptr;
             default:
-                error("OP_EXP-Error");
+                return nullptr;
         }
     }
 
