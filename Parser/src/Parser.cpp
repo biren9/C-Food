@@ -5,8 +5,8 @@
 #include "../../Scanner/includes/Scanner.h"
 
 Parser::Parser(char *filename) {
-//    Symboltable *symboltable = new Symboltable();
-//    Scanner *scanner = new Scanner(filename, symboltable);
+    Symboltable *symboltable = new Symboltable();
+    Scanner *scanner = new Scanner(filename, symboltable);
 //    this->parseTree = new ParseTree(scanner);
 }
 
