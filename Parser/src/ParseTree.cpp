@@ -28,7 +28,7 @@ void ParseTree::nextToken() {
  * PROG ::= DECLS STATEMENTS
  */
 NodeProg* ParseTree::prog() {
-
+    NodeProg* prog = nullptr;
     switch(this->currentToken->getType()) {
         case IntToken:
         case OpenBracket:
@@ -50,7 +50,7 @@ NodeProg* ParseTree::prog() {
         case AndOP:
         case Integer:
         case Identifier:
-            NodeProg* prog = new NodeProg();
+            prog = new NodeProg();
             prog->addNode(decls());
             prog->addNode(statements());
             break;
@@ -283,6 +283,7 @@ NodeArray* ParseTree::array() {
                 NodeExp *nodeExp = new NodeExp();
                 nodeExp->addNode(exp2());
                 nodeExp->addNode(opExp());
+                return nodeExp;
             default:
                 error("exp-Error");
         }
