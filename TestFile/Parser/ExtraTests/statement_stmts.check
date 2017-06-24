@@ -1,8 +1,0 @@
-{
-  value := 5;
-  write(value);
-  {
-    value := 7;
-  };
-};
-
