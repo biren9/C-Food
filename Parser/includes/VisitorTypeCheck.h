@@ -39,7 +39,6 @@ class VisitorTypeCheck: public Visitor {
 public:
     VisitorTypeCheck();
     ~VisitorTypeCheck();
-    void typeCheck(NodeProg* prog);
     void error(char* errorMessage, unsigned int line, unsigned int column);
     void visitNode(Node* node);
     void visitNode(NodeProg* node);
@@ -67,11 +66,12 @@ public:
     void visitNode(NodeStatementWhile* node);
     void visitNode(NodeStatementWrite* node);
     void visitNode(NodeStatements* node);
+    void typeCheck(NodeProg *prog);
 private:
     ofstream err;
     unsigned long labelNumber;
 
-    void typeCheck(NodeProg *prog);
+
 };
 
 
