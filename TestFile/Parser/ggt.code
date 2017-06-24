@@ -1,0 +1,318 @@
+DS $a 1
+DS $b 1
+DS $c 1
+DS $d 1
+DS $x 1
+DS $y 1
+DS $ggt 1
+DS $r0 1
+DS $r1 1
+DS $p0 1
+DS $p1 1
+DS $q0 1
+DS $q1 1
+DS $u 1
+REA
+LA $a
+STR
+REA
+LA $b
+STR
+LA $a
+LV
+LC 0
+LES
+JIN #label1
+LC 0
+LA $a
+LV
+SUB
+LA $a
+STR
+JMP #label2
+#label1 NOP
+NOP
+#label2 NOP
+LA $b
+LV
+LC 0
+LES
+JIN #label3
+LC 0
+LA $b
+LV
+SUB
+LA $b
+STR
+JMP #label4
+#label3 NOP
+NOP
+#label4 NOP
+#label5 NOP
+LC 0
+LA $b
+LV
+LES
+JIN #label6
+LA $a
+LV
+LA $b
+LV
+DIV
+LA $d
+STR
+LA $a
+LV
+LA $d
+LV
+LA $b
+LV
+MUL
+SUB
+LA $c
+STR
+LA $b
+LV
+LA $a
+STR
+LA $c
+LV
+LA $b
+STR
+NOP
+JMP #label5
+#label6 NOP
+LA $a
+LV
+PRI
+LC 5
+PRI
+REA
+LA $a
+STR
+LA $a
+LV
+LC 0
+LES
+JIN #label7
+LC 0
+LA $a
+LV
+SUB
+LA $a
+STR
+LA $a
+LV
+PRI
+NOP
+JMP #label8
+#label7 NOP
+NOP
+#label8 NOP
+REA
+LA $b
+STR
+LA $b
+LV
+LC 0
+LES
+JIN #label9
+LC 0
+LA $b
+LV
+SUB
+LA $b
+STR
+LA $b
+LV
+PRI
+NOP
+JMP #label10
+#label9 NOP
+NOP
+#label10 NOP
+LA $a
+LV
+LA $r0
+STR
+LA $b
+LV
+LA $r1
+STR
+LC 0
+LA $p0
+STR
+LC 1
+LA $p1
+STR
+LC 1
+LA $q0
+STR
+LC 0
+LA $q1
+STR
+#label11 NOP
+LC 0
+LA $r0
+LV
+LES
+LC 0
+LA $r1
+LV
+LES
+AND
+JIN #label12
+LA $r0
+LV
+LA $r1
+LV
+DIV
+LA $u
+STR
+LA $r0
+LV
+LA $u
+LV
+LA $r1
+LV
+MUL
+SUB
+LA $r0
+STR
+LA $u
+LV
+LA $p1
+LV
+MUL
+LA $p0
+LV
+ADD
+LA $p0
+STR
+LA $u
+LV
+LA $q1
+LV
+MUL
+LA $q0
+LV
+ADD
+LA $q0
+STR
+LC 0
+LA $r0
+LV
+LES
+JIN #label13
+LA $r1
+LV
+LA $r0
+LV
+DIV
+LA $u
+STR
+LA $r1
+LV
+LA $u
+LV
+LA $r0
+LV
+MUL
+SUB
+LA $r1
+STR
+LA $u
+LV
+LA $p0
+LV
+MUL
+LA $p1
+LV
+ADD
+LA $p1
+STR
+LA $u
+LV
+LA $q0
+LV
+MUL
+LA $q1
+LV
+ADD
+LA $q1
+STR
+NOP
+JMP #label14
+#label13 NOP
+NOP
+#label14 NOP
+NOP
+JMP #label11
+#label12 NOP
+LA $r0
+LV
+LC 0
+EQU
+JIN #label15
+LA $r1
+LV
+LA $ggt
+STR
+LC 0
+LA $q1
+LV
+SUB
+LA $x
+STR
+LA $p1
+LV
+LA $y
+STR
+NOP
+JMP #label16
+#label15 NOP
+LA $r0
+LV
+LA $ggt
+STR
+LA $q0
+LV
+LA $x
+STR
+LC 0
+LA $p0
+LV
+SUB
+LA $y
+STR
+NOP
+#label16 NOP
+LA $ggt
+LV
+PRI
+LC 5
+PRI
+LA $x
+LV
+PRI
+LC 0
+LC 25
+SUB
+PRI
+LA $y
+LV
+PRI
+LC 78
+PRI
+LC 0
+LC 25
+SUB
+LC 1045
+MUL
+LC 78
+LC 335
+MUL
+ADD
+PRI
+NOP
+STP

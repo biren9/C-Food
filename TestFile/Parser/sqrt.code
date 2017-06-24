@@ -1,0 +1,566 @@
+DS $a 1
+DS $n 1
+DS $w 1
+DS $m 1
+DS $y 1
+DS $i 1
+DS $x 1
+DS $tmp 1
+REA
+LA $n
+STR
+LA $n
+LV
+LA $a
+STR
+LA $a
+LV
+LA $w
+STR
+LA $w
+LV
+LA $n
+LV
+LA $w
+LV
+DIV
+ADD
+LC 2
+DIV
+LA $a
+STR
+#label1 NOP
+LA $a
+LV
+LA $w
+LV
+LES
+JIN #label2
+LA $a
+LV
+LA $w
+STR
+LA $w
+LV
+LA $n
+LV
+LA $w
+LV
+DIV
+ADD
+LC 2
+DIV
+LA $a
+STR
+NOP
+JMP #label1
+#label2 NOP
+LA $w
+LV
+PRI
+LC 26
+PRI
+REA
+LA $m
+STR
+LA $m
+LV
+LC 2
+DIV
+LA $y
+STR
+LC 20
+LA $i
+STR
+#label3 NOP
+LC 0
+LA $i
+LV
+LES
+JIN #label4
+LA $y
+LV
+LA $m
+LV
+LA $y
+LV
+DIV
+ADD
+LC 2
+DIV
+LA $y
+STR
+LA $i
+LV
+LC 1
+SUB
+LA $i
+STR
+NOP
+JMP #label3
+#label4 NOP
+LA $y
+LV
+PRI
+LA $y
+LV
+LA $y
+LV
+MUL
+PRI
+REA
+LA $n
+STR
+REA
+LA $a
+STR
+LC 1
+LA $x
+STR
+LC 0
+LA $tmp
+STR
+#label5 NOP
+LA $tmp
+LV
+LA $x
+LV
+LES
+JIN #label6
+LA $a
+LV
+LA $tmp
+STR
+LC 1
+LA $i
+STR
+#label7 NOP
+LA $i
+LV
+LA $n
+LV
+LES
+JIN #label8
+LA $tmp
+LV
+LA $x
+LV
+DIV
+LA $tmp
+STR
+LA $i
+LV
+LC 1
+ADD
+LA $i
+STR
+NOP
+JMP #label7
+#label8 NOP
+LA $n
+LV
+LC 1
+SUB
+LA $x
+LV
+MUL
+LA $tmp
+LV
+ADD
+LA $n
+LV
+DIV
+LA $x
+STR
+LC 2
+LA $i
+STR
+LA $a
+LV
+LA $x
+LV
+DIV
+LA $tmp
+STR
+#label9 NOP
+LA $i
+LV
+LA $n
+LV
+LES
+LA $x
+LV
+LA $tmp
+LV
+LES
+AND
+JIN #label10
+LA $i
+LV
+LC 1
+ADD
+LA $i
+STR
+LA $tmp
+LV
+LA $x
+LV
+DIV
+LA $tmp
+STR
+NOP
+JMP #label9
+#label10 NOP
+NOP
+JMP #label5
+#label6 NOP
+LA $x
+LV
+PRI
+LC 13
+PRI
+LA $x
+LV
+LA $tmp
+STR
+LC 1
+LA $i
+STR
+#label11 NOP
+LA $i
+LV
+LA $n
+LV
+LES
+JIN #label12
+LA $tmp
+LV
+LA $x
+LV
+MUL
+LA $tmp
+STR
+LA $i
+LV
+LC 1
+ADD
+LA $i
+STR
+NOP
+JMP #label11
+#label12 NOP
+LA $tmp
+LV
+PRI
+REA
+LA $a
+STR
+LC 2
+LA $n
+STR
+LC 1
+LA $x
+STR
+LC 0
+LA $tmp
+STR
+#label13 NOP
+LA $tmp
+LV
+LA $x
+LV
+LES
+JIN #label14
+LA $a
+LV
+LA $tmp
+STR
+LC 1
+LA $i
+STR
+#label15 NOP
+LA $i
+LV
+LA $n
+LV
+LES
+JIN #label16
+LA $tmp
+LV
+LA $x
+LV
+DIV
+LA $tmp
+STR
+LA $i
+LV
+LC 1
+ADD
+LA $i
+STR
+NOP
+JMP #label15
+#label16 NOP
+LA $n
+LV
+LC 1
+SUB
+LA $x
+LV
+MUL
+LA $tmp
+LV
+ADD
+LA $n
+LV
+DIV
+LA $x
+STR
+LC 2
+LA $i
+STR
+LA $a
+LV
+LA $x
+LV
+DIV
+LA $tmp
+STR
+#label17 NOP
+LA $i
+LV
+LA $n
+LV
+LES
+LA $x
+LV
+LA $tmp
+LV
+LES
+AND
+JIN #label18
+LA $i
+LV
+LC 1
+ADD
+LA $i
+STR
+LA $tmp
+LV
+LA $x
+LV
+DIV
+LA $tmp
+STR
+NOP
+JMP #label17
+#label18 NOP
+NOP
+JMP #label13
+#label14 NOP
+LA $x
+LV
+LA $tmp
+STR
+LC 1
+LA $i
+STR
+#label19 NOP
+LA $i
+LV
+LA $n
+LV
+LES
+JIN #label20
+LA $tmp
+LV
+LA $x
+LV
+MUL
+LA $tmp
+STR
+LA $i
+LV
+LC 1
+ADD
+LA $i
+STR
+NOP
+JMP #label19
+#label20 NOP
+#label21 NOP
+LA $tmp
+LV
+LA $a
+LV
+EQU
+NOT
+LA $n
+LV
+LA $x
+LV
+LES
+AND
+JIN #label22
+LA $n
+LV
+LC 1
+ADD
+LA $n
+STR
+LC 1
+LA $x
+STR
+LC 0
+LA $tmp
+STR
+#label23 NOP
+LA $tmp
+LV
+LA $x
+LV
+LES
+JIN #label24
+LA $a
+LV
+LA $tmp
+STR
+LC 1
+LA $i
+STR
+#label25 NOP
+LA $i
+LV
+LA $n
+LV
+LES
+JIN #label26
+LA $tmp
+LV
+LA $x
+LV
+DIV
+LA $tmp
+STR
+LA $i
+LV
+LC 1
+ADD
+LA $i
+STR
+NOP
+JMP #label25
+#label26 NOP
+LA $n
+LV
+LC 1
+SUB
+LA $x
+LV
+MUL
+LA $tmp
+LV
+ADD
+LA $n
+LV
+DIV
+LA $x
+STR
+LC 2
+LA $i
+STR
+LA $a
+LV
+LA $x
+LV
+DIV
+LA $tmp
+STR
+#label27 NOP
+LA $i
+LV
+LA $n
+LV
+LES
+LA $x
+LV
+LA $tmp
+LV
+LES
+AND
+JIN #label28
+LA $i
+LV
+LC 1
+ADD
+LA $i
+STR
+LA $tmp
+LV
+LA $x
+LV
+DIV
+LA $tmp
+STR
+NOP
+JMP #label27
+#label28 NOP
+NOP
+JMP #label23
+#label24 NOP
+LA $x
+LV
+LA $tmp
+STR
+LC 1
+LA $i
+STR
+#label29 NOP
+LA $i
+LV
+LA $n
+LV
+LES
+JIN #label30
+LA $tmp
+LV
+LA $x
+LV
+MUL
+LA $tmp
+STR
+LA $i
+LV
+LC 1
+ADD
+LA $i
+STR
+NOP
+JMP #label29
+#label30 NOP
+NOP
+JMP #label21
+#label22 NOP
+LA $tmp
+LV
+LA $a
+LV
+EQU
+JIN #label31
+LA $x
+LV
+PRI
+LA $n
+LV
+PRI
+NOP
+JMP #label32
+#label31 NOP
+LC 0
+LC 1
+SUB
+PRI
+NOP
+#label32 NOP
+NOP
+STP

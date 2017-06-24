@@ -1,0 +1,96 @@
+:* ggt (a,b) *:
+int a;
+int b;
+int c;
+int d;
+
+int x;
+int y;
+int ggt;
+
+int r0;
+int r1;
+
+int p0;
+int p1;
+
+int q0;
+int q1;
+
+int u;
+
+
+:* 1045 *:
+read(a);
+:* 335 *:
+read(b);
+if (a < 0) a := -a else{};
+if (b < 0) b := -b else{};
+
+while ( 0 < b ){
+ d := a : b;
+ c := a - (d * b); :* c = a mod b *:
+ a := b;
+ b := c;
+ };
+ write (a);
+ write (5);
+
+
+
+:* Teil II *:
+:* x*a + y*b = ggt(a,b) *:
+
+:* 1045 *:
+read(a);
+if (a < 0) {
+   a := -a;
+   write(a);
+}else{};
+
+:* 335 *:
+read(b);
+if (b < 0) {
+   b := -b;
+   write(b);
+}else{};
+
+r0 := a;
+r1 := b;
+p0 := 0;
+p1 := 1;
+q0 := 1;
+q1 := 0;
+
+while ( (0 < r0) && (0 < r1) ){
+  u := r0 : r1;
+  r0 := r0 - (u * r1); :* r0 = r0 mod r1 *:
+  p0 := (u * p1) + p0;
+  q0 := (u * q1) + q0;
+
+  if ( 0 < r0 ) {
+     u := r1 : r0;
+     r1 := r1 - (u * r0); :* r0 = r0 mod r1 *:
+     p1 := (u * p0) + p1;
+     q1 := (u * q0) + q1;
+     } else {};
+};
+
+if (r0 = 0){
+  ggt := r1;
+  x := -q1;
+  y := p1;
+} else {
+  ggt := r0;
+  x := q0;
+  y := -p0;
+};
+
+
+write(ggt);
+write(5);
+write(x);
+write(-25);
+write(y);
+write(78);
+write(((-25) * 1045) + (78 * 335));
