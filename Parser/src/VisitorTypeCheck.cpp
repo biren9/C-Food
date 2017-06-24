@@ -8,8 +8,8 @@ VisitorTypeCheck::~VisitorTypeCheck() {
     //
 }
 
-void VisitorTypeCheck::typeCheck(ParseTree* tree) {
-    //
+void VisitorTypeCheck::typeCheck(NodeProg* prog) {
+    visitNode(prog);
 }
 
 void VisitorTypeCheck::error(char* errorMessage, unsigned int line, unsigned int column) {
