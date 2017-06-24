@@ -3,17 +3,18 @@
 #ifndef PARSER_NODEEPSILON_H_
 #define PARSER_NODEEPSILON_H_
 
+enum EpsilonType {
+    epsDecls,
+    epsArray,
+    epsStatements,
+    epsIndex,
+    epsOpExp
+};
+
 class NodeEpsilon: public NodeDecls, public NodeArray, public NodeStatements, public NodeIndex, public NodeOpExp {
 public:
-    enum EpsilonType {
-        epsDecls,
-        epsArray,
-        epsStatements,
-        epsIndex,
-        epsOpExp
-    };
 
-    NodeEpsilon(NodeEpsilon::EpsilonType epsType) {
+    NodeEpsilon(EpsilonType epsType) {
         this->epsType = epsType;
     }
 
@@ -31,13 +32,13 @@ public:
         return this->type;
     }
 
-    NodeEpsilon::EpsilonType getEpsilonNodeType() {
+    EpsilonType getEpsilonNodeType() {
         return this->epsType;
     }
 
 private:
     NodeType type;
-    NodeEpsilon::EpsilonType epsType;
+    EpsilonType epsType;
 };
 
 #endif
