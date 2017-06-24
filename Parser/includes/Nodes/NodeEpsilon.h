@@ -28,7 +28,7 @@ public:
         this->type = type;
     }
 
-    NodeType getEpsilonType() {
+    NodeType getType() {
         return this->type;
     }
 
