@@ -310,6 +310,7 @@ NodeArray* ParseTree::array() {
             case Semicolon:
             case CloseBracket:
             case CloseParenthesis:
+            case ElseToken:
                 return nullptr;
             default:
                 error("OpExp-Error");
