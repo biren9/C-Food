@@ -1,0 +1,6 @@
+int v1;
+int v2;
+int[20] v3;
+int[5] v4;
+int v5;
+
