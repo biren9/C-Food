@@ -220,6 +220,7 @@ NodeArray* ParseTree::array() {
             case EqualAssign:
             case AndOP:
             case Assign:
+            case ElseToken:
                 return nullptr;
             default:
                 error("Index-error");
