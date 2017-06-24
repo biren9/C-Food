@@ -79,7 +79,7 @@ NodeDecls* ParseTree::decls() {
             if (this->currentToken->getType() == Semicolon) {
                 nextToken();
             } else {
-                error("decls-Error: Expected 'int'");
+                error("decls-Error: Expected ';' ");
             }
             nodeDecls->addNode(decls());
             return nodeDecls;
