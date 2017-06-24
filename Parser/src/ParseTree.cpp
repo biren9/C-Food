@@ -91,7 +91,7 @@ NodeDecls* ParseTree::decls() {
         case WhileToken:
         case EOL:
         case Identifier: {
-            return nullptr;
+            return new NodeEpsilon(epsDecls);
         }
         default:
             error("decls-Error");
@@ -132,7 +132,7 @@ NodeArray* ParseTree::array() {
             return nodeArray;
         }
         case Identifier: {
-            return nullptr;
+            return new NodeEpsilon(epsArray);
         }
         default:
             error("Array-Error");
@@ -159,7 +159,7 @@ NodeArray* ParseTree::array() {
             }
             case EOL:
             case CloseBrace:
-                return nullptr;
+                return new NodeEpsilon(epsStatements);
             default:
                 error("statements-Error");
         }
@@ -221,7 +221,7 @@ NodeArray* ParseTree::array() {
             case AndOP:
             case Assign:
             case ElseToken:
-                return nullptr;
+                return new NodeEpsilon(epsIndex);
             default:
                 error("Index-error");
         }
@@ -312,7 +312,7 @@ NodeArray* ParseTree::array() {
             case CloseBracket:
             case CloseParenthesis:
             case ElseToken:
-                return nullptr;
+                return new NodeEpsilon(epsOpExp);
             default:
                 error("OpExp-Error");
         }
