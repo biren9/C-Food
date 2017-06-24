@@ -1,4 +1,5 @@
 #include "../includes/Parser.h"
+#include "../includes/VisitorTypeCheck.h"
 
 Parser::Parser(char *filename) {
     Symboltable *symboltable = new Symboltable();
@@ -14,4 +15,8 @@ int main(int argc, char *argv[]) {
     Parser *parser = new Parser(argv[1]);
     NodeProg *prog = parser->createTree();
     std::cout << "Success!";
+
+    VisitorTypeCheck *tc = new VisitorTypeCheck();
+
+    tc->typeCheck(prog);
 }
