@@ -14,6 +14,7 @@ public:
 		this->Index = Index;
 		this->prev = prev;
 		this->next = next;
+		this->type = NodeType::noType;
 	}
 	StringTabelle* strTabelle;
 	unsigned int Index;
