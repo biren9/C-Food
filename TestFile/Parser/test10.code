@@ -1,0 +1,52 @@
+DS $test3 4
+DS $test 1
+DS $test2 1
+LC 3
+LA $test
+STR
+LA $test
+LV
+LC 3
+EQU
+JIN #label1
+LC 3
+LA $test
+STR
+JMP #label2
+#label1 NOP
+LC 4
+LA $test
+STR
+#label2 NOP
+LA $test
+LV
+LC 3
+EQU
+JIN #label3
+LC 3
+LA $test
+STR
+NOP
+JMP #label4
+#label3 NOP
+LC 4
+LA $test
+STR
+NOP
+#label4 NOP
+#label5 NOP
+LA $test
+LV
+LC 3
+EQU
+JIN #label6
+LA $test
+LV
+LC 2
+ADD
+LA $test
+STR
+JMP #label5
+#label6 NOP
+NOP
+STP

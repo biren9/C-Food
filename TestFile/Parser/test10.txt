@@ -1,0 +1,16 @@
+int[4] test3;
+int test;
+int test2;
+test := 3;
+if (test =:= 3) 
+test := 3
+else
+test := 4; 
+
+if (test =:= 3) {
+test := 3; }
+else {
+test := 4; }; 
+
+while (test =:= 3) 
+test := test + 2;
