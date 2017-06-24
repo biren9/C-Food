@@ -9,6 +9,18 @@ VisitorTypeCheck::~VisitorTypeCheck() {
     //
 }
 
+std::string VisitorTypeCheck::typeToString(NodeType type) {
+    switch(type) {
+        case NodeType::arrayType: return "arrayType";
+        case NodeType::intArrayType: return "intArrayType";
+        case NodeType::noType: return "noType";
+        case NodeType::intType: return "intType";
+        case NodeType::errorType: return "errorType";
+        default: return "operator";
+    }
+
+}
+
 void VisitorTypeCheck::typeCheck(NodeProg* prog) {
     visitNode(prog);
 }
@@ -18,9 +30,11 @@ void VisitorTypeCheck::error(char* errorMessage, unsigned int line, unsigned int
     exit(1);
 }
 
-void VisitorTypeCheck::errorIncompatible(char *errorMessage, unsigned int line, unsigned int column, unsigned int line2,
-                                         unsigned int column2, char *part1, char *part2) {
-
+void VisitorTypeCheck::errorIncompatible(char *errorMessage, unsigned int line, unsigned int column,
+                                         NodeType type1, NodeType type2) {
+    cerr << "ERROR @ Line: " << line << " Column: " << column << "  " << errorMessage << endl << "type 1: "
+         <<  typeToString(type1) << endl << "type 2: " << typeToString(type2) << endl;
+    exit(1);
 }
 
 void VisitorTypeCheck::visitNode(Node* node) {
@@ -228,7 +242,8 @@ void VisitorTypeCheck::visitNode(NodeStatementAssign* node) {
         node->setNodeType(NodeType::noType);
     }
     else {
-        error("incompatible types",node->getIdentifier()->getLine(),node->getIdentifier()->getColumn());
+        errorIncompatible("incompatible types",node->getIdentifier()->getLine(),node->getIdentifier()->getColumn(),
+                            node->getIdentifier()->getType(),node->getExp()->getType());
         node->setNodeType(NodeType::errorType);
     }
 }

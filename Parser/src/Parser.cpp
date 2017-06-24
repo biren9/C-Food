@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     NodeProg *prog = parser->createTree();
     std::cout << "Success!";
 
-    //VisitorTypeCheck *tc = new VisitorTypeCheck();
+    VisitorTypeCheck *tc = new VisitorTypeCheck();
 
-    //tc->typeCheck(prog);
+    tc->typeCheck(prog);
 }

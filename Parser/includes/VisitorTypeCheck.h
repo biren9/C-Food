@@ -41,7 +41,7 @@ public:
     ~VisitorTypeCheck();
     void error(char* errorMessage, unsigned int line, unsigned int column);
     void errorIncompatible(char* errorMessage, unsigned int line, unsigned int column,
-                           unsigned int line2, unsigned int column2, char* part1, char* part2);
+                           NodeType type, NodeType type2);
     void visitNode(Node* node);
     void visitNode(NodeProg* node);
     void visitNode(NodeArray* node);
@@ -74,6 +74,7 @@ private:
     unsigned long labelNumber;
 
 
+    string typeToString(NodeType type);
 };
 
 
