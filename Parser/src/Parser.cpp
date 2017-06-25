@@ -4,6 +4,8 @@
 
 Parser::Parser(char *filename) {
     Symboltable *symboltable = new Symboltable();
+
+    std::cout << "Scanner..." << std::endl;
     Scanner *scanner = new Scanner(filename, symboltable);
     this->parseTree = new ParseTree(scanner);
 }
@@ -13,15 +15,18 @@ NodeProg *Parser::createTree() {
 }
 
 int main(int argc, char *argv[]) {
+
+    std::cout << "Parser..." << std::endl;
     Parser *parser = new Parser(argv[1]);
     NodeProg *prog = parser->createTree();
-    std::cout << "Success!";
 
+    std::cout << "Type check..." << std::endl;
     VisitorTypeCheck *tc = new VisitorTypeCheck();
-
     tc->typeCheck(prog);
 
+    std::cout << "Make code..." << std::endl;
     VisitorMakeCode *mc = new VisitorMakeCode();
+    mc->makeCode(prog, argv[2]);
 
-    mc->makeCode(prog, "a.code");
+    std::cout << "Success!" << std::endl;
 }
