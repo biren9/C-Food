@@ -15,6 +15,9 @@ NodeProg *Parser::createTree() {
 }
 
 int main(int argc, char *argv[]) {
+    std::string outname = argv[2];
+    outname.append(".code");
+    char *cstr = &outname[0u];
 
     std::cout << "Parser..." << std::endl;
     Parser *parser = new Parser(argv[1]);
@@ -26,7 +29,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Make code..." << std::endl;
     VisitorMakeCode *mc = new VisitorMakeCode();
-    mc->makeCode(prog, argv[2]);
+    mc->makeCode(prog, cstr);
 
     std::cout << "Success!" << std::endl;
 }
