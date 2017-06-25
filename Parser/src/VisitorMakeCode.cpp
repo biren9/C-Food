@@ -27,52 +27,54 @@ void VisitorMakeCode::visitNode(Node *node) {
 //PROG	::=	DECLS	STATEMENTS
 void VisitorMakeCode::visitNode(NodeProg *node) {
     node->getDecls()->accept(this);
-    if (node->getStatements() != 0) {
-        node->getStatements()->accept(this);
-    }
+    node->getStatements()->accept(this);
     code << " STP ";
 }
 
 //ARRAY	::=	[ integer ] )
 void VisitorMakeCode::visitNode(NodeArray *node) {
-    code << node->getInteger();
+    code << node->getInteger()->getValue();
 }
 
 //
 void VisitorMakeCode::visitNode(NodeDecl *node) {
     code << " DS " <<  "$" << node->getIdentifier()->getInformation();
-    if (node->getArray() != 0) {
-        node->getArray()->accept(this);
-    }
-    else {
-        code << 1;
-    }
+    node->getArray()->accept(this);
 }
 //DECLS	::=	DECL	; DECLS
 void VisitorMakeCode::visitNode(NodeDecls *node) {
     node->getDecl()->accept(this);
-    if (node->getDecls() != 0) {
-        node->getDecls()->accept(this);
-    }
+    node->getDecls()->accept(this);
 
 }
 
 void VisitorMakeCode::visitNode(NodeEpsilon *node) {
-
+    switch(node->getEpsilonNodeType()) {
+        case EpsilonType::epsOpExp:
+        case EpsilonType::epsIndex:
+        case EpsilonType::epsDecls:
+            break;
+        case EpsilonType::epsStatements:
+            code << " NOP ";
+            break;
+        case EpsilonType::epsArray:
+            code << 1;
+            break;
+    }
 }
 
 void VisitorMakeCode::visitNode(NodeExp *node) {
-    if (node->getType() == NodeType::noType) {
+    if (node->getOpExp()->getType() == NodeType::noType) {
         node->getExp2()->accept(this);
     }
     else if (node->getOpExp()->getOp()->getType() == NodeType::opGreater) {
-        if (node->getOpExp() != 0) { node->getOpExp()->accept(this); }
+        node->getOpExp()->accept(this);
         node->getExp2()->accept(this);
         code << "LES";
     }
     else if (node->getOpExp()->getOp()->getType() == NodeType::opUnEqual) {
         node->getExp2()->accept(this);
-        if (node->getOpExp() != 0) {node->getOpExp()->accept(this);}
+        node->getOpExp()->accept(this);
         code << "NOT";
     }
     else {
@@ -98,13 +100,13 @@ void VisitorMakeCode::visitNode(NodeExp2Exclamation *node) {
 //EXP2 ::= identifier INDEX
 void VisitorMakeCode::visitNode(NodeExp2Identifier *node) {
     code << "LA " << "$" << node->getIdentifier()->getInformation();
-    if (node->getIndex() != 0) {node->getIndex()->accept(this);}
+    node->getIndex()->accept(this);
     code << " LV ";
 }
 
 //EXP2 ::= integer
 void VisitorMakeCode::visitNode(NodeExp2Integer *node) {
-    code << " LC " << node->getInteger();
+    code << " LC " << node->getInteger()->getValue();
 }
 
 //EXP2 ::= - EXP2
@@ -121,7 +123,7 @@ void VisitorMakeCode::visitNode(NodeIdentifier *node) {
 //INDEX	::=	[ EXP	]){makeCode(EXP
 void VisitorMakeCode::visitNode(NodeIndex *node) {
     node->getExp()->accept(this);
-    code << " ADD";
+    code << " ADD ";
 }
 
 void VisitorMakeCode::visitNode(NodeInteger *node) {
@@ -139,17 +141,14 @@ void VisitorMakeCode::visitNode(NodeOp *node) {
         case NodeType::opEqual: code << "EQU"; break;
         case NodeType::opUnEqual: code << "EQU"; break;
         case NodeType::opAnd: code << "AND"; break;
+        default: break;
     }
 }
 
 //OP_EXP ::= OP	EXP
 void VisitorMakeCode::visitNode(NodeOpExp *node) {
-    if (node->getExp()!=0) {
-        node->getExp()->accept(this);
-    }
-    if (node->getExp()!=0) {
-        node->getOp()->accept(this);
-    }
+    node->getExp()->accept(this);
+    node->getOp()->accept(this);
 }
 
 void VisitorMakeCode::visitNode(NodeStatement *node) {
@@ -158,19 +157,14 @@ void VisitorMakeCode::visitNode(NodeStatement *node) {
 //STATEMENT ::= identifier	INDEX := EXP
 void VisitorMakeCode::visitNode(NodeStatementAssign *node) {
     node->getExp()->accept(this);
-    code <<	"LA" << "$" << node->getIdentifier()->getInformation();
-    if (node->getIndex() != 0) {node->getIndex()->accept(this);}
-    code <<	"STR";
+    code <<	" LA " << "$" << node->getIdentifier()->getInformation();
+    node->getIndex()->accept(this);
+    code <<	" STR ";
 }
 
 //STATEMENT ::= { STATEMENTS } ){	makeCode(STATEMENTS);
 void VisitorMakeCode::visitNode(NodeStatementBlock *node) {
-    if (node->getStatements() != 0) {
-        node->getStatements()->accept(this);
-    }
-    else {
-        code << " NOP ";
-    }
+    node->getStatements()->accept(this);
 }
 
 //STATEMENT ::= if	(	EXP ) STATEMENT else STATEMENT
@@ -188,7 +182,7 @@ void VisitorMakeCode::visitNode(NodeStatementIf *node) {
 void VisitorMakeCode::visitNode(NodeStatementRead *node) {
     code << " REA ";
     code << " LA " << "$" << node->getIdentifier()->getInformation();
-    if (node->getIndex() != 0) {node->getIndex()->accept(this);}
+    node->getIndex()->accept(this);
     code << " STR ";
 }
 
@@ -211,9 +205,5 @@ void VisitorMakeCode::visitNode(NodeStatementWrite *node) {
 //STATEMENTS ::=	STATEMENT ; STATEMENTS
 void VisitorMakeCode::visitNode(NodeStatements *node) {
     node->getStatement()->accept(this);
-    if (node->getStatements() != 0) {
-        node->getStatements()->accept(this);
-    } else {
-        code << " NOP ";
-    }
+    node->getStatements()->accept(this);
 }

@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "../includes/VisitorTypeCheck.h"
 #include "../../Scanner/includes/Token.h"
 
@@ -27,14 +28,14 @@ void VisitorTypeCheck::typeCheck(NodeProg* prog) {
 
 void VisitorTypeCheck::error(char* errorMessage, unsigned int line, unsigned int column) {
     cerr << "ERROR @ Line: " << line << " Column: " << column << "  " << errorMessage << endl;
-    exit(1);
+    std::exit(1);
 }
 
 void VisitorTypeCheck::errorIncompatible(char *errorMessage, unsigned int line, unsigned int column,
                                          NodeType type1, NodeType type2) {
     cerr << "ERROR @ Line: " << line << " Column: " << column << "  " << errorMessage << endl << "type 1: "
          <<  typeToString(type1) << endl << "type 2: " << typeToString(type2) << endl;
-    exit(1);
+    std::exit(1);
 }
 
 void VisitorTypeCheck::visitNode(Node* node) {
