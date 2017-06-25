@@ -14,7 +14,7 @@ SCANNERDIR = Scanner
 PARSERDIR = Parser
 
 
-all:	clean automatOBJs bufferOBJs symboltableOBJs scanner parser run
+all:	clean automatOBJs bufferOBJs symboltableOBJs scanner parser
 	@echo "target all"
 
 	
@@ -47,9 +47,5 @@ scanner: FORCE
 
 parser: FORCE
 	$(MAKE) -C $(PARSERDIR) ParserOBJTarget
-
-run:
-	./$(PARSERDIR)/debug/ParserTest TestFile/Parser/ggt.txt
-	#./$(SCANNERDIR)/debug/ScannerTest TestFile/comment.txt
 
 FORCE:
