@@ -6,6 +6,10 @@ ParseTree::ParseTree(Scanner *scanner) {
     this->currentToken = this->scanner->nextToken();
 }
 
+ParseTree::~ParseTree() {
+    delete this->scanner;
+}
+
 NodeProg *ParseTree::parse() {
     this->progTree = prog();
     return progTree;

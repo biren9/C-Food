@@ -8,6 +8,8 @@ class Parser {
 public:
     Parser(char *filename);
 
+    ~Parser();
+
     NodeProg *createTree();
 
 private:

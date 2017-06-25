@@ -38,6 +38,8 @@ class ParseTree {
 public:
     NodeProg* parse();
     ParseTree(Scanner *scanner);
+
+    ~ParseTree();
 private:
     NodeProg* progTree;
     Token* currentToken;

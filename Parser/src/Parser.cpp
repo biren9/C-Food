@@ -10,6 +10,10 @@ Parser::Parser(char *filename) {
     this->parseTree = new ParseTree(scanner);
 }
 
+Parser::~Parser() {
+    delete this->parseTree;
+}
+
 NodeProg *Parser::createTree() {
     return this->parseTree->parse();
 }
@@ -19,8 +23,9 @@ int main(int argc, char *argv[]) {
     outname.append(".code");
     char *cstr = &outname[0u];
 
-    std::cout << "Parser..." << std::endl;
     Parser *parser = new Parser(argv[1]);
+
+    std::cout << "Parser..." << std::endl;
     NodeProg *prog = parser->createTree();
 
     std::cout << "Type check..." << std::endl;
@@ -32,4 +37,8 @@ int main(int argc, char *argv[]) {
     mc->makeCode(prog, cstr);
 
     std::cout << "Success!" << std::endl;
+
+    delete mc;
+    delete tc;
+    delete parser;
 }
