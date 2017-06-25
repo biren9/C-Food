@@ -1,6 +1,7 @@
 ## Ausführen
 
 :> make -f makefile
+
 :> Parser/debug/ParserTest TestFile/Parser/fib.txt ../a 2> ../error.log
 
 ## Das Projekt
