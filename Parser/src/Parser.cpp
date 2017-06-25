@@ -1,5 +1,6 @@
 #include "../includes/Parser.h"
 #include "../includes/VisitorTypeCheck.h"
+#include "../includes/VisitorMakeCode.h"
 
 Parser::Parser(char *filename) {
     Symboltable *symboltable = new Symboltable();
@@ -19,4 +20,8 @@ int main(int argc, char *argv[]) {
     VisitorTypeCheck *tc = new VisitorTypeCheck();
 
     tc->typeCheck(prog);
+
+    VisitorMakeCode *mc = new VisitorMakeCode();
+
+    mc->makeCode(prog, "a.code");
 }
