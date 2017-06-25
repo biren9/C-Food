@@ -211,7 +211,7 @@ void VisitorMakeCode::visitNode(NodeStatementWhile *node) {
     code << "JIN " << "#label" << label2 << endl;
     node->getStatement()->accept(this);
     code << "JMP " << "#label" << label1 << endl;
-    code << "#label" << label2 << "NOP " << endl;
+    code << "#label" << label2 << " NOP " << endl;
 }
 
 //STATEMENT ::=	write( EXP	)
