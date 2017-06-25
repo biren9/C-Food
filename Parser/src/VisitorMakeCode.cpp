@@ -28,7 +28,7 @@ void VisitorMakeCode::visitNode(Node *node) {
 void VisitorMakeCode::visitNode(NodeProg *node) {
     node->getDecls()->accept(this);
     node->getStatements()->accept(this);
-    code << " STP ";
+    code << "STP ";
 }
 
 //ARRAY	::=	[ integer ] )
@@ -38,7 +38,7 @@ void VisitorMakeCode::visitNode(NodeArray *node) {
 
 //
 void VisitorMakeCode::visitNode(NodeDecl *node) {
-    code << " DS " << "$" << node->getIdentifier()->getInformation() << " ";
+    code << "DS " << "$" << node->getIdentifier()->getInformation() << " ";
     node->getArray()->accept(this);
 }
 //DECLS	::=	DECL	; DECLS
@@ -55,7 +55,7 @@ void VisitorMakeCode::visitNode(NodeEpsilon *node) {
         case EpsilonType::epsDecls:
             break;
         case EpsilonType::epsStatements:
-            code << " NOP " << endl;
+            code << "NOP " << endl;
             break;
         case EpsilonType::epsArray:
             code << 1 << endl;
@@ -101,19 +101,19 @@ void VisitorMakeCode::visitNode(NodeExp2Exclamation *node) {
 void VisitorMakeCode::visitNode(NodeExp2Identifier *node) {
     code << "LA " << "$" << node->getIdentifier()->getInformation() << endl;
     node->getIndex()->accept(this);
-    code << " LV " << endl;
+    code << "LV " << endl;
 }
 
 //EXP2 ::= integer
 void VisitorMakeCode::visitNode(NodeExp2Integer *node) {
-    code << " LC " << node->getInteger()->getValue() << endl;
+    code << "LC " << node->getInteger()->getValue() << endl;
 }
 
 //EXP2 ::= - EXP2
 void VisitorMakeCode::visitNode(NodeExp2Minus *node) {
-    code << " LC " << 0 << endl;
+    code << "LC " << 0 << endl;
     node->getExp2()->accept(this);
-    code << " SUB " << endl;
+    code << "SUB" << endl;
 }
 
 //
@@ -123,7 +123,7 @@ void VisitorMakeCode::visitNode(NodeIdentifier *node) {
 //INDEX	::=	[ EXP	]){makeCode(EXP
 void VisitorMakeCode::visitNode(NodeIndex *node) {
     node->getExp()->accept(this);
-    code << " ADD " << endl;
+    code << "ADD" << endl;
 }
 
 void VisitorMakeCode::visitNode(NodeInteger *node) {
@@ -173,9 +173,9 @@ void VisitorMakeCode::visitNode(NodeStatement *node) {
 //STATEMENT ::= identifier	INDEX := EXP
 void VisitorMakeCode::visitNode(NodeStatementAssign *node) {
     node->getExp()->accept(this);
-    code << " LA " << "$" << node->getIdentifier()->getInformation() << endl;
+    code << "LA " << "$" << node->getIdentifier()->getInformation() << endl;
     node->getIndex()->accept(this);
-    code << " STR " << endl;
+    code << "STR " << endl;
 }
 
 //STATEMENT ::= { STATEMENTS } ){	makeCode(STATEMENTS);
@@ -187,9 +187,9 @@ void VisitorMakeCode::visitNode(NodeStatementBlock *node) {
 void VisitorMakeCode::visitNode(NodeStatementIf *node) {
     unsigned long label1 = getLabelNumber(), label2 = getLabelNumber();
     node->getExp()->accept(this);
-    code << " JIN " << "#label" << label1 << endl;
+    code << "JIN " << "#label" << label1 << endl;
     node->getStatementIf()->accept(this);
-    code << " JMP " << "#label" << label2 << endl;
+    code << "JMP " << "#label" << label2 << endl;
     code << "#label" << label1 << " NOP " << endl;
     node->getStatementElse()->accept(this);
     code << "#label" << label2 << " NOP " << endl;
@@ -197,10 +197,10 @@ void VisitorMakeCode::visitNode(NodeStatementIf *node) {
 
 //STATEMENT ::= read( identifier INDEX	)
 void VisitorMakeCode::visitNode(NodeStatementRead *node) {
-    code << " REA " << endl;
-    code << " LA " << "$" << node->getIdentifier()->getInformation() << endl;
+    code << "REA " << endl;
+    code << "LA " << "$" << node->getIdentifier()->getInformation() << endl;
     node->getIndex()->accept(this);
-    code << " STR " << endl;
+    code << "STR " << endl;
 }
 
 //STATEMENT ::= while	( EXP ) STATEMENT
@@ -208,16 +208,16 @@ void VisitorMakeCode::visitNode(NodeStatementWhile *node) {
     unsigned long label1 = getLabelNumber(), label2 = getLabelNumber();
     code << "#label" << label1 << " NOP " << endl;
     node->getExp()->accept(this);
-    code << " JIN " << "#label" << label2 << endl;
+    code << "JIN " << "#label" << label2 << endl;
     node->getStatement()->accept(this);
-    code << " JMP " << "#label" << label1 << endl;
-    code << "#label" << label2 << " NOP " << endl;
+    code << "JMP " << "#label" << label1 << endl;
+    code << "#label" << label2 << "NOP " << endl;
 }
 
 //STATEMENT ::=	write( EXP	)
 void VisitorMakeCode::visitNode(NodeStatementWrite *node) {
     node->getExp()->accept(this);///////////////7/////
-    code << " PRI " << endl;
+    code << "PRI " << endl;
 }
 
 //STATEMENTS ::=	STATEMENT ; STATEMENTS
