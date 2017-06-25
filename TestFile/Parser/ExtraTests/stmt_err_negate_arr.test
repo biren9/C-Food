@@ -1,0 +1,4 @@
+int v1;
+int[1] arr;
+
+if (!arr) v1 := 1;
