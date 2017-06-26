@@ -37,14 +37,14 @@ makeTestAutomat: AutomatTarget TestAutomatTarget BufferTarget
 
 
 AutomatTarget :  $(SRCDIR)/Automat.cpp $(HEADERDIR)/Automat.h
-	g++ -std=c++11 -g  -c -Wall  $(SRCDIR)/Automat.cpp -o $(OBJDIR)/Automat.o
+	g++  -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall  $(SRCDIR)/Automat.cpp -o $(OBJDIR)/Automat.o
 
 #TestAutomat.o ist abhaengig von TestAutomat.cpp und Automat.h
 TestAutomatTarget :  $(SRCDIR)/TestAutomat.cpp $(HEADERDIR)/Automat.h
-	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/TestAutomat.cpp -o $(BINDIRTEST)/TestAutomat.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall $(SRCDIR)/TestAutomat.cpp -o $(BINDIRTEST)/TestAutomat.o
 
 BufferTarget :  $(SRCDIR)/Buffer.cpp $(HEADERDIR)/Buffer.h
-	g++ -std=c++11 -g  -c -Wall  $(BufferDIR)/$(SRCDIR)/Buffer.cpp -o $(OBJDIR)/Buffer.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall  $(BufferDIR)/$(SRCDIR)/Buffer.cpp -o $(OBJDIR)/Buffer.o
 
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu compilieren

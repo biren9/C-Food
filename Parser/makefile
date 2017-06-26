@@ -17,22 +17,22 @@ makeTestParser: Node ParserTarget TestParserTarget ParseTreeTarget VisitorMakeCo
 	g++ -std=c++11 -g $(OBJDIR)/Node.o $(OBJDIR)/ParseTree.o $(OBJDIR)/VisitorMakeCode.o $(OBJDIR)/VisitorTypeCheck.o $(OBJDIR)/Parser.o $(OBJDIR)/TestParser.o ../Scanner/$(OBJDIR)/Scanner.o ../Scanner/$(OBJDIR)/Token.o ../Symboltable/$(OBJDIR)/StringTabelle.o ../Symboltable/$(OBJDIR)/Liste.o ../Symboltable/$(OBJDIR)/Symboltable.o  ../Automat/$(OBJDIR)/Automat.o  ../Buffer/$(OBJDIR)/Buffer.o -o $(BINDIRTEST)/ParserTest
 
 Node :  $(SRCDIR)/Node.cpp $(HEADERDIR)/Node.h
-	g++ -std=c++11 -g  -c -w  $(SRCDIR)/Node.cpp -o $(OBJDIR)/Node.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w  $(SRCDIR)/Node.cpp -o $(OBJDIR)/Node.o
 
 ParserTarget :  $(SRCDIR)/Parser.cpp $(HEADERDIR)/Parser.h
-	g++ -std=c++11 -g  -c -w  $(SRCDIR)/Parser.cpp -o $(OBJDIR)/Parser.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w  $(SRCDIR)/Parser.cpp -o $(OBJDIR)/Parser.o
 
 TestParserTarget :  $(SRCDIR)/TestParser.cpp $(HEADERDIR)/Parser.h
-	g++ -std=c++11 -g  -c -w $(SRCDIR)/TestParser.cpp -o $(OBJDIR)/TestParser.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/TestParser.cpp -o $(OBJDIR)/TestParser.o
 
 ParseTreeTarget :  $(SRCDIR)/ParseTree.cpp $(HEADERDIR)/ParseTree.h
-	g++ -std=c++11 -g  -c -w $(SRCDIR)/ParseTree.cpp -o $(OBJDIR)/ParseTree.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/ParseTree.cpp -o $(OBJDIR)/ParseTree.o
 
 VisitorMakeCode :  $(SRCDIR)/VisitorMakeCode.cpp $(HEADERDIR)/VisitorMakeCode.h
-	g++ -std=c++11 -g  -c -w $(SRCDIR)/VisitorMakeCode.cpp -o $(OBJDIR)/VisitorMakeCode.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/VisitorMakeCode.cpp -o $(OBJDIR)/VisitorMakeCode.o
 
 VisitorTypeCheck :  $(SRCDIR)/VisitorTypeCheck.cpp $(HEADERDIR)/VisitorTypeCheck.h
-	g++ -std=c++11 -g  -c -w $(SRCDIR)/VisitorTypeCheck.cpp -o $(OBJDIR)/VisitorTypeCheck.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/VisitorTypeCheck.cpp -o $(OBJDIR)/VisitorTypeCheck.o
 
 
 cleanCompileParser:

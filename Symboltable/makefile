@@ -51,17 +51,17 @@ makeSymboltable: SymboltableTarget TestSymboltableTarget ListTarget StringTabell
 
 
 ListTarget :  $(SRCDIR)/Liste.cpp $(HEADERDIR)/Liste.h
-	g++ -std=c++11 -g  -c -Wall  $(SRCDIR)/Liste.cpp -o $(OBJDIR)/Liste.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall  $(SRCDIR)/Liste.cpp -o $(OBJDIR)/Liste.o
 
 StringTabelleTarget :  $(SRCDIR)/StringTabelle.cpp $(HEADERDIR)/StringTabelle.h
-	g++ -std=c++11 -g  -c -Wall  $(SRCDIR)/StringTabelle.cpp -o $(OBJDIR)/StringTabelle.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall  $(SRCDIR)/StringTabelle.cpp -o $(OBJDIR)/StringTabelle.o
 
 
 TestSymboltableTarget: $(SRCDIR)/TestSymboltable.cpp $(HEADERDIR)/Symboltable.h
-	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/TestSymboltable.cpp -o $(OBJDIR)/TestSymboltable.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall $(SRCDIR)/TestSymboltable.cpp -o $(OBJDIR)/TestSymboltable.o
 
 SymboltableTarget: $(SRCDIR)/Symboltable.cpp $(HEADERDIR)/Symboltable.h
-	g++ -std=c++11 -g  -c -Wall $(SRCDIR)/Symboltable.cpp -o $(OBJDIR)/Symboltable.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall $(SRCDIR)/Symboltable.cpp -o $(OBJDIR)/Symboltable.o
 
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu compilieren
