@@ -94,7 +94,26 @@ int main(int argc, char *argv[]) {
                 }
 
                 std::cout << std::endl;
-                delete token;
+                switch(token->getType()) {
+                    case Identifier:
+                    case Integer:
+                    case Greater:
+                    case Multiply:
+                    case Plus:
+                    case Minus:
+                    case Colon:
+                    case EqualAssign:
+                    case Equal:
+                    case ExclamationMark:
+                    case CloseParenthesis:
+                    case OpenParenthesis:
+                    case OpenBrace:
+                    case CloseBrace:
+                        break;
+                    default:
+                        delete token;
+                        break;
+                }
                 token = scanner->nextToken();
             }
         }

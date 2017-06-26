@@ -1,0 +1,21 @@
+int a;
+int b;
+int c;
+int [10] t;
+a := 23;
+b := 0;
+c := 1;
+t[0] := 23231313;
+t[1] := 23132;
+if(0){
+write(b);
+} else {
+write(c);
+};
+
+if(0) {
+write(11111);
+} else {
+write(2222);
+};
+
