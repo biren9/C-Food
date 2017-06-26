@@ -40,11 +40,11 @@ set(SOURCE_FILES
         Parser/includes/VisitorMakeCode.h
         Parser/includes/VisitorTypeCheck.h
         Parser/src/Node.cpp
-        Parser/src/Parser.cpp
         Parser/src/ParseTree.cpp
         Parser/src/TestParser.cpp
         Parser/src/VisitorMakeCode.cpp
         Parser/src/VisitorTypeCheck.cpp
+        Parser/src/Parser.cpp
         Scanner/includes/Scanner.h
         Scanner/includes/Token.h
         Scanner/src/Scanner.cpp

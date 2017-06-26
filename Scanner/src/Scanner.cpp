@@ -42,6 +42,7 @@ Token* Scanner::nextToken() {
             token->setValue(value1);
         }
     }
+    std::cout << "Line: " << token->getLine() << " Column " << token->getColumn() << std::endl;
     return token;
 
 }

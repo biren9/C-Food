@@ -81,7 +81,9 @@ NodeDecls* ParseTree::decls() {
             NodeDecls *nodeDecls = new NodeDecls();
             nodeDecls->addNode(decl());
             if (this->currentToken->getType() == Semicolon) {
+                Token* del = currentToken;
                 nextToken();
+                delete del;
             } else {
                 error("decls-Error: Expected ';' ");
             }
@@ -120,13 +122,17 @@ NodeArray* ParseTree::array() {
     switch (this->currentToken->getType()) {
         case OpenBracket: {
             NodeArray *nodeArray = new NodeArray();
+            Token* del1 = currentToken;
             nextToken();
+            delete del1;
             if (currentToken->getType() == Integer) {
                 NodeInteger *nodeInteger = new NodeInteger(currentToken);
                 nodeArray->addInteger(nodeInteger);
                 nextToken();
                 if (currentToken->getType() == CloseBracket) {
+                    Token* del2 = currentToken;
                     nextToken();
+                    delete del2;
                 } else {
                     error("array-Error: Expected )");
                 }
@@ -154,7 +160,9 @@ NodeArray* ParseTree::array() {
                 NodeStatements *nodeStatements = new NodeStatements();
                 nodeStatements->addNode(statement());
                 if (this->currentToken->getType() == Semicolon) {
+                    Token* del = currentToken;
                     nextToken();
+                    delete del;
                 } else {
                     error("statements-Error: Expected ;");
                 }
@@ -190,7 +198,9 @@ NodeArray* ParseTree::array() {
         nextToken();
         nodeStatementAssign->addNode(index());
         if(currentToken->getType() == Assign) {
+            Token* del = currentToken;
             nextToken();
+            delete del;
         } else {
             error("Assign-Error: Expected :=");
         }
@@ -201,11 +211,15 @@ NodeArray* ParseTree::array() {
     NodeIndex* ParseTree::index() {
         switch (this->currentToken->getType()) {
             case OpenBracket: {
+                Token* del1 = currentToken;
                 nextToken();
+                delete del1;
                 NodeIndex *nodeIndex = new NodeIndex();
                 nodeIndex->addNode(exp());
                 if (currentToken->getType() == CloseBracket) {
+                    Token* del2 = currentToken;
                     nextToken();
+                    delete del2;
                 } else {
                     error("index-Error: Expected ]");
                 }
@@ -252,24 +266,32 @@ NodeArray* ParseTree::array() {
     NodeExp2* ParseTree::exp2(){
         switch(currentToken->getType()) {
             case OpenParenthesis: {
+                Token* del1 = currentToken;
                 nextToken();
+                delete del1;
                 NodeExp2Parenthesis *nodeExp2Parenthesis = new NodeExp2Parenthesis();
                 nodeExp2Parenthesis->addNode(exp());
                 if (currentToken->getType() == CloseParenthesis) {
+                    Token* del2 = currentToken;
                     nextToken();
+                    delete del2;
                 } else {
                     error("exp2-Error: expected )");
                 }
                 return nodeExp2Parenthesis;
             }
             case Minus: {
+                Token* del = currentToken;
                 nextToken();
+                delete del;
                 NodeExp2Minus *nodeExp2Minus = new NodeExp2Minus();
                 nodeExp2Minus->addNode(exp2());
                 return nodeExp2Minus;
             }
             case ExclamationMark: {
+                Token* del = currentToken;
                 nextToken();
+                delete del;
                 NodeExp2Exclamation *nodeExp2Exclamation = new NodeExp2Exclamation();
                 nodeExp2Exclamation->addNode(exp2());
                 return nodeExp2Exclamation;
@@ -323,16 +345,22 @@ NodeArray* ParseTree::array() {
     }
 
 NodeStatementWhile *ParseTree::statementWhile() {
+        Token* del1 = currentToken;
         nextToken();
+        delete del1;
         NodeStatementWhile *statementWhile = new NodeStatementWhile();
         if(this->currentToken->getType() == OpenParenthesis) {
+            Token* del2 = currentToken;
             nextToken();
+            delete del2;
         } else {
             error("while-Error: Expected (");
         }
         statementWhile->addNode(exp());
         if(this->currentToken->getType() == CloseParenthesis) {
+            Token* del3 = currentToken;
             nextToken();
+            delete del3;
         } else {
             error("while-Error: Expected )");
         }
@@ -342,10 +370,14 @@ NodeStatementWhile *ParseTree::statementWhile() {
     }
 
     NodeStatementIf* ParseTree::statementIf() {
+        Token* del1 = currentToken;
         nextToken();
+        delete del1;
         NodeStatementIf *nodeStatementIf = new NodeStatementIf();
         if(this->currentToken->getType() == OpenParenthesis) {
+            Token* del2 = currentToken;
             nextToken();
+            delete del2;
         } else {
             error("if-Error: Expected (");
         }
@@ -353,14 +385,18 @@ NodeStatementWhile *ParseTree::statementWhile() {
         nodeStatementIf->addNode(exp());
 
         if(this->currentToken->getType() == CloseParenthesis) {
+            Token* del3 = currentToken;
             nextToken();
+            delete del3;
         } else {
             error("if-Error: Expected )");
         }
         nodeStatementIf->addNodeIf(statement());
 
         if(this->currentToken->getType() == ElseToken) {
+            Token* del4 = currentToken;
             nextToken();
+            delete del4;
         } else {
             error("if-Error: Expected else");
         }
@@ -371,12 +407,16 @@ NodeStatementWhile *ParseTree::statementWhile() {
     }
 
     NodeStatementBlock* ParseTree::statementBlock() {
+        Token* del1 = currentToken;
         nextToken();
+        delete del1;
         NodeStatementBlock *nodeStatementBlock = new NodeStatementBlock();
         nodeStatementBlock->addNode(statements());
 
         if(this->currentToken->getType() == CloseBrace) {
+            Token* del2 = currentToken;
             nextToken();
+            delete del2;
         } else {
             error("Block-Error: Expected }");
         }
@@ -387,9 +427,13 @@ NodeStatementWhile *ParseTree::statementWhile() {
 
     NodeStatementRead* ParseTree::statementRead() {
         NodeStatementRead *nodeStatementRead = new NodeStatementRead();
+        Token* del1 = currentToken;
         nextToken();
+        delete del1;
         if(this->currentToken->getType() == OpenParenthesis) {
+            Token* del2 = currentToken;
             nextToken();
+            delete del2;
         } else {
             error("Read-Error: Expected (");
         }
@@ -405,7 +449,9 @@ NodeStatementWhile *ParseTree::statementWhile() {
         nodeStatementRead->addNode(index());
 
         if(this->currentToken->getType() == CloseParenthesis) {
+            Token* del3 = currentToken;
             nextToken();
+            delete del3;
         } else {
             error("Read-Error: Expected )");
         }
@@ -414,11 +460,15 @@ NodeStatementWhile *ParseTree::statementWhile() {
     }
 
     NodeStatementWrite* ParseTree::statementWrite() {
+        Token* del1 = currentToken;
         nextToken();
+        delete del1;
         NodeStatementWrite *nodeStatementWrite = new NodeStatementWrite();
 
         if(this->currentToken->getType() == OpenParenthesis) {
+            Token* del2 = currentToken;
             nextToken();
+            delete del2;
         } else {
             error("Write-Error: Expected (");
         }
@@ -426,7 +476,9 @@ NodeStatementWhile *ParseTree::statementWhile() {
         nodeStatementWrite->addNode(exp());
 
         if(this->currentToken->getType() == CloseParenthesis) {
+            Token* del3 = currentToken;
             nextToken();
+            delete del3;
         } else {
             error("Write-Error: Expected )");
         }
