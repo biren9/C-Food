@@ -1,5 +1,7 @@
 ## Ausführen
 
+set stack limit: ulimit -s BYTE
+
 :> make -f makefile
 
 :> Parser/debug/ParserTest TestFile/Parser/fib.txt ../a 2> ../error.log
