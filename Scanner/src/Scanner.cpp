@@ -3,7 +3,7 @@
 #include <cerrno>
 #include <cstdlib>
 
-
+std::mutex g_lock;
 /**
  * initialize
  */
@@ -12,23 +12,25 @@ Scanner::Scanner(const char* file,Symboltable* symboltable) {
     this->automat = new Automat(buffer);
     this->symbolTable = new Symboltable();
 
+    std::thread t1(&Scanner::buildTokenList,this);
+    this->buildTokensThread = &t1;
 }
 
 /**
  * get data from automat to create Token
  */
-Token* Scanner::nextToken() {
-    this->automat->nextToken();
-    std::string tokenLiteral = this->automat->getTokenLiteral();
-    TokenType tokenType = this->automat->getCurrentTokenType();
-    int startLine = this->automat->getStartLine();
-    int startColumn = this->automat->getStartColumn();
+Token* Scanner::nextT() {
+    automat->nextToken();
+    std::string tokenLiteral = automat->getTokenLiteral();
+    TokenType tokenType = automat->getCurrentTokenType();
+    int startLine = automat->getStartLine();
+    int startColumn = automat->getStartColumn();
 
     Token *token = new Token(tokenType,startColumn,startLine,tokenLiteral);
 
     InfoNode *key = nullptr;
     if(tokenType == Identifier) {
-        key  = this->symbolTable->insert(tokenLiteral.c_str());
+        key  = symbolTable->insert(tokenLiteral.c_str());
         token->setKey(key);
     } else if(tokenType == Integer) {
         char *p;
@@ -46,10 +48,67 @@ Token* Scanner::nextToken() {
 
 }
 
+void Scanner::addToken(Token *token) {
+    g_lock.lock();
+    tokenList.push_back(token);
+    g_lock.unlock();
+}
+
+Token* Scanner::getToken() {
+    g_lock.lock();
+    Token *token = this->tokenList.front();
+    this->tokenList.pop_front();
+    g_lock.unlock();
+    return token;
+}
+
+
+
+void Scanner::buildTokenList() {
+    Token *token = nextT();
+    while (token->getType() != EOL) {
+
+        if (token->getType() == Identifier) {
+            std::cout << "\t" << " Lexem: " << token->getTokenLiteral();
+        } else if (token->getType() == Integer) {
+            std::cout << "\t" << " Value: " << token->getValue();
+        }
+
+        std::cout << std::endl;
+        switch(token->getType()) {
+            case Identifier:
+            case Integer:
+            case Greater:
+            case Multiply:
+            case Plus:
+            case Minus:
+            case Colon:
+            case EqualAssign:
+            case Equal:
+            case ExclamationMark:
+            case CloseParenthesis:
+            case OpenParenthesis:
+            case OpenBrace:
+            case CloseBrace:
+                break;
+            default:
+                delete token;
+                break;
+        }
+        addToken(token);
+        token = nextT();
+    }
+}
+
+Token* Scanner::nextToken() {
+    return getToken();
+}
+
 /**
  * delete heap
  */
 Scanner::~Scanner() {
+    this->buildTokensThread->join();
     delete this->buffer;
     delete this->automat;
     delete this->symbolTable;

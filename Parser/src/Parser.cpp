@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Success!" << std::endl;
 
-    delete mc;
-    delete tc;
+//    delete mc;
+//    delete tc;
     delete parser;
 }
