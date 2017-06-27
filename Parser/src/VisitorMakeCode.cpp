@@ -2,9 +2,9 @@
 
 VisitorMakeCode::VisitorMakeCode() {
     this->labelNumber = 1;
-
 }
 
+//entry to the tree created from Parser
 void VisitorMakeCode::makeCode(NodeProg *prog, char *filename) {
     this->labelNumber = 1;
     code.open(filename);
@@ -16,6 +16,7 @@ void VisitorMakeCode::makeCode(NodeProg *prog, char *filename) {
 VisitorMakeCode::~VisitorMakeCode() {
 }
 
+//unique label generator for jumps in assembly
 unsigned long VisitorMakeCode::getLabelNumber() {
     return this->labelNumber++;
 }

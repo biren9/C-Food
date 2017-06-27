@@ -9,7 +9,7 @@ VisitorTypeCheck::VisitorTypeCheck() {
 VisitorTypeCheck::~VisitorTypeCheck() {
     //
 }
-
+//creates a string from a NodeType enum value
 std::string VisitorTypeCheck::typeToString(NodeType type) {
     switch(type) {
         case NodeType::arrayType: return "arrayType";
@@ -22,15 +22,17 @@ std::string VisitorTypeCheck::typeToString(NodeType type) {
 
 }
 
+//entry to the tree created by parser
 void VisitorTypeCheck::typeCheck(NodeProg* prog) {
     visitNode(prog);
 }
 
+//standard typechecking error
 void VisitorTypeCheck::error(char* errorMessage, unsigned int line, unsigned int column) {
     cerr << "ERROR @ Line: " << line << " Column: " << column << "  " << errorMessage << endl;
     std::exit(1);
 }
-
+//typechecking error for incompatible types
 void VisitorTypeCheck::errorIncompatible(char *errorMessage, unsigned int line, unsigned int column,
                                          NodeType type1, NodeType type2) {
     cerr << "ERROR @ Line: " << line << " Column: " << column << "  " << errorMessage << endl << "type 1: "
@@ -41,12 +43,14 @@ void VisitorTypeCheck::errorIncompatible(char *errorMessage, unsigned int line, 
 void VisitorTypeCheck::visitNode(Node* node) {
     //
 }
+
 //PROG	::=	DECLS STATEMENTS
 void VisitorTypeCheck::visitNode(NodeProg* node) {
     node->getDecls()->accept(this);
     node->getStatements()->accept(this);
     node->setNodeType(NodeType::noType);
 }
+
 //ARRAY::=[integer])
 void VisitorTypeCheck::visitNode(NodeArray* node) {
     if (node->getInteger()->getValue() > 0) {
@@ -55,9 +59,8 @@ void VisitorTypeCheck::visitNode(NodeArray* node) {
         error("no valid dimension", node->getInteger()->getLine(), node->getInteger()->getColumn());
     }
 }
-//DECL::=	int ARRAY identifier
-//TODO store typinformation
 
+//DECL::=	int ARRAY identifier
 void VisitorTypeCheck::visitNode(NodeDecl* node) {
     NodeIdentifier* identifier = node->getIdentifier();
     NodeArray* array = node->getArray();
@@ -89,9 +92,11 @@ void VisitorTypeCheck::visitNode(NodeDecls* node) {
     node->setNodeType(NodeType::noType);
 }
 
+//epsilon node doesn't have a type
 void VisitorTypeCheck::visitNode(NodeEpsilon* node) {
     node->setEpsilonType(NodeType::noType);
 }
+
 //EXP ::=	EXP2	OP_EXP
 void VisitorTypeCheck::visitNode(NodeExp* node) {
     node->getExp2()->accept(this);
@@ -113,14 +118,16 @@ void VisitorTypeCheck::visitNode(NodeExp* node) {
     }
 
 }
-//
+
 void VisitorTypeCheck::visitNode(NodeExp2* node) {
 }
+
 //(EXP2 ::= ( EXP ))
 void VisitorTypeCheck::visitNode(NodeExp2Parenthesis* node) {
     node->getExp()->accept(this);
     node->setNodeType(node->getExp()->getType());
 }
+
 //EXP2 ::= ! EXP2
 void VisitorTypeCheck::visitNode(NodeExp2Exclamation* node) {
     NodeExp2 *exp2 = node->getExp2();
@@ -134,6 +141,7 @@ void VisitorTypeCheck::visitNode(NodeExp2Exclamation* node) {
         node->setNodeType(NodeType::intType);
     }
 }
+
 //EXP2 ::= identifier INDEX
 void VisitorTypeCheck::visitNode(NodeExp2Identifier* node) {
     NodeIndex *index = node->getIndex();
@@ -161,6 +169,7 @@ void VisitorTypeCheck::visitNode(NodeExp2Identifier* node) {
 void VisitorTypeCheck::visitNode(NodeExp2Integer* node) {
     node->setNodeType(NodeType::intType);
 }
+
 //EXP2 ::= - EXP2
 void VisitorTypeCheck::visitNode(NodeExp2Minus* node) {
     NodeExp2 *exp2 = node->getExp2();
@@ -170,8 +179,8 @@ void VisitorTypeCheck::visitNode(NodeExp2Minus* node) {
 }
 
 void VisitorTypeCheck::visitNode(NodeIdentifier* node) {
-    //
 }
+
 //INDEX ::= [ EXP ]
 void VisitorTypeCheck::visitNode(NodeIndex* node) {
     NodeExp *exp = node->getExp();
@@ -185,9 +194,9 @@ void VisitorTypeCheck::visitNode(NodeIndex* node) {
 }
 
 void VisitorTypeCheck::visitNode(NodeInteger* node) {
-    //
 }
 
+//set type of an operator node
 void VisitorTypeCheck::visitNode(NodeOp* node) {
     TokenType tokenType = node->getToken()->getType();
     switch (tokenType) {
@@ -215,9 +224,6 @@ void VisitorTypeCheck::visitNode(NodeOpExp* node) {
 
 //STATEMENT ::= identifier INDEX := EXP
 void VisitorTypeCheck::visitNode(NodeStatement* node) {
-    /*
-    if (node->)
-     */
 }
 
 void VisitorTypeCheck::visitNode(NodeStatementAssign* node) {
@@ -248,12 +254,14 @@ void VisitorTypeCheck::visitNode(NodeStatementAssign* node) {
         node->setNodeType(NodeType::errorType);
     }
 }
+
 //STATEMENT ::= { STATEMENTS }
 void VisitorTypeCheck::visitNode(NodeStatementBlock* node) {
     NodeStatements *statements = node->getStatements();
     statements->accept(this);
     node->setNodeType(NodeType::noType);
 }
+
 //STATEMENT ::= if	( EXP ) STATEMENT else STATEMENT
 void VisitorTypeCheck::visitNode(NodeStatementIf* node) {
     NodeStatement *ifBlock = node->getStatementIf();
@@ -269,6 +277,7 @@ void VisitorTypeCheck::visitNode(NodeStatementIf* node) {
         node->setNodeType(NodeType::noType);
     }
 }
+
 //(STATEMENT ::= read(	identifier INDEX)
 void VisitorTypeCheck::visitNode(NodeStatementRead* node) {
     NodeType identifierType = node->getIdentifier()->getToken()->getKey()->getType();
@@ -291,6 +300,7 @@ void VisitorTypeCheck::visitNode(NodeStatementRead* node) {
         node->setNodeType(NodeType::errorType);
     }
 }
+
 //STATEMENT ::= while	(	EXP ) STATEMENT
 void VisitorTypeCheck::visitNode(NodeStatementWhile* node) {
     NodeExp *exp = node->getExp();
