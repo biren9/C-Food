@@ -11,6 +11,7 @@ Parser::Parser(char *filename) {
 }
 
 Parser::~Parser() {
+    std::cout << "Parser Dekonstruktor" << std::endl;
     delete this->parseTree;
 }
 
@@ -25,20 +26,21 @@ int main(int argc, char *argv[]) {
 
     Parser *parser = new Parser(argv[1]);
 
-    std::cout << "Parser..." << std::endl;
-    NodeProg *prog = parser->createTree();
-
-    std::cout << "Type check..." << std::endl;
-    VisitorTypeCheck *tc = new VisitorTypeCheck();
-    tc->typeCheck(prog);
-
-    std::cout << "Make code..." << std::endl;
-    VisitorMakeCode *mc = new VisitorMakeCode();
-    mc->makeCode(prog, cstr);
-
+//    std::cout << "Parser..." << std::endl;
+//    NodeProg *prog = parser->createTree();
+//
+//    std::cout << "Type check..." << std::endl;
+//    VisitorTypeCheck *tc = new VisitorTypeCheck();
+//    tc->typeCheck(prog);
+//
+//    std::cout << "Make code..." << std::endl;
+//    VisitorMakeCode *mc = new VisitorMakeCode();
+//    mc->makeCode(prog, cstr);
+//
     std::cout << "Success!" << std::endl;
 
 //    delete mc;
 //    delete tc;
     delete parser;
+    return 0;
 }

@@ -31,6 +31,9 @@ private:
 public:
 	Token* nextToken();
 	Scanner(const char* file,Symboltable *symboltable);
+    Scanner() {
+
+    };
 	~Scanner();
 };
 

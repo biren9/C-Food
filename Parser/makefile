@@ -14,25 +14,25 @@ BINDIRTEST = debug
 
 
 makeTestParser: Node ParserTarget TestParserTarget ParseTreeTarget VisitorMakeCode VisitorTypeCheck
-	g++ -std=c++11 -g $(OBJDIR)/Node.o $(OBJDIR)/ParseTree.o $(OBJDIR)/VisitorMakeCode.o $(OBJDIR)/VisitorTypeCheck.o $(OBJDIR)/Parser.o $(OBJDIR)/TestParser.o ../Scanner/$(OBJDIR)/Scanner.o ../Scanner/$(OBJDIR)/Token.o ../Symboltable/$(OBJDIR)/StringTabelle.o ../Symboltable/$(OBJDIR)/Liste.o ../Symboltable/$(OBJDIR)/Symboltable.o  ../Automat/$(OBJDIR)/Automat.o  ../Buffer/$(OBJDIR)/Buffer.o -o $(BINDIRTEST)/ParserTest
+	g++ -std=c++11 -g $(OBJDIR)/Node.o $(OBJDIR)/ParseTree.o $(OBJDIR)/VisitorMakeCode.o $(OBJDIR)/VisitorTypeCheck.o $(OBJDIR)/Parser.o $(OBJDIR)/TestParser.o ../Scanner/$(OBJDIR)/Scanner.o ../Scanner/$(OBJDIR)/Token.o ../Symboltable/$(OBJDIR)/StringTabelle.o ../Symboltable/$(OBJDIR)/Liste.o ../Symboltable/$(OBJDIR)/Symboltable.o  ../Automat/$(OBJDIR)/Automat.o  ../Buffer/$(OBJDIR)/Buffer.o -o $(BINDIRTEST)/ParserTest -pthread
 
 Node :  $(SRCDIR)/Node.cpp $(HEADERDIR)/Node.h
-	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w  $(SRCDIR)/Node.cpp -o $(OBJDIR)/Node.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w  $(SRCDIR)/Node.cpp -o $(OBJDIR)/Node.o -pthread
 
 ParserTarget :  $(SRCDIR)/Parser.cpp $(HEADERDIR)/Parser.h
-	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w  $(SRCDIR)/Parser.cpp -o $(OBJDIR)/Parser.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w  $(SRCDIR)/Parser.cpp -o $(OBJDIR)/Parser.o -pthread
 
 TestParserTarget :  $(SRCDIR)/TestParser.cpp $(HEADERDIR)/Parser.h
-	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/TestParser.cpp -o $(OBJDIR)/TestParser.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/TestParser.cpp -o $(OBJDIR)/TestParser.o -pthread
 
 ParseTreeTarget :  $(SRCDIR)/ParseTree.cpp $(HEADERDIR)/ParseTree.h
-	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/ParseTree.cpp -o $(OBJDIR)/ParseTree.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/ParseTree.cpp -o $(OBJDIR)/ParseTree.o -pthread
 
 VisitorMakeCode :  $(SRCDIR)/VisitorMakeCode.cpp $(HEADERDIR)/VisitorMakeCode.h
-	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/VisitorMakeCode.cpp -o $(OBJDIR)/VisitorMakeCode.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/VisitorMakeCode.cpp -o $(OBJDIR)/VisitorMakeCode.o -pthread
 
 VisitorTypeCheck :  $(SRCDIR)/VisitorTypeCheck.cpp $(HEADERDIR)/VisitorTypeCheck.h
-	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/VisitorTypeCheck.cpp -o $(OBJDIR)/VisitorTypeCheck.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -w $(SRCDIR)/VisitorTypeCheck.cpp -o $(OBJDIR)/VisitorTypeCheck.o -pthread
 
 
 cleanCompileParser:

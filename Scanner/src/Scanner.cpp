@@ -7,14 +7,20 @@ std::mutex g_lock;
 /**
  * initialize
  */
+
+void testThread() {
+    std::cout << "testThread" << std::endl;
+}
+
 Scanner::Scanner(const char* file,Symboltable* symboltable) {
     this->buffer = new Buffer(file);
     this->automat = new Automat(buffer);
     this->symbolTable = new Symboltable();
 
-    std::thread t1(&Scanner::buildTokenList,this);
-    this->buildTokensThread = &t1;
+    //std::thread t1(testThread);
+    //this->buildTokensThread = &t1;
 }
+
 
 /**
  * get data from automat to create Token
@@ -66,6 +72,7 @@ Token* Scanner::getToken() {
 
 void Scanner::buildTokenList() {
     Token *token = nextT();
+    std::cout << "buildTokenList" << std::endl;
     while (token->getType() != EOL) {
 
         if (token->getType() == Identifier) {
@@ -108,6 +115,7 @@ Token* Scanner::nextToken() {
  * delete heap
  */
 Scanner::~Scanner() {
+    std::cout << "Scanner Dek" << std::endl;
     this->buildTokensThread->join();
     delete this->buffer;
     delete this->automat;
