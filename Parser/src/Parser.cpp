@@ -1,6 +1,7 @@
 #include "../includes/Parser.h"
 #include "../includes/VisitorTypeCheck.h"
 #include "../includes/VisitorMakeCode.h"
+#include <ctime>
 
 Parser::Parser(char *filename) {
     Symboltable *symboltable = new Symboltable();
@@ -19,6 +20,7 @@ NodeProg *Parser::createTree() {
 }
 
 int main(int argc, char *argv[]) {
+    clock_t begin = clock();
     std::string outname = argv[2];
     outname.append(".code");
     char *cstr = &outname[0u];
@@ -38,6 +40,10 @@ int main(int argc, char *argv[]) {
 
     std::cout << "Success!" << std::endl;
 
+    clock_t end = clock();
+    double elapsed_secs = (double(end - begin) / CLOCKS_PER_SEC);
+
+    std::cout << "Duration: " << elapsed_secs << " S" << std::endl;
     delete mc;
     delete tc;
     delete parser;
