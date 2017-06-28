@@ -14,6 +14,9 @@ Parser::~Parser() {
     delete this->parseTree;
 }
 
+/**
+ * create Tree
+ */
 NodeProg *Parser::createTree() {
     return this->parseTree->parse();
 }

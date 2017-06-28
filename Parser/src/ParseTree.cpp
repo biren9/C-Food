@@ -10,11 +10,17 @@ ParseTree::~ParseTree() {
     delete this->scanner;
 }
 
+/**
+ * create Prog Tree
+ */
 NodeProg *ParseTree::parse() {
     this->progTree = prog();
     return progTree;
 }
 
+/**
+ * call a Token
+ */
 void ParseTree::nextToken() {
     if (this->currentToken->getType() != EOL) {
         this->currentToken = this->scanner->nextToken();
@@ -74,7 +80,9 @@ void ParseTree::error(std::string parseTreeError) {
 
 
 
-
+/**
+ * DECLS ::= DECL;DECLS | e
+ */
 NodeDecls* ParseTree::decls() {
     switch (this->currentToken->getType()) {
         case IntToken: {
@@ -102,6 +110,9 @@ NodeDecls* ParseTree::decls() {
     }
 }
 
+/**
+ * DECL ::= int ARRAY identifier
+ */
 NodeDecl* ParseTree::decl() {
     nextToken();
     NodeDecl *nodeDecl = new NodeDecl();
@@ -116,6 +127,9 @@ NodeDecl* ParseTree::decl() {
     return nodeDecl;
 }
 
+/**
+ * ARRAY ::= [integer] | e
+ */
 NodeArray* ParseTree::array() {
     switch (this->currentToken->getType()) {
         case OpenBracket: {
@@ -143,6 +157,9 @@ NodeArray* ParseTree::array() {
     }
 }
 
+/**
+ * STATEMENTS ::= STATEMENT;STATEMENTS | e
+ */
     NodeStatements* ParseTree::statements() {
         switch (this->currentToken->getType()) {
             case WriteToken:
@@ -169,6 +186,12 @@ NodeArray* ParseTree::array() {
         }
     }
 
+
+/**
+ *	STATEMENT ::= identifier INDEX := EXP | write(EXP) | read(identifier INDEX) |
+ *				  {STATEMENTS} | if (EXP) STATEMENT else STATEMENT | while (EXP) STATEMENT
+ *
+ */
     NodeStatement* ParseTree::statement() {
         switch (this->currentToken->getType()) {
             case Identifier: return statementAssign();
@@ -183,6 +206,10 @@ NodeArray* ParseTree::array() {
     }
 
 
+/**
+ *	identifier INDEX := EXP
+ *
+ */
     NodeStatementAssign* ParseTree::statementAssign() {
         NodeIdentifier *nodeIdentifier = new NodeIdentifier(currentToken);
         NodeStatementAssign *nodeStatementAssign = new NodeStatementAssign();
@@ -198,6 +225,9 @@ NodeArray* ParseTree::array() {
         return nodeStatementAssign;
     }
 
+/**
+ * INDEX ::= [EXP]
+ */
     NodeIndex* ParseTree::index() {
         switch (this->currentToken->getType()) {
             case OpenBracket: {
@@ -232,6 +262,9 @@ NodeArray* ParseTree::array() {
     }
 
 
+/**
+ * EXP ::= EXP2 OP_EXP
+ */
     NodeExp* ParseTree::exp() {
         switch(currentToken->getType()) {
             case OpenParenthesis:
@@ -249,6 +282,9 @@ NodeArray* ParseTree::array() {
         }
     }
 
+/**
+ * EXP2 ::= (EXP) | identifier INDEX | integer | -EXP2 | !EXP2
+ */
     NodeExp2* ParseTree::exp2(){
         switch(currentToken->getType()) {
             case OpenParenthesis: {
@@ -294,6 +330,9 @@ NodeArray* ParseTree::array() {
         }
     }
 
+/**
+ * OP_EXP ::= OP EXP
+ */
     NodeOpExp* ParseTree::opExp() {
         switch (this->currentToken->getType()) {
             case Plus:
@@ -322,6 +361,9 @@ NodeArray* ParseTree::array() {
         }
     }
 
+/**
+ * while (EXP) STATEMENT
+ */
 NodeStatementWhile *ParseTree::statementWhile() {
         nextToken();
         NodeStatementWhile *statementWhile = new NodeStatementWhile();
@@ -341,6 +383,9 @@ NodeStatementWhile *ParseTree::statementWhile() {
         return statementWhile;
     }
 
+/**
+ * if (EXP) STATEMENT else STATEMENT
+ */
     NodeStatementIf* ParseTree::statementIf() {
         nextToken();
         NodeStatementIf *nodeStatementIf = new NodeStatementIf();
@@ -370,6 +415,9 @@ NodeStatementWhile *ParseTree::statementWhile() {
         return nodeStatementIf;
     }
 
+/**
+ * {STATEMENTS}
+ */
     NodeStatementBlock* ParseTree::statementBlock() {
         nextToken();
         NodeStatementBlock *nodeStatementBlock = new NodeStatementBlock();
@@ -385,6 +433,9 @@ NodeStatementWhile *ParseTree::statementWhile() {
 
     }
 
+/**
+ * read(identifier INDEX)
+ */
     NodeStatementRead* ParseTree::statementRead() {
         NodeStatementRead *nodeStatementRead = new NodeStatementRead();
         nextToken();
@@ -413,6 +464,9 @@ NodeStatementWhile *ParseTree::statementWhile() {
         return nodeStatementRead;
     }
 
+/**
+ * write(EXP)
+ */
     NodeStatementWrite* ParseTree::statementWrite() {
         nextToken();
         NodeStatementWrite *nodeStatementWrite = new NodeStatementWrite();
@@ -435,6 +489,10 @@ NodeStatementWhile *ParseTree::statementWhile() {
     }
 
 
+
+/**
+ * getTokenName
+ */
     std::string ParseTree::getName(TokenType type) {
         switch(type) {
             case Identifier:
