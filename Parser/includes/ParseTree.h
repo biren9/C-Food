@@ -38,7 +38,7 @@ class ParseTree {
 public:
     NodeProg* parse();
     ParseTree(Scanner *scanner);
-
+    void startThread();
     ~ParseTree();
 private:
     NodeProg* progTree;
@@ -46,6 +46,7 @@ private:
     Scanner* scanner;
     void nextToken();
     NodeProg* prog();
+
     NodeDecls* decls();
     NodeDecl* decl();
     NodeArray* array();

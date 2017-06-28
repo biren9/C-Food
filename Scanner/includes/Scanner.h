@@ -23,16 +23,22 @@ private:
 	 Automat *automat;
      Symboltable *symbolTable;
 	 std::deque<Token*> tokenList;
-	std::thread* buildTokensThread;
+	std::thread buildTokensThread;
     void buildTokenList();
     void addToken(Token *token);
     Token* nextT();
+    void threadTest() {
+        std::cout << "ThreadTest" << std::endl;
+    }
+    void startTh();
 	Token* getToken();
 public:
 	Token* nextToken();
 	Scanner(const char* file,Symboltable *symboltable);
-    Scanner() {
-
+	void startThread()  {
+        std::cout << "Vor Thread" << std::endl;
+        // do what you want
+        this->buildTokensThread = std::thread(&Scanner::buildTokenList,this);
     };
 	~Scanner();
 };

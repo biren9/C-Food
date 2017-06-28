@@ -11,6 +11,7 @@ public:
     ~Parser();
 
     NodeProg *createTree();
+    void startThread();
 
 private:
     ParseTree *parseTree;

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.7)
 project(C_Food)
 
 set(CMAKE_CXX_STANDARD 11)
-
+set(CMAKE_CXX_FLAGS "-pthread")
 set(SOURCE_FILES
         Automat/includes/Automat.h
         Automat/src/Automat.cpp

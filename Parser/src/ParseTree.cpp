@@ -7,7 +7,12 @@ ParseTree::ParseTree(Scanner *scanner) {
 }
 
 ParseTree::~ParseTree() {
+    std::cout << "ParseTree Decronstuctor "<< std::endl;
     delete this->scanner;
+}
+
+void ParseTree::startThread() {
+    this->scanner->startThread();
 }
 
 NodeProg *ParseTree::parse() {

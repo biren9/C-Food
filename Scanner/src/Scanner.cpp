@@ -12,14 +12,21 @@ void testThread() {
     std::cout << "testThread" << std::endl;
 }
 
+void Scanner::startTh() {
+    std::cout << "testThread" << std::endl;
+};
+
 Scanner::Scanner(const char* file,Symboltable* symboltable) {
     this->buffer = new Buffer(file);
     this->automat = new Automat(buffer);
     this->symbolTable = new Symboltable();
 
-    //std::thread t1(testThread);
-    //this->buildTokensThread = &t1;
+
+
+    //t1.join();
 }
+
+
 
 
 /**
@@ -76,35 +83,17 @@ void Scanner::buildTokenList() {
     while (token->getType() != EOL) {
 
         if (token->getType() == Identifier) {
-            std::cout << "\t" << " Lexem: " << token->getTokenLiteral();
+            //std::cout << "\t" << " Lexem: " << token->getTokenLiteral();
         } else if (token->getType() == Integer) {
-            std::cout << "\t" << " Value: " << token->getValue();
+            ///std::cout << "\t" << " Value: " << token->getValue();
         }
 
         std::cout << std::endl;
-        switch(token->getType()) {
-            case Identifier:
-            case Integer:
-            case Greater:
-            case Multiply:
-            case Plus:
-            case Minus:
-            case Colon:
-            case EqualAssign:
-            case Equal:
-            case ExclamationMark:
-            case CloseParenthesis:
-            case OpenParenthesis:
-            case OpenBrace:
-            case CloseBrace:
-                break;
-            default:
-                delete token;
-                break;
-        }
         addToken(token);
         token = nextT();
     }
+
+
 }
 
 Token* Scanner::nextToken() {
@@ -116,7 +105,8 @@ Token* Scanner::nextToken() {
  */
 Scanner::~Scanner() {
     std::cout << "Scanner Dek" << std::endl;
-    this->buildTokensThread->join();
+    this->buildTokensThread.join();
+    std::cout << "TokenSize: " <<this->tokenList.size() << std::endl;
     delete this->buffer;
     delete this->automat;
     delete this->symbolTable;

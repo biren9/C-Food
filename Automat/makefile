@@ -26,7 +26,7 @@ LIB = ../lib
 BufferDIR = ../Buffer
 
 makeTestAutomat: AutomatTarget TestAutomatTarget BufferTarget
-	g++ -std=c++11 -g $(OBJDIR)/Automat.o $(BINDIRTEST)/TestAutomat.o $(OBJDIR)/Buffer.o  -o $(BINDIRTEST)/TestAutomat
+	g++ -std=c++11 -g $(OBJDIR)/Automat.o $(BINDIRTEST)/TestAutomat.o $(OBJDIR)/Buffer.o  -o $(BINDIRTEST)/TestAutomat -pthread
 
 # compilieren der Source-files
 # Buffer.o ist abhaengig von Automat.cpp und Automat.h
@@ -37,14 +37,14 @@ makeTestAutomat: AutomatTarget TestAutomatTarget BufferTarget
 
 
 AutomatTarget :  $(SRCDIR)/Automat.cpp $(HEADERDIR)/Automat.h
-	g++  -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall  $(SRCDIR)/Automat.cpp -o $(OBJDIR)/Automat.o
+	g++  -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall  $(SRCDIR)/Automat.cpp -o $(OBJDIR)/Automat.o -pthread
 
 #TestAutomat.o ist abhaengig von TestAutomat.cpp und Automat.h
 TestAutomatTarget :  $(SRCDIR)/TestAutomat.cpp $(HEADERDIR)/Automat.h
-	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall $(SRCDIR)/TestAutomat.cpp -o $(BINDIRTEST)/TestAutomat.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall $(SRCDIR)/TestAutomat.cpp -o $(BINDIRTEST)/TestAutomat.o -pthread
 
 BufferTarget :  $(SRCDIR)/Buffer.cpp $(HEADERDIR)/Buffer.h
-	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall  $(BufferDIR)/$(SRCDIR)/Buffer.cpp -o $(OBJDIR)/Buffer.o
+	g++ -Wl,--stack=1200194304 -std=c++11 -g  -c -Wall  $(BufferDIR)/$(SRCDIR)/Buffer.cpp -o $(OBJDIR)/Buffer.o -pthread
 
 
 # loeschen aller files im verzeichnis $(OBJDIR) und $(BINDIRTEST) und neu compilieren
