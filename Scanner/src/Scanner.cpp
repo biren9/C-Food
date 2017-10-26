@@ -1,7 +1,4 @@
 #include "../includes/Scanner.h"
-#include <string>
-#include <cerrno>
-#include <cstdlib>
 
 
 /**
@@ -42,6 +39,8 @@ Token* Scanner::nextToken() {
             token->setValue(value1);
         }
     }
+
+    std::cout << "Line: " << token->getLine() << " Cloumn: " << token->getColumn() << std::endl;
     return token;
 
 }
